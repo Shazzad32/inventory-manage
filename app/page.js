@@ -1,101 +1,154 @@
-import Image from "next/image";
+// import RangsCard from "@/components/RangsCard";
+// import RetailCard from "@/components/RetailCard";
+// import StoreCard from "@/components/StoreCard";
+// import Link from "next/link";
 
-export default function Home() {
+// export default async function Home() {
+//   const baseUrl = process.env.URL || "http://localhost:3000";
+
+//   const devicesRes = await fetch(`${baseUrl}/api/devices`);
+//   const devices = await devicesRes.json();
+//   const totalDevices = devices.length;
+
+//   const totalInRetail = devices.filter((x) => x.send_to === "Retail");
+//   const totalInRangs = devices.filter((x) => x.send_to === "Rangs").length;
+//   const totalInStock = devices.filter((x) => x.send_to === "Store").length;
+//   const voiceDeviceInStock = devices.filter(
+//     (x) => x.send_to === "Store" && x.device_type === "Voice"
+//   ).length;
+//   const nonVoiceDeviceInStock = devices.filter(
+//     (x) => x.send_to === "Store" && x.device_type === "Non_Voice"
+//   ).length;
+//   const voiceDeviceInRangs = devices.filter(
+//     (x) => x.send_to === "Rangs" && x.device_type === "Voice"
+//   ).length;
+//   const nonVoiceDeviceInRangs = devices.filter(
+//     (x) => x.send_to === "Rangs" && x.device_type === "Non_Voice"
+//   ).length;
+
+//   return (
+//     <div className="w-full h-full bg-skyblue-500 flex flex-col">
+//       <div className="h-[10%] w-full bg-gray-800 text-white flex lg:gap-2 gap-2 md:gap:3 items-center lg:px-2 px-2">
+//         <button className="border-2 h-[30px] lg:p-2 p-2 rounded-md flex items-center justify-center">
+//           <Link href={"/store"}> STORE</Link>
+//         </button>
+//         <button className="border-2 h-[30px] lg:p-2 p-2 rounded-md flex items-center justify-center">
+//           <Link href={"/rangs"}> RANGS</Link>
+//         </button>
+//         <button className="border-2 h-[30px] lg:p-2 p-2 rounded-md flex items-center justify-center">
+//           <Link href={"/retail"}>RETAIL</Link>
+//         </button>
+
+//         <div className="h-[30px] w-[120px] bg-white p-2 rounded-md text-black flex items-center justify-center">
+//           Total :{" "}
+//           <p className="text-orange-500 ml-2 font-bold">{totalDevices}</p>
+//         </div>
+//       </div>
+//       <div className="lg:h-[90%] h-[95%] w-full bg-gray-400 flex flex-col gap-4 md:flex-row lg:flex items-center justify-center">
+//         <div className="w-[98%] h-[33%] lg:w-[33%] rounded-md lg:h-[95%] bg-white text-center uppercase p-2 font-bold">
+//           Total Stock
+//           <StoreCard
+//             totalDevices={totalInStock}
+//             voiceDevices={voiceDeviceInStock}
+//             nonVoiceDevices={nonVoiceDeviceInStock}
+//           />
+//         </div>
+//         <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold">
+//           Retail Information
+//           <RetailCard totalInRetail={totalInRetail} />
+//         </div>
+//         <div className="w-[90%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center uppercase p-2 font-bold">
+//           Rangs Information
+//           <RangsCard
+//             totalInRangs={totalInRangs}
+//             voiceInrangs={voiceDeviceInRangs}
+//             nonVoiceInRangs={nonVoiceDeviceInRangs}
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+import RangsCard from "@/components/RangsCard";
+import RetailCard from "@/components/RetailCard";
+import StoreCard from "@/components/StoreCard";
+import Link from "next/link";
+
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const baseUrl = process.env.URL || "http://localhost:3000";
+  let devices = [];
+  try {
+    const devicesRes = await fetch(`${baseUrl}/api/devices`, {
+      cache: "no-store",
+    });
+    if (!devicesRes.ok) throw new Error("Failed to fetch devices");
+    devices = await devicesRes.json();
+  } catch (error) {
+    console.error("Error fetching devices:", error);
+  }
+
+  const totalDevices = devices.length;
+  const totalInRetail = devices.filter((x) => x.send_to === "Retail");
+  const totalInRangs = devices.filter((x) => x.send_to === "Rangs").length;
+  const totalInStock = devices.filter((x) => x.send_to === "Store").length;
+  const voiceDeviceInStock = devices.filter(
+    (x) => x.send_to === "Store" && x.device_type === "Voice"
+  ).length;
+  const nonVoiceDeviceInStock = devices.filter(
+    (x) => x.send_to === "Store" && x.device_type === "Non_Voice"
+  ).length;
+  const voiceDeviceInRangs = devices.filter(
+    (x) => x.send_to === "Rangs" && x.device_type === "Voice"
+  ).length;
+  const nonVoiceDeviceInRangs = devices.filter(
+    (x) => x.send_to === "Rangs" && x.device_type === "Non_Voice"
+  ).length;
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="w-full h-full bg-skyblue-500 flex flex-col">
+      <div className="h-[10%] w-full bg-gray-800 text-white flex lg:gap-2 gap-2 md:gap:3 items-center lg:px-2 px-2">
+        <button className="border-2 h-[30px] lg:p-2 p-2 rounded-md flex items-center justify-center">
+          <Link href={"/store"}> STORE</Link>
+        </button>
+        <button className="border-2 h-[30px] lg:p-2 p-2 rounded-md flex items-center justify-center">
+          <Link href={"/rangs"}> RANGS</Link>
+        </button>
+        <button className="border-2 h-[30px] lg:p-2 p-2 rounded-md flex items-center justify-center">
+          <Link href={"/retail"}>RETAIL</Link>
+        </button>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="h-[30px] w-[120px] bg-white p-2 rounded-md text-black flex items-center justify-center">
+          Total :{" "}
+          <p className="text-orange-500 ml-2 font-bold">{totalDevices}</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </div>
+
+      <div className="lg:h-[90%] h-[95%] w-full bg-gray-400 flex flex-col gap-4 md:flex-row lg:flex items-center justify-center">
+        <div className="w-[98%] h-[33%] lg:w-[33%] rounded-md lg:h-[95%] bg-white text-center uppercase p-2 font-bold">
+          Total Stock
+          <StoreCard
+            totalDevices={totalInStock}
+            voiceDevices={voiceDeviceInStock}
+            nonVoiceDevices={nonVoiceDeviceInStock}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+        </div>
+        <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold">
+          Retail Information
+          <RetailCard totalInRetail={totalInRetail} />
+        </div>
+
+        <div className="w-[90%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center uppercase p-2 font-bold">
+          Rangs Information
+          <RangsCard
+            totalInRangs={totalInRangs}
+            voiceInRangs={voiceDeviceInRangs}
+            nonVoiceInRangs={nonVoiceDeviceInRangs}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+      </div>
     </div>
   );
 }
