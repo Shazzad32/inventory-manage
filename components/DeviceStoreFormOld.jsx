@@ -21,10 +21,7 @@ const DeviceStoreForm = ({ defaultItem, isUpdate, technicians }) => {
     ...defaultItem,
   });
 
-  // const [tech, setTech] = useState({ ...technicians });
-  // console.log("tech", tech);
-
-  const tech = ({...technicians})
+  const tech = { ...technicians };
 
   const [errors, setErrors] = useState({
     issue_by: "",
@@ -33,8 +30,6 @@ const DeviceStoreForm = ({ defaultItem, isUpdate, technicians }) => {
 
   const validateFields = () => {
     let newErrors = { issue_by: "", district: "" };
-  
-    // Apply validation only if send_to is "Retail"
     if (item.send_to === "Retail") {
       if (!item.issue_by) {
         newErrors.issue_by = "Issue By is required";
@@ -64,21 +59,20 @@ const DeviceStoreForm = ({ defaultItem, isUpdate, technicians }) => {
     }
   };
 
-
   // const updateDevice = async () => {
   //   if (!validateFields()) return; // Only validate if needed
-  
+
   //   try {
   //     const res = await fetch(`/api/devices/${item._id}`, {
   //       method: "PUT",
   //       headers: { "Content-type": "application/json" },
   //       body: JSON.stringify(item),
   //     });
-  
+
   //     if (!res.ok) {
   //       throw new Error("Failed to update device");
   //     }
-  
+
   //     router.push("/store");
   //   } catch (error) {
   //     console.error("Update failed:", error);
@@ -86,12 +80,11 @@ const DeviceStoreForm = ({ defaultItem, isUpdate, technicians }) => {
   //   }
   // };
 
-
   const [loading, setLoading] = useState(false);
 
   const updateDevice = async () => {
     if (!validateFields()) return;
-    
+
     setLoading(true);
     try {
       const res = await fetch(`/api/devices/${item._id}`, {
@@ -99,7 +92,7 @@ const DeviceStoreForm = ({ defaultItem, isUpdate, technicians }) => {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(item),
       });
-  
+
       if (!res.ok) throw new Error("Failed to update device");
       router.push("/store");
     } catch (error) {
@@ -108,12 +101,15 @@ const DeviceStoreForm = ({ defaultItem, isUpdate, technicians }) => {
       setLoading(false);
     }
   };
-  
+
   // Disable button while loading
-  <Button onClick={isUpdate ? updateDevice : saveDevice} variant="outlined" disabled={loading}>
+  <Button
+    onClick={isUpdate ? updateDevice : saveDevice}
+    variant="outlined"
+    disabled={loading}
+  >
     {loading ? "Processing..." : isUpdate ? "Update" : "Submit"}
-  </Button>
-  
+  </Button>;
 
   const handleChange = (event) => {
     const { name, value } = event.target;

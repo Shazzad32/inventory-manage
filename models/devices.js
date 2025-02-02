@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const devicesSchema = new Schema({
-  device_id: { type: String },
+  device_id: { type: String,unique: true, required: true },
   device_model: { type: String },
   device_type: { type: String,enum: ["Voice", "Non_Voice"] },
   from: { type: String },

@@ -90,7 +90,6 @@
 import { connectToDb } from "/utils/database";
 import Devices from "/models/devices";
 
-// GET: Fetch a single device by ID
 export const GET = async (req, { params }) => {
   const { id } = params;
 
@@ -112,7 +111,6 @@ export const GET = async (req, { params }) => {
   }
 };
 
-// PUT: Update a device by ID
 export const PUT = async (req, { params }) => {
   const { id } = params;
 
@@ -144,7 +142,6 @@ export const PUT = async (req, { params }) => {
       return new Response("Device not found", { status: 404 });
     }
 
-    // Update device fields
     device.device_id = device_id;
     device.send_to = send_to;
     device.from = from;
@@ -168,7 +165,6 @@ export const PUT = async (req, { params }) => {
   }
 };
 
-// DELETE: Delete a device by ID
 export const DELETE = async (req, { params }) => {
   const { id } = params;
 

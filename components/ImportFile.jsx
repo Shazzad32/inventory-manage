@@ -20,6 +20,8 @@ const ImportFile = () => {
         let insertedCount = 0;
         let skippedCount = 0;
 
+        console.log(jsonData,"Data")
+
         for (const row of jsonData) {
           try {
             if (!row.insert_date || row.insert_date === "undefined") {
