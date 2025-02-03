@@ -6,9 +6,8 @@ import axios from "axios";
 import StoreTable from "@/components/StoreTable";
 
 const Store = async () => {
-  const devices = (
-    await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/devices/store`)
-  ).data;
+  const devices = (await axios.get(`${process.env.URL}/api/devices/store`))
+    .data;
 
   // console.log(devices)
 

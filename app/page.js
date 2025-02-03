@@ -92,9 +92,7 @@ export default async function Home() {
   //   console.error("Error fetching devices:", error);
   // }
 
-  const devices = (
-    await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/devices`)
-  ).data;
+  const devices = (await axios.get(`${process.env.URL}/api/devices`)).data;
 
   console.log(devices);
 
