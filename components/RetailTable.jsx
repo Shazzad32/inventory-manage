@@ -107,7 +107,10 @@ function RetailTable({ devices }) {
           <div className="flex-[1] text-white">ACTION</div>
         </div>
 
-        <div className="w-full flex flex-col flex-1">
+        <div
+          className="w-full flex flex-col flex-1 max-h-[510px]
+overflow-y-auto"
+        >
           {state.data.map((x, i) => (
             <div
               key={i}

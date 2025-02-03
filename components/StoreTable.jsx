@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import StoreTableInfo from "./StoreTableInfo";
+import ImportFile from "./ImportFile";
 
 const headers = ["Device_id", "Model", "From", "Type", "Insert Date"];
 
@@ -57,13 +58,15 @@ function StoreTable({ devices }) {
   return (
     <div className="h-[100%] w-full flex flex-col">
       <div className="flex w-full justify-between  bg-gray-800 items-center p-4">
-        <div className="flex gap-6">
+        <div className="flex gap-4">
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/"}> HOME</Link>
           </button>
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/store/add"}> ADD</Link>
           </button>
+
+          <ImportFile />
         </div>
         <div>
           <p className="text-white uppercase">Total Stock</p>
@@ -84,8 +87,8 @@ function StoreTable({ devices }) {
       </div>
 
       <div className="flex flex-col flex-1 bg-slate-300 w-full p-1">
-        <div className="flex justify-between bg-gray-800 items-center p-4">
-          <div className="flex-[9] flex">
+        <div className="flex justify-between bg-gray-800 items-center p-4 ">
+          <div className="flex-[9] flex ">
             {headers.map((x) => (
               <p key={x} className="text-white uppercase flex-[8]">
                 {x}
@@ -95,7 +98,7 @@ function StoreTable({ devices }) {
           <div className="flex-[1] text-white">ACTION</div>
         </div>
 
-        <div className="w-full flex flex-col flex-1">
+        <div className="w-full  max-h-[510px] flex flex-col flex-9 overflow-y-auto ">
           {state.data.map((x, i) => (
             <div
               key={i}
