@@ -4,6 +4,7 @@
 // import StoreTable from "./storetable/page";
 import axios from "axios";
 import StoreTable from "@/components/StoreTable";
+export const dynamic = "force-dynamic";
 
 const Store = async () => {
   const devices = (await axios.get(`${process.env.URL}/api/devices/store`))
