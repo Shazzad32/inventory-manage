@@ -8,18 +8,6 @@ import axios from "axios";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  // const baseUrl = process.env.URL || "http://localhost:3000";
-  // let devices = [];
-  // try {
-  //   const devicesRes = await fetch(`${baseUrl}/api/devices`, {
-  //     cache: "no-store",
-  //   });
-  //   if (!devicesRes.ok) throw new Error("Failed to fetch devices");
-  //   devices = await devicesRes.json();
-  // } catch (error) {
-  //   console.error("Error fetching devices:", error);
-  // }
-
   const devices = (await axios.get(`${process.env.URL}/api/devices`)).data;
 
   console.log(devices);
