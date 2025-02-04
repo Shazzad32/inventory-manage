@@ -146,15 +146,9 @@ function Sold({ devices }) {
   return (
     <div className="h-[100%] w-full flex flex-col">
       <div className="flex w-full justify-between  bg-gray-800 items-center p-4">
-        <div className="flex gap-6">
+        <div className="flex gap-4">
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/"}> HOME</Link>
-          </button>
-          <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
-            <Link href={"/retail/sold"}> SOLD</Link>
-          </button>
-          <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
-            <Link href={"/retail/add"}> ADD</Link>
           </button>
           <input
             type="date"

@@ -22,9 +22,11 @@ export default async function Home() {
   const nonVoiceDeviceInStock = devices.filter(
     (x) => x.send_to === "Store" && x.device_type === "Non_Voice"
   ).length;
+
   const voiceDeviceInRangs = devices.filter(
     (x) => x.send_to === "Rangs" && x.device_type === "Voice"
   ).length;
+
   const nonVoiceDeviceInRangs = devices.filter(
     (x) => x.send_to === "Rangs" && x.device_type === "Non_Voice"
   ).length;

@@ -1,5 +1,5 @@
 import React from "react";
-import DeviceStoreForm from "@/components/DeviceStoreFormOld";
+import StoreForm from "@/components/StoreForm";
 
 const UpdateStore = async ({ params }) => {
   const { id } = await params;
@@ -33,11 +33,7 @@ const UpdateStore = async ({ params }) => {
       <p className="text-sm font-bold uppercase text-orange-400 md:text-3xl flex justify-center items-end">
         Update Form
       </p>
-      <DeviceStoreForm
-        defaultItem={data}
-        isUpdate={true}
-        technicians={technicians}
-      />
+      <StoreForm defaultItem={data} isUpdate={true} technicians={technicians} />
     </div>
   );
 };

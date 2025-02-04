@@ -1,15 +1,17 @@
 import React from "react";
-import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+} from "@mui/material";
 
-const TechNameName = ({ value, onChange, error, technicians }) => {
+const TechName = ({ value, onChange, error, technicians }) => {
   return (
     <FormControl fullWidth error={!!error}>
       <InputLabel>Issue To</InputLabel>
-      <Select
-        value={value || ""}
-        onChange={onChange}
-        name="issue_by"
-      >
+      <Select value={value || ""} onChange={onChange} name="issue_by">
         {technicians.map((tech, i) => (
           <MenuItem key={i} value={tech.tech_name}>
             {tech.tech_name}
@@ -21,4 +23,4 @@ const TechNameName = ({ value, onChange, error, technicians }) => {
   );
 };
 
-export default TechNameName;
+export default TechName;

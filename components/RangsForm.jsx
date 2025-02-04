@@ -9,9 +9,11 @@ import dayjs from "dayjs";
 
 const RangsForm = ({ defaultItem, isUpdate }) => {
   const router = useRouter();
+
   const [item, setItem] = useState({
     ...defaultItem,
   });
+
   const saveDevice = async () => {
     const res = await fetch("/api/devices", {
       method: "POST",

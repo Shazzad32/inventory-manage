@@ -71,10 +71,10 @@ function RetailTable({ devices }) {
             <Link href={"/"}> HOME</Link>
           </button>
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
-            <Link href={"/retail/sold"}> SOLD</Link>
+            <Link href={"/retail/add"}> ADD</Link>
           </button>
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
-            <Link href={"/retail/add"}> ADD</Link>
+            <Link href={"/retail/sold"}> SOLD</Link>
           </button>
         </div>
         <div>
@@ -107,10 +107,7 @@ function RetailTable({ devices }) {
           <div className="flex-[1] text-white">ACTION</div>
         </div>
 
-        <div
-          className="w-full flex flex-col flex-1 max-h-[510px]
-overflow-y-auto"
-        >
+        <div className="w-full flex flex-col flex-1 max-h-[510px] overflow-y-auto">
           {state.data.map((x, i) => (
             <div
               key={i}

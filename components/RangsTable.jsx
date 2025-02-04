@@ -24,6 +24,9 @@ const RangsTable = ({ item }) => {
         <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.from}
         </p>
+        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+          {item?.workshop}
+        </p>
 
         <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
           {formattedInsertDate}

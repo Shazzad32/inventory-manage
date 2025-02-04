@@ -9,6 +9,7 @@ const headers = [
   "Model",
   "Type",
   "From",
+  "Workshop",
   "Insert_Date",
   "Sending_Date",
 ];
@@ -99,7 +100,7 @@ function Rangs({ devices }) {
           ))}
         </div>
 
-        <div className="w-full flex flex-col flex-1">
+        <div className="w-full flex max-h-[510px] flex-col flex-1 overflow-y-auto">
           {state.data.map((x, i) => (
             <div
               key={i}

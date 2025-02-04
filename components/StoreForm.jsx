@@ -13,23 +13,37 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import dayjs from "dayjs";
-import TechNameName from "./TechnicianName";
+import TechName from "./TechnicianName";
 import DistrictName from "./DistrictName";
 
 const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
   const router = useRouter();
   const [item, setItem] = useState({ ...defaultItem });
-  const [errors, setErrors] = useState({ issue_by: "", district: "" });
+  const [errors, setErrors] = useState({
+    issue_by: "",
+    district: "",
+    workshop: "",
+  });
   const [loading, setLoading] = useState(false);
 
+  console.log(item, "item");
+
   const validateFields = () => {
-    let newErrors = { issue_by: "", district: "" };
+    let newErrors = {
+      issue_by: "",
+      district: "",
+    };
+
+    // if (!item.device_id) newErrors.district = "Device Id Name is required";
+    // if (!item.device_model) newErrors.district = "Device Model is required";
+    // if (!item.device_type) newErrors.district = "Device Type is required";
+    // if (!item.from) newErrors.district = "From is required";
 
     if (item.send_to === "Retail") {
       if (!item.issue_by) newErrors.issue_by = "Issue By is required";
       if (!item.district) newErrors.district = "District Name is required";
     } else if (item.send_to === "Rangs") {
-      if (!item.district) newErrors.workshop = "Workshop Name is required";
+      if (!item.workshop) newErrors.workshop = "Workshop Name is required";
     }
 
     setErrors(newErrors);
@@ -94,6 +108,8 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
           label="Device Id"
           onChange={handleChange}
           disabled={isUpdate}
+          error={errors.device_id}
+          helperText={errors.device_id || ""}
         />
 
         {!isUpdate && (
@@ -110,17 +126,6 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
               name="from"
               value={item.from || ""}
               label="From"
-              onChange={handleChange}
-            />
-          </>
-        )}
-        {isUpdate && item.send_to === "Rangs" && (
-          <>
-            <TextField
-              type="text"
-              name="workshop"
-              value={item.workshop || ""}
-              label="workshop"
               onChange={handleChange}
             />
           </>
@@ -149,6 +154,7 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
               value={item.send_to || ""}
               onChange={handleChange}
             >
+              <MenuItem value="Store">Store</MenuItem>
               <MenuItem value="Retail">Retail</MenuItem>
               <MenuItem value="Rangs">Rangs</MenuItem>
             </Select>
@@ -157,7 +163,7 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
 
         {isUpdate && item.send_to === "Retail" && (
           <div className="w-full flex gap-2">
-            <TechNameName
+            <TechName
               value={item.issue_by}
               onChange={handleChange}
               error={errors.issue_by}
@@ -172,6 +178,17 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
           </div>
         )}
 
+        {isUpdate && item.send_to === "Rangs" && (
+          <TextField
+            type="text"
+            name="workshop"
+            value={item.workshop || ""}
+            label="Workshop"
+            onChange={handleChange}
+            error={errors.workshop}
+            helperText={errors.workshop || ""}
+          />
+        )}
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             fullwidth
