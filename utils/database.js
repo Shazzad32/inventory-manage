@@ -16,7 +16,7 @@ export const connectToDb = async () => {
   }
   if (!cached.promise) {
     cached.promise = mongoose
-      .connect(MONGODB_URI, { dbName: "inventoryDB" })
+      .connect(MONGODB_URI, { dbName: "serviceDB" })
       .then((result) => {
         console.log("Connected to MongoDB");
         return result;

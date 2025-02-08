@@ -16,9 +16,7 @@ const UpdateStore = async ({ params }) => {
 
   const [data, technicians] = await Promise.all([
     fetch(`${process.env.URL}/api/devices/${id}`).then((res) => res.json()),
-    fetch("https://servicecheckapp.vercel.app/api/technician").then((res) =>
-      res.json()
-    ),
+    fetch(`${process.env.URL}/api/technician`).then((res) => res.json()),
   ]);
 
   console.log(technicians);

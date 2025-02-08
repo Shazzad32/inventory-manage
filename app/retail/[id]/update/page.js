@@ -6,7 +6,7 @@ const UpdateRetail = async ({ params }) => {
   const { id } = await params;
 
   const data = await (
-    await fetch(`${process.env.URL}/api/devices/${id}`)
+    await fetch(`https://servicecheckapp.vercel.app/api/devices/${id}`)
   ).json();
   return (
     <div className="w-full flex flex-col items-center justify-center sm:w-full ">

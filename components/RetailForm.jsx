@@ -60,6 +60,7 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
     });
 
     if (res.ok) {
+      router.refresh();
       router.push("/retail");
     } else {
       const responseData = await res.json();

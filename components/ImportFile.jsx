@@ -3,7 +3,6 @@
 import React from "react";
 import * as XLSX from "xlsx";
 import axios from "axios";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
 import { useRouter } from "next/navigation";
 
@@ -22,11 +21,6 @@ const ImportFile = () => {
         const sheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(sheet);
 
-        let insertedCount = 0;
-        let skippedCount = 0;
-
-        // console.log(jsonData, "Data");
-
         if (jsonData.length > 0) {
           const saveResponse = await axios.post(
             "/api/devices/store/file",
@@ -39,8 +33,9 @@ const ImportFile = () => {
           console.log(saveResponse);
 
           if (saveResponse.status === 201) {
-            alert("DEvice Added Succfully");
-            router.refresh("/store");
+            alert("Device Added Succfully");
+            router.push("/store");
+            router.refresh();
           } else if (saveResponse.status === 200) {
             alert(
               `${saveResponse.data.message}\n${saveResponse.data.data.join(
@@ -49,47 +44,6 @@ const ImportFile = () => {
             );
           }
         }
-
-        // for (const row of jsonData) {
-        //   try {
-        //     if (!row.insert_date || row.insert_date === "undefined") {
-        //       row.insert_date = new Date().toISOString();
-        //     }
-
-        //     if (!row.device_id) {
-        //       console.warn("Skipping row due to missing device_id:", row);
-        //       skippedCount++;
-        //       continue;
-        //     }
-        //     const response = await axios.get(
-        //       `/api/devices?device_id=${row.device_id}`
-        //     );
-
-        //     if (response.data && response.data.exists) {
-        //       console.warn(
-        //         `Device ID ${row.device_id} already exists! Skipping.`
-        //       );
-        //       skippedCount++;
-        //       continue;
-        //     }
-
-        //     const saveResponse = await axios.post("/api/devices", row, {
-        //       headers: { "Content-Type": "application/json" },
-        //     });
-
-        //     if (saveResponse.status === 201) {
-        //       console.log("Inserted:", row);
-        //       insertedCount++;
-        //     }
-        //   } catch (error) {
-        //     console.error("Error processing row:", row, error);
-        //     skippedCount++;
-        //   }
-        // }
-
-        // alert(
-        //   `Import completed! Inserted: ${insertedCount}, Skipped: ${skippedCount}`
-        // );
       } catch (error) {
         // if (error.status === 401) {
         //   console.log(error.response);
