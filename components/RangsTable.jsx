@@ -11,27 +11,27 @@ const RangsTable = ({ item }) => {
 
   return (
     <div className={`h-auto w-[100%]  flex lg:flex-row lg:h-14 items-center`}>
-      <div className="hidden lg:flex lg:w-[100%] lg:px-2">
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+      <div className="hidden lg:flex lg:w-[100%] p-2">
+        <p className="flex-[1.5] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_id}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_model}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_type}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.from}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.workshop}
         </p>
 
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
           {formattedInsertDate}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
           {formattedSendingDate}
         </p>
       </div>

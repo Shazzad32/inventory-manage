@@ -85,8 +85,6 @@
 //   }
 // }
 
-
-
 import { connectToDb } from "/utils/database";
 import Devices from "/models/devices";
 
@@ -133,6 +131,7 @@ export const PUT = async (req, { params }) => {
       is_complete,
       insert_date,
       workshop,
+      install_purpose,
     } = await req.json();
 
     await connectToDb();
@@ -155,6 +154,7 @@ export const PUT = async (req, { params }) => {
     device.is_complete = is_complete;
     device.insert_date = insert_date;
     device.workshop = workshop;
+    device.install_purpose = install_purpose;
 
     await device.save();
 

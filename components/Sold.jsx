@@ -10,6 +10,7 @@ const headers = [
   "Type",
   "Issue_To",
   "District",
+  "install_purpose",
   "Price",
   "Install_date",
 ];
@@ -172,7 +173,7 @@ function Sold({ devices }) {
           </button>
         </div>
         <div>
-          <p className="text-white uppercase">Total Sold</p>
+          <p className="text-white uppercase">Total Sold Device</p>
         </div>
         <div className="flex gap-6 items-center justify-end">
           <div className="bg-white p-1.5 rounded-md flex items-center">

@@ -38,12 +38,12 @@ const RetailCard = ({ totalInRetail }) => {
     <div className="h-[95%] w-full p-4 flex flex-col gap-4 items-center justify-evenly">
       <Link
         href={"/retail"}
-        className="w-[90%] h-[33%] bg-purple-500 rounded-md flex flex-col text-left p-4 "
+        className="w-[90%] h-[33%] bg-pink-500 rounded-md flex flex-col text-left p-4 "
       >
         <p className="text-center text-white uppercase">
           Un Sold Device =
           <span>
-            {totalInRetail.filter((x) => (x.is_complete === false)).length}
+            {totalInRetail.filter((x) => x.is_complete === false).length}
           </span>
         </p>
 
@@ -51,21 +51,27 @@ const RetailCard = ({ totalInRetail }) => {
           <div className="bg-white px-2 py-1 rounded-md flex items-center mt-2 w-[50%]">
             Voice :
             <span className="text-xl font-bold text-orange-500 ml-1">
-              {totalInRetail.filter((x) =>x.is_complete === false && x.device_type === "Voice").length}
+              {
+                totalInRetail.filter(
+                  (x) => x.is_complete === false && x.device_type === "Voice"
+                ).length
+              }
             </span>
           </div>
           <div className="bg-white px-2 py-1 rounded-md flex items-center mt-2 w-[50%] ">
             Non Voice :
             <span className="text-xl font-bold text-orange-500 ml-1">
               {
-                totalInRetail.filter((x) =>x.is_complete === false && x.device_type === "Non_Voice")
-                  .length
+                totalInRetail.filter(
+                  (x) =>
+                    x.is_complete === false && x.device_type === "Non_Voice"
+                ).length
               }
             </span>
           </div>
         </div>
       </Link>
-      <div className="w-[90%] h-[33%] bg-purple-500 rounded-md flex flex-col text-left p-4">
+      <div className="w-[90%] h-[33%] bg-pink-500 rounded-md flex flex-col text-left p-4">
         <div className="flex justify-between">
           <p className="text-left text-white uppercase">Daily Report</p>
           <input
@@ -89,7 +95,7 @@ const RetailCard = ({ totalInRetail }) => {
       </div>
       <Link
         href={"retail/sold"}
-        className="w-[90%] h-[33%] bg-purple-500 rounded-md flex-col flex items-center justify-center "
+        className="w-[90%] h-[33%] bg-pink-500 rounded-md flex-col flex items-center justify-center "
       >
         <div className="bg-white px-2 py-1 rounded-md flex items-center mt-2 w-[70%] ">
           Sold Device :{" "}

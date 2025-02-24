@@ -12,7 +12,8 @@ const defaultItem = {
   install_date: "",
   device_type: "",
   device_model: "",
-  device_price: "",
+  device_price: "0",
+  install_purpose: "",
 };
 
 const techniciansRes = await fetch(

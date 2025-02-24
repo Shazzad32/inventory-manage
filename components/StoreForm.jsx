@@ -6,15 +6,14 @@ import {
   Select,
   MenuItem,
   TextField,
+  Autocomplete,
 } from "@mui/material";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import dayjs from "dayjs";
 import TechName from "./TechnicianName";
 import DistrictName from "./DistrictName";
+import workshop from "@/data";
 
 const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
   const router = useRouter();
@@ -98,6 +97,13 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
     }
   };
 
+  const handleAutocompleteChange = (name, newValue) => {
+    setItem((prevUser) => ({
+      ...prevUser,
+      [name]: newValue,
+    }));
+  };
+
   return (
     <div className="w-full h-[100%] flex items-center justify-center gap-2 p-4 lg:p-6 lg:w-[50%] lg:gap-4 flex-col">
       <div className="w-full h-[90%] flex gap-4 flex-col">
@@ -179,17 +185,35 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
         )}
 
         {isUpdate && item.send_to === "Rangs" && (
-          <TextField
-            type="text"
-            name="workshop"
+          // <TextField
+          //   type="text"
+          //   name="workshop"
+          //   value={item.workshop || ""}
+          //   label="Workshop"
+          //   onChange={handleChange}
+          //   error={errors.workshop}
+          //   helperText={errors.workshop || ""}
+          // />
+
+          <Autocomplete
+            fullWidth
+            options={workshop} // Assuming `workshop` is an array of workshop names
             value={item.workshop || ""}
-            label="Workshop"
-            onChange={handleChange}
-            error={errors.workshop}
-            helperText={errors.workshop || ""}
+            onChange={(e, newValue) =>
+              handleAutocompleteChange("workshop", newValue)
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Workshop"
+                error={!!errors.workshop}
+                helperText={errors.workshop || ""}
+              />
+            )}
           />
         )}
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             fullwidth
             label="Insert Date"
@@ -204,7 +228,7 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
               });
             }}
           />
-        </LocalizationProvider>
+        </LocalizationProvider> */}
       </div>
 
       <div className="flex w-full justify-end gap-2">

@@ -71,25 +71,28 @@ const SoldTable = ({ item }) => {
       className={`h-auto w-full lg:w-[100%] flex lg:flex-row lg:h-14 items-center`}
     >
       <div className="flex-[9] flex p-2">
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_id}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_model}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_type}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.issue_by}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.district}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
+          {item?.install_purpose}
+        </p>
+        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_price}
         </p>
-        <p className="flex-[1.75] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
           {formattedDate}
         </p>
       </div>

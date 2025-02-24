@@ -1,5 +1,5 @@
 import axios from "axios";
-import StoreTable from "@/components/StoreTable";
+import StoreTable from "@/components/Store";
 export const dynamic = "force-dynamic";
 
 const Store = async () => {

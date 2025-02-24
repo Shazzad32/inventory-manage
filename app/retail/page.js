@@ -1,5 +1,5 @@
 import axios from "axios";
-import RetailTable from "@/components/RetailTable";
+import RetailTable from "@/components/Retail";
 
 export const dynamic = "force-dynamic";
 

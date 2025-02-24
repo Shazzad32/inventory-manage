@@ -8,9 +8,6 @@ import axios from "axios";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  // const devices = (
-  //   await axios.get("https://servicecheckapp.vercel.app/api/devices")
-  // ).data;
   const devices = (await axios.get(`${process.env.URL}/api/devices`)).data;
 
   console.log(devices);
@@ -55,14 +52,14 @@ export default async function Home() {
 
       <div className="lg:h-[90%] h-[95%] w-full bg-gray-400 flex flex-col gap-4 md:flex-row lg:flex items-center justify-center">
         <div className="w-[98%] h-[33%] lg:w-[33%] rounded-md lg:h-[95%] bg-white text-center uppercase p-2 font-bold">
-          Total Stock
+          Total In Store
           <StoreCard
             totalDevices={totalInStock}
             voiceDevices={voiceDeviceInStock}
             nonVoiceDevices={nonVoiceDeviceInStock}
           />
         </div>
-        <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold">
+        <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold uppercase">
           Retail Information
           <RetailCard totalInRetail={totalInRetail} />
         </div>

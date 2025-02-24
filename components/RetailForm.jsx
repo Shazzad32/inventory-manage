@@ -32,22 +32,39 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
     device_price: "",
   });
 
-  const validateFields = () => {
-    let newErrors = { device_price: "" };
+  // const validateFields = () => {
+  //   let newErrors = { device_price: "" };
 
-    if (item.is_complete) {
+  //   if (item.is_complete) {
+  //     const price = parseFloat(item.device_price);
+  //     if (isNaN(price) || price < 1500 || price > 8000) {
+  //       newErrors.device_price = "Device Price must be between 1500 and 8000";
+  //     }
+  //   }
+
+  //   if (!item.device_price) {
+  //     newErrors.device_price = "Price required";
+  //   }
+
+  //   setErrors(newErrors);
+  //   return Object.values(newErrors).every((error) => error === "");
+  // };
+
+  const validateFields = () => {
+    let newErrors = {};
+
+    if (item.is_complete && item.install_purpose === "New_Install") {
       const price = parseFloat(item.device_price);
-      if (isNaN(price) || price < 1500 || price > 8000) {
+
+      if (!item.device_price) {
+        newErrors.device_price = "Price required";
+      } else if (isNaN(price) || price < 1500 || price > 8000) {
         newErrors.device_price = "Device Price must be between 1500 and 8000";
       }
     }
 
-    if (!item.device_price) {
-      newErrors.device_price = "Price required";
-    }
-
     setErrors(newErrors);
-    return Object.values(newErrors).every((error) => error === "");
+    return Object.keys(newErrors).length === 0;
   };
 
   const saveDevice = async () => {
@@ -74,37 +91,6 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
       }
     }
   };
-
-  // const updateDevice = async () => {
-  //   const res = await fetch(`/api/devices/${item._id}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(item),
-  //   });
-
-  //   if (!res.ok) {
-  //     throw new Error("Failed to update topic");
-  //   }
-  //   router.push("/retail");
-  // };
-
-  // useEffect(() => {
-  //   getTechnician();
-  // }, []);
-
-  // const getTechnician = async () => {
-  //   try {
-  //     const res = await axios.get(
-  //       "https://jsonplaceholder.typicode.com/comments"
-  //     );
-  //     const data = res.data;
-  //     setState({ datas: data });
-  //   } catch (error) {
-  //     console.error("Error fetching technician data:", error.message);
-  //   }
-  // };
 
   const updateDevice = async () => {
     if (!validateFields()) return;
@@ -136,13 +122,6 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
     setItem((prevValue) => ({
       ...prevValue,
       [name]: !prevValue[name],
-    }));
-  };
-
-  const handleAutocompleteChange = (name, newValue) => {
-    setItem((prevUser) => ({
-      ...prevUser,
-      [name]: newValue,
     }));
   };
 
@@ -195,57 +174,15 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
             <TechName
               value={item.issue_by}
               onChange={handleChange}
-              // error={errors.issue_by}
               technicians={technicians}
             />
             <DistrictName
               value={item.district}
               onChange={handleChange}
-              // error={errors.district}
               technicians={technicians}
             />
           </>
         )}
-
-        {/* <FormControl fullWidth>
-          <InputLabel>Send To</InputLabel>
-          <Select
-            type="text"
-            name="send_to"
-            value={item.send_to || ""}
-            onChange={handleChange}
-          >
-            {state.datas.map((tech, i) => (
-              <MenuItem key={i} value={tech.email}>
-                {tech.email}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl> */}
-
-        {/* {isUpdate && (
-          <Autocomplete
-            fullWidth
-            options={districtOptions}
-            value={item.district || ""}
-            onChange={(e, newValue) =>
-              handleAutocompleteChange("district", newValue)
-            }
-            renderInput={(params) => (
-              <TextField {...params} label="District Name" />
-            )}
-          />
-        )}
-
-        {isUpdate && (
-          <TextField
-            type="text"
-            name="issue_by"
-            label="Issue By"
-            value={item.issue_by || ""}
-            onChange={handleChange}
-          />
-        )} */}
 
         {!isUpdate && (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -279,10 +216,25 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
                 />
               }
             </p>
+            <div className="flex gap-4 w-full">
+              {item.is_complete && (
+                <FormControl className="w-[50%]">
+                  <InputLabel>Install Purpose</InputLabel>
+                  <Select
+                    type="text"
+                    name="install_purpose"
+                    value={item.install_purpose || ""}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="New_Install">New_Install</MenuItem>
+                    <MenuItem value="Replace">Replace</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
 
-            {item.is_complete && (
-              <div className="flex">
+              {item.is_complete && (
                 <TextField
+                  className="w-[50%]"
                   type="number"
                   label="Device Price"
                   name="device_price"
@@ -291,8 +243,8 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
                   error={!!errors.device_price}
                   helperText={errors.device_price}
                 />
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
       </div>

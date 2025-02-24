@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import workshop from "@/data";
 
 const RangsForm = ({ defaultItem, isUpdate }) => {
   const router = useRouter();
@@ -65,6 +66,13 @@ const RangsForm = ({ defaultItem, isUpdate }) => {
     setItem((prevValue) => ({
       ...prevValue,
       [name]: !prevValue[name],
+    }));
+  };
+
+  const handleAutocompleteChange = (name, newValue) => {
+    setClient((prevUser) => ({
+      ...prevUser,
+      [name]: newValue,
     }));
   };
 
@@ -172,12 +180,23 @@ const RangsForm = ({ defaultItem, isUpdate }) => {
 
           {item.is_send && (
             <div>
-              <TextField
+              {/* <TextField
                 type="text"
                 label="Workshop"
                 name="workshop"
                 value={item.workshop || ""}
                 onChange={handleChange}
+              /> */}
+              <Autocomplete
+                fullWidth
+                options={workshop} // Assuming `workshop` is an array of workshop names
+                value={item.workshop || ""} // Ensure it shows selected value
+                onChange={(e, newValue) =>
+                  handleAutocompleteChange("workshop", newValue)
+                }
+                renderInput={(params) => (
+                  <TextField {...params} label="Workshop" />
+                )}
               />
             </div>
           )}
