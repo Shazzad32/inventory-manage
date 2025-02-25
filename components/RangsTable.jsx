@@ -24,14 +24,14 @@ const RangsTable = ({ item }) => {
         <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.from}
         </p>
-        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.50] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.workshop}
         </p>
 
-        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.50] overflow-hidden text-ellipsis whitespace-nowrap">
           {formattedInsertDate}
         </p>
-        <p className="flex-[1.45] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.35] overflow-hidden text-ellipsis whitespace-nowrap">
           {formattedSendingDate}
         </p>
       </div>
