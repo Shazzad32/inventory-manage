@@ -16,10 +16,9 @@ const defaultItem = {
   install_purpose: "",
 };
 
-const techniciansRes = await fetch(`${process.env.URL}/api/technician`);
-const technicians = await techniciansRes.json();
-
-const AddService = () => {
+const AddService = async () => {
+  const techniciansRes = await fetch(`${process.env.URL}/api/technician`);
+  const technicians = await techniciansRes.json();
   return (
     <div className="w-full h-full flex flex-col justify-center items-center gap-6 sm:gap-4">
       <div className="h-[90%] lg:h-[85%] lg:w-[80%] w-[100%] flex flex-col items-center justify-center bg-white ">
