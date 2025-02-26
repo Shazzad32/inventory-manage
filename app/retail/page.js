@@ -1,5 +1,5 @@
 import axios from "axios";
-import RetailTable from "@/components/Retail";
+import RetailInfo from "@/components/RetailInfo";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +9,7 @@ const Retail = async () => {
 
   const devices = alldevices.filter((item) => item.is_complete === false);
 
-  return <RetailTable devices={devices} />;
+  return <RetailInfo devices={devices} />;
 };
 
 export default Retail;

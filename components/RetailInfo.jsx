@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import RetailTable from "@/components/RetailTable";
+import { DropdownMenuDemo } from "./DropdownMenuDemo";
 
 const headers = [
   "Device_id",
@@ -31,7 +32,7 @@ const headers = [
 //   );
 // };
 
-function Retail({ devices }) {
+const RetailInfo = ({ devices }) => {
   const [state, setState] = useState({
     data: [...devices],
     search: "",
@@ -56,7 +57,8 @@ function Retail({ devices }) {
           x.device_id.toLowerCase().includes(state.search.toLowerCase()) ||
           x.issue_by.toLowerCase().includes(state.search.toLowerCase()) ||
           x.device_type.toLowerCase().includes(state.search.toLowerCase()) ||
-          x.device_model.toLowerCase().includes(state.search.toLowerCase())
+          x.device_model.toLowerCase().includes(state.search.toLowerCase()) ||
+          x.district.toLowerCase().includes(state.search.toLowerCase())
       );
     }
 
@@ -68,8 +70,9 @@ function Retail({ devices }) {
 
   return (
     <div className="h-[100%] w-full flex flex-col">
-      <div className="flex h-[10%] w-full justify-between  bg-gray-800 items-center p-2">
-        <div className="flex gap-4">
+      <div className="flex h-[10%] w-full justify-between bg-gray-800 items-center p-2">
+        <DropdownMenuDemo />
+        <div className="lg:flex gap-4 hidden">
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/"}> HOME</Link>
           </button>
@@ -81,12 +84,14 @@ function Retail({ devices }) {
           </button>
         </div>
         <div>
-          <p className="text-white uppercase">Total In Retail</p>
+          <p className="text-white uppercase lg:flex hidden">Total In Retail</p>
         </div>
         <div className="flex gap-6 items-center justify-end">
           <div className="flex gap-3 text-white uppercase">
-            <p>Total Devices</p>
-            <p>{devices.length}</p>
+            <p className="hidden lg:flex">Total Devices</p>
+            <p className="bg-white font-bold text-black p-2 rounded-md lg:bg-gray-800 lg:p-0 lg:text-white">
+              {state.data.length}
+            </p>
           </div>
           <input
             type="search"
@@ -99,7 +104,7 @@ function Retail({ devices }) {
       </div>
       <div className="h-[90%] flex items-center justify-center bg-white">
         <div className="h-[99%] w-[99.5%] flex flex-col">
-          <div className="h-[8%] flex bg-gray-800 p-2 items-center">
+          <div className="hidden h-[8%] lg:flex bg-gray-800 p-2 items-center">
             {headers.map((x) => (
               <p key={x} className="text-white uppercase flex-[9]">
                 {x}
@@ -107,7 +112,7 @@ function Retail({ devices }) {
             ))}
             <p className="flex-[1] text-white text-center">ACTION</p>
           </div>
-          <div className="h-[92%] overflow-y-auto">
+          <div className="h-[92%] overflow-y-scroll">
             {state.data.map((x, i) => (
               <div
                 key={i}
@@ -145,6 +150,6 @@ function Retail({ devices }) {
       </div> */}
     </div>
   );
-}
+};
 
-export default Retail;
+export default RetailInfo;

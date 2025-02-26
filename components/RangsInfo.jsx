@@ -31,7 +31,7 @@ const headers = [
 //   );
 // };
 
-function Rangs({ devices }) {
+const RangsInfo = ({ devices }) => {
   const [state, setState] = useState({
     data: [...devices],
     search: "",
@@ -82,7 +82,7 @@ function Rangs({ devices }) {
         <div className="flex gap-6 items-center justify-end">
           <div className="flex gap-3 text-white uppercase">
             <p>Total Devices</p>
-            <p>{devices.length}</p>
+            <p>{state.data.length}</p>
           </div>
           <input
             type="search"
@@ -95,7 +95,7 @@ function Rangs({ devices }) {
       </div>
       <div className="h-[90%] flex items-center justify-center bg-white">
         <div className="h-[99%] w-[99.5%] flex flex-col">
-          <div className="h-[8%] flex bg-gray-800 p-2 items-center">
+          <div className="hidden lg:flex h-[8%] bg-gray-800 p-2 items-center">
             {headers.map((x) => (
               <p key={x} className="text-white uppercase flex-[1]">
                 {x}
@@ -137,6 +137,6 @@ function Rangs({ devices }) {
       {/* </div> */}
     </div>
   );
-}
+};
 
-export default Rangs;
+export default RangsInfo;

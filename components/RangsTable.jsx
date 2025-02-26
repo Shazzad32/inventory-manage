@@ -10,7 +10,7 @@ const RangsTable = ({ item }) => {
     : new Date().toLocaleDateString("en-GB").replace(/\//g, "-");
 
   return (
-    <div className={`h-auto w-[100%]  flex lg:flex-row lg:h-14 items-center`}>
+    <div className="h-auto w-[100%]  flex lg:flex-row lg:h-14 items-center justify-center">
       <div className="hidden lg:flex lg:w-[100%] p-2">
         <p className="flex-[1.5] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_id}
@@ -35,7 +35,7 @@ const RangsTable = ({ item }) => {
           {formattedSendingDate}
         </p>
       </div>
-      <div className="block lg:hidden w-full bg-white p-4 border-2 border-black">
+      <div className="block lg:hidden w-[100%] bg-white border-2 border-black justify-center items-center rounded-md p-4">
         <p>
           <strong>
             Device ID: <span className="text-red-700">{item?.device_id}</span>
@@ -54,19 +54,6 @@ const RangsTable = ({ item }) => {
           <strong>Sending Date:</strong> {formattedSendingDate}
         </p>
       </div>
-      {/* <div className="flex flex-col items-center justify-center gap-6 w-[15%] lg:w-[15%] lg:mt-0 lg:flex lg:flex-row lg:gap-12">
-          {item?.is_send ? (
-            <>
-              <FiEdit className="text-gray-400 cursor-not-allowed" />
-            </>
-          ) : (
-            <>
-              <Link href={`/rangs/${item?._id}/update`}>
-                <FiEdit className="text-black" />
-              </Link>
-            </>
-          )}
-        </div> */}
     </div>
   );
 };
