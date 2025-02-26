@@ -170,7 +170,7 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
         )}
         {!isUpdate && (
           <>
-            {" "}
+            {/* {" "}
             <TechName
               value={item.issue_by}
               onChange={handleChange}
@@ -179,6 +179,18 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
             <DistrictName
               value={item.district}
               onChange={handleChange}
+              technicians={technicians}
+            /> */}
+            <TechName
+              value={item.issue_by}
+              onChange={handleChange}
+              // error={errors.issue_by}
+              technicians={technicians}
+            />
+            <DistrictName
+              value={item.district}
+              onChange={handleChange}
+              // error={errors.district}
               technicians={technicians}
             />
           </>

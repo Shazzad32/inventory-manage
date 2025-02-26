@@ -197,7 +197,7 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
 
           <Autocomplete
             fullWidth
-            options={workshop} // Assuming `workshop` is an array of workshop names
+            options={workshop}
             value={item.workshop || ""}
             onChange={(e, newValue) =>
               handleAutocompleteChange("workshop", newValue)
@@ -212,23 +212,6 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
             )}
           />
         )}
-
-        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            fullwidth
-            label="Insert Date"
-            name="insert_date"
-            value={item.insert_date ? dayjs(item.insert_date) : dayjs()}
-            onChange={(newValue) => {
-              handleChange({
-                target: {
-                  name: "insert_date",
-                  value: newValue ? newValue.toISOString() : "",
-                },
-              });
-            }}
-          />
-        </LocalizationProvider> */}
       </div>
 
       <div className="flex w-full justify-end gap-2">
