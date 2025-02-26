@@ -16,21 +16,12 @@ const defaultItem = {
   install_purpose: "",
 };
 
-const techniciansRes = await fetch(
-  "https://servicecheckapp.vercel.app/api/technician"
-);
-const technicians = await techniciansRes.json();
-
 const AddService = () => {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center gap-6 sm:gap-4">
       <div className="h-[90%] lg:h-[85%] lg:w-[80%] w-[100%] flex flex-col items-center justify-center bg-white ">
         <p className="text-orange-500 uppercase text-3xl">Add New Device</p>
-        <RetailForm
-          defaultItem={defaultItem}
-          isUpdate={false}
-          technicians={technicians}
-        />
+        <RetailForm defaultItem={defaultItem} isUpdate={false} />
       </div>
     </div>
   );
