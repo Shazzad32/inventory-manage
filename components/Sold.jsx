@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import SoldTable from "./SoldTable";
+import * as XLSX from "xlsx";
+import { startOfDay, endOfDay } from "date-fns";
 
 const headers = [
   "Device_id",
@@ -50,64 +52,29 @@ function Sold({ devices }) {
     }));
   }, [state.search]);
 
-  // const filterByDate = () => {
-  //   const { startDate, endDate, data } = state;
-  //   if (startDate && endDate) {
-  //     const filteredData = data.filter((item) => {
-  //       if (item.install_date) {
-  //         const installDate = new Date(item.install_date).toLocaleDateString(
-  //           "en-CA",
-  //           {
-  //             timeZone: "Asia/Dhaka",
-  //             year: "numeric",
-  //             month: "2-digit",
-  //             day: "2-digit",
-  //           }
-  //         );
-  //         const start = new Date(startDate).toLocaleDateString("en-CA", {
-  //           timeZone: "Asia/Dhaka",
-  //           year: "numeric",
-  //           month: "2-digit",
-  //           day: "2-digit",
-  //         });
-  //         const end = new Date(endDate).toLocaleDateString("en-CA", {
-  //           timeZone: "Asia/Dhaka",
-  //           year: "numeric",
-  //           month: "2-digit",
-  //           day: "2-digit",
-  //         });
-  //         return installDate >= start && installDate <= end;
-  //       }
-  //       return false;
-  //     });
-  //     setState({ ...state, datas: filteredData });
-  //   }
-  // };
-
   const filterByDate = () => {
     const { startDate, endDate } = state;
 
     if (startDate && endDate) {
+      const start = startOfDay(new Date(startDate)).getTime();
+      const end = endOfDay(new Date(endDate)).getTime();
+
       const filteredData = devices.filter((item) => {
         if (item.install_date) {
-          const installDate = new Date(item.install_date);
-          const start = new Date(startDate);
-          const end = new Date(endDate);
-
+          const installDate = new Date(item.install_date).getTime();
           return installDate >= start && installDate <= end;
         }
         return false;
       });
 
-      // Calculate total price for the filtered devices
       const filteredTotalPrice = filteredData.reduce((total, item) => {
         return total + Number(item.device_price || 0);
       }, 0);
 
       setState((prev) => ({
         ...prev,
-        data: filteredData, // Update filtered data
-        totalDevicePrice: filteredTotalPrice, // Update total price
+        data: filteredData,
+        totalDevicePrice: filteredTotalPrice,
         totalDeviceCount: filteredData.length,
       }));
     }
@@ -138,12 +105,50 @@ function Sold({ devices }) {
     }));
   };
 
-  const exportToExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(soldDevice);
+  const exportToExcel = (startDate, endDate) => {
+    const selectedFields = [
+      "device_id",
+      "device_type",
+      "issue_by",
+      "district",
+      "install_purpose",
+      "device_price",
+      "install_date",
+    ];
+
+    const filteredData = state.data.map((item) =>
+      Object.fromEntries(selectedFields.map((key) => [key, item[key]]))
+    );
+
+    const worksheet = XLSX.utils.json_to_sheet([]);
+
+    // Add title
+    XLSX.utils.sheet_add_aoa(worksheet, [["Device Bill"]], { origin: "A1" });
+
+    // Merge title
+    worksheet["!merges"] = [
+      { s: { r: 0, c: 0 }, e: { r: 0, c: selectedFields.length - 1 } },
+    ];
+
+    // Add date range
+    XLSX.utils.sheet_add_aoa(
+      worksheet,
+      [[`Date On: ${startDate || "N/A"} to ${endDate || "N/A"}`]],
+      { origin: "A2" }
+    );
+
+    // Add actual data
+    XLSX.utils.sheet_add_json(worksheet, filteredData, {
+      origin: "A4",
+      skipHeader: false,
+    });
+
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
-    XLSX.writeFile(workbook, "device_list.xlsx");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "SoldDevices");
+
+    XLSX.writeFile(workbook, "sold_devices.xlsx");
   };
+
   return (
     <div className="h-[100%] w-full flex flex-col">
       <div className="flex w-full justify-between  bg-gray-800 items-center p-4">
@@ -156,7 +161,7 @@ function Sold({ devices }) {
             name="startDate"
             value={state.startDate}
             onChange={handleDateChange}
-            className="border rounded p-1"
+            className="border rounded px-1"
           />
           <input
             type="date"
@@ -173,24 +178,24 @@ function Sold({ devices }) {
           </button>
         </div>
         <div>
-          <p className="text-white uppercase">Total Sold Device</p>
+          <p className="text-white uppercase">Sold Device</p>
         </div>
         <div className="flex gap-6 items-center justify-end">
-          <div className="bg-white p-1.5 rounded-md flex items-center">
+          <div className="flex gap-3 text-white uppercase items-center">
             Total Amount :{" "}
-            <span className="text-xl font-bold text-orange-500">
+            <span className="text-xl font-bold text-white">
               {totalDevicePrice}
             </span>
           </div>
           <button
-            onClick={exportToExcel}
+            onClick={() => exportToExcel(state.startDate, state.endDate)}
             className="bg-green-600 text-white px-2 py-2 rounded"
           >
             Download
           </button>
           <div className="flex gap-3 text-white uppercase">
             <p>Total Devices</p>
-            <p>{devices.length}</p>
+            <p>{state.data.length}</p>
           </div>
           <input
             type="search"
@@ -203,7 +208,7 @@ function Sold({ devices }) {
       </div>
 
       <div className="flex flex-col flex-1 bg-slate-300 w-full p-1">
-        <div className="flex justify-between bg-gray-800 items-center p-4">
+        <div className=" hidden lg:flex justify-between bg-gray-800 items-center p-4">
           <div className="flex-[9] flex">
             {headers.map((x) => (
               <p key={x} className="text-white uppercase flex-[8]">

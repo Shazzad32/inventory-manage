@@ -34,19 +34,21 @@ export default async function Home() {
   return (
     <div className="w-full h-full bg-skyblue-500 flex flex-col">
       <div className="h-[10%] w-full bg-gray-800 text-white flex lg:gap-2 gap-2 md:gap:3 items-center lg:px-2 px-2">
-        <button className="p-1 rounded-md flex items-center justify-center">
+        <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
           <Link href={"/store"}> STORE</Link>
         </button>
-        <button className="p-1 rounded-md flex items-center justify-center">
+        <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
           <Link href={"/rangs"}> RANGS</Link>
         </button>
-        <button className="p-1 rounded-md flex items-center justify-center">
+        <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
           <Link href={"/retail"}>RETAIL</Link>
         </button>
 
-        <div className="flex gap-3 text-white uppercase">
-          <p className="hidden lg:flex">Total Devices</p>
-          <p className="font-bold rounded-md lg:bg-gray-800 lg:p-0 text-white">
+        <div className="flex gap-3 text-white uppercase float-end">
+          <p className="hidden lg:flex lg:items-center lg:justify-center">
+            Total Device
+          </p>
+          <p className="font-bold rounded-md lg:bg-gray-800 text-white border border-white lg:px-2 lg:py-1">
             {totalDevices}
           </p>
         </div>
