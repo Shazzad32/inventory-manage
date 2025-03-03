@@ -41,8 +41,10 @@ function Sold({ devices }) {
     if (state.search === "") {
       filterDEvices = [...devices];
     } else {
-      filterDEvices = [...devices].filter((x) =>
-        x.device_id.toLowerCase().includes(state.search.toLowerCase())
+      filterDEvices = [...devices].filter(
+        (x) =>
+          x.device_id.toLowerCase().includes(state.search.toLowerCase()) ||
+          x.issue_by.toLowerCase().includes(state.search.toLowerCase())
       );
     }
 
@@ -116,42 +118,111 @@ function Sold({ devices }) {
       "install_date",
     ];
 
+    // Map the filtered data to include only selected fields
     const filteredData = state.data.map((item) =>
       Object.fromEntries(selectedFields.map((key) => [key, item[key]]))
     );
 
+    // Create a new worksheet
     const worksheet = XLSX.utils.json_to_sheet([]);
 
-    // Add title
+    // Add Title
     XLSX.utils.sheet_add_aoa(worksheet, [["Device Bill"]], { origin: "A1" });
 
-    // Merge title
+    // Merge Title Row
     worksheet["!merges"] = [
       { s: { r: 0, c: 0 }, e: { r: 0, c: selectedFields.length - 1 } },
     ];
 
-    // Add date range
+    // Add Date Range
     XLSX.utils.sheet_add_aoa(
       worksheet,
       [[`Date On: ${startDate || "N/A"} to ${endDate || "N/A"}`]],
       { origin: "A2" }
     );
 
-    // Add actual data
+    // Add Column Headers in Bold
+    XLSX.utils.sheet_add_aoa(
+      worksheet,
+      [selectedFields.map((field) => field.toUpperCase())],
+      { origin: "A4" }
+    );
+
+    // Add the Data Below Headers
     XLSX.utils.sheet_add_json(worksheet, filteredData, {
-      origin: "A4",
-      skipHeader: false,
+      origin: "A5",
+      skipHeader: true, // Headers already added manually
     });
 
+    // Create a New Workbook
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "SoldDevices");
 
+    // Apply Formatting
+    const columnWidths = selectedFields.map(() => ({ wch: 20 })); // Set column width
+    worksheet["!cols"] = columnWidths;
+
+    // Apply styling (requires XLSX-Style library for actual styling)
+    worksheet["A1"].s = {
+      font: { bold: true, sz: 14 },
+      alignment: { horizontal: "center" },
+    };
+    worksheet["A2"].s = {
+      font: { italic: true, sz: 12 },
+      alignment: { horizontal: "center" },
+    };
+
+    // Save File
     XLSX.writeFile(workbook, "sold_devices.xlsx");
   };
 
+  // const exportToExcel = (startDate, endDate) => {
+  //   const selectedFields = [
+  //     "device_id",
+  //     "device_type",
+  //     "issue_by",
+  //     "district",
+  //     "install_purpose",
+  //     "device_price",
+  //     "install_date",
+  //   ];
+
+  //   const filteredData = state.data.map((item) =>
+  //     Object.fromEntries(selectedFields.map((key) => [key, item[key]]))
+  //   );
+
+  //   const worksheet = XLSX.utils.json_to_sheet([]);
+
+  //   // Add title
+  //   XLSX.utils.sheet_add_aoa(worksheet, [["Device Bill"]], { origin: "A1" });
+
+  //   // Merge title
+  //   worksheet["!merges"] = [
+  //     { s: { r: 0, c: 0 }, e: { r: 0, c: selectedFields.length - 1 } },
+  //   ];
+
+  //   // Add date range
+  //   XLSX.utils.sheet_add_aoa(
+  //     worksheet,
+  //     [[`Date On: ${startDate || "N/A"} to ${endDate || "N/A"}`]],
+  //     { origin: "A2" }
+  //   );
+
+  //   // Add actual data
+  //   XLSX.utils.sheet_add_json(worksheet, filteredData, {
+  //     origin: "A4",
+  //     skipHeader: false,
+  //   });
+
+  //   const workbook = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(workbook, worksheet, "SoldDevices");
+
+  //   XLSX.writeFile(workbook, "sold_devices.xlsx");
+  // };
+
   return (
     <div className="h-[100%] w-full flex flex-col">
-      <div className="flex w-full justify-between  bg-gray-800 items-center p-4">
+      <div className="h-[10%] flex w-full justify-between  bg-gray-400 items-center p-4">
         <div className="flex gap-4">
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/"}> HOME</Link>
@@ -207,8 +278,8 @@ function Sold({ devices }) {
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 bg-slate-300 w-full p-1">
-        <div className=" hidden lg:flex justify-between bg-gray-800 items-center p-4">
+      <div className="h-[90%] flex flex-col flex-1 bg-slate-300 w-full p-1">
+        <div className="h-[8%] hidden lg:flex justify-between bg-gray-800 items-center p-3">
           <div className="flex-[9] flex">
             {headers.map((x) => (
               <p key={x} className="text-white uppercase flex-[8]">
@@ -216,10 +287,12 @@ function Sold({ devices }) {
               </p>
             ))}
           </div>
-          <div className="flex-[1] text-white">ACTION</div>
+          <div className="flex-[1] text-white flex items-center justify-center">
+            ACTION
+          </div>
         </div>
 
-        <div className="w-full flex flex-col flex-1">
+        <div className="h-[92%] w-full flex flex-col overflow-y-scroll">
           {state.data.map((x, i) => (
             <div
               key={i}

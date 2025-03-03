@@ -15,23 +15,6 @@ const headers = [
   "Sending_Date",
 ];
 
-// const Item = ({ device, index }) => {
-//   return (
-//     <div
-//       className={`w-full justify-between flex p-4 ${
-//         index % 2 == 0 ? "bg-slate-100" : "bg-slate-500"
-//       }`}
-//     >
-//       <p>{device.device_id}</p>
-//       <p>{device.device_model}</p>
-//       <p>{device.from}</p>
-//       <p>{device.device_type}</p>
-//       <p>{device.from}</p>
-//       <p>sdasdal</p>
-//     </div>
-//   );
-// };
-
 const RetailInfo = ({ devices }) => {
   const [state, setState] = useState({
     data: [...devices],
@@ -68,6 +51,13 @@ const RetailInfo = ({ devices }) => {
     }));
   }, [state.search]);
 
+  const non_voice = state.data.filter(
+    (x) => x.send_to === "Retail" && x.device_type === "Non_Voice"
+  ).length;
+  const voice = state.data.filter(
+    (x) => x.send_to === "Retail" && x.device_type === "Voice"
+  ).length;
+
   return (
     <div className="h-[100%] w-full flex flex-col">
       <div className="flex h-[10%] w-full justify-between bg-gray-800 items-center p-2">
@@ -88,9 +78,21 @@ const RetailInfo = ({ devices }) => {
         </div>
         <div className="flex gap-6 items-center justify-end">
           <div className="flex gap-3 text-white uppercase">
-            <p className="hidden lg:flex">Total Devices</p>
+            <p className="hidden lg:flex">Total</p>
             <p className="bg-white font-bold text-black p-2 rounded-md lg:bg-gray-800 lg:p-0 lg:text-white">
               {state.data.length}
+            </p>
+          </div>
+          <div className="flex gap-3 text-white uppercase">
+            <p className="hidden lg:flex">Non Voice</p>
+            <p className="bg-white font-bold text-black p-2 rounded-md lg:bg-gray-800 lg:p-0 lg:text-white">
+              {non_voice}
+            </p>
+          </div>
+          <div className="flex gap-3 text-white uppercase">
+            <p className="hidden lg:flex">Voice </p>
+            <p className="bg-white font-bold text-black p-2 rounded-md lg:bg-gray-800 lg:p-0 lg:text-white">
+              {voice}
             </p>
           </div>
           <input

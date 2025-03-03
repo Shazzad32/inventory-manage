@@ -58,6 +58,13 @@ const StoreInfo = ({ devices }) => {
     }));
   }, [state.search]);
 
+  const non_voice = state.data.filter(
+    (x) => x.send_to === "Store" && x.device_type === "Non_Voice"
+  ).length;
+  const voice = state.data.filter(
+    (x) => x.send_to === "Store" && x.device_type === "Voice"
+  ).length;
+
   return (
     <div className="h-[100%] w-full flex flex-col">
       <div className="flex h-[10%] w-full justify-between  bg-gray-800 items-center p-4">
@@ -77,9 +84,21 @@ const StoreInfo = ({ devices }) => {
         </div>
         <div className="flex gap-4 items-center justify-end">
           <div className="flex gap-3 text-white uppercase">
-            <p className="hidden lg:flex">Total Devices</p>
+            <p className="hidden lg:flex">Total</p>
             <p className="bg-white text-black p-2 rounded-md lg:bg-none lg:p-0 lg:bg-gray-800 lg:text-white font-bold">
-              {state.data.length}
+              {devices.length}
+            </p>
+          </div>
+          <div className="flex gap-3 text-white uppercase">
+            <p className="hidden lg:flex">Non Voice</p>
+            <p className="bg-white text-black p-2 rounded-md lg:bg-none lg:p-0 lg:bg-gray-800 lg:text-white font-bold">
+              {non_voice}
+            </p>
+          </div>
+          <div className="flex gap-3 text-white uppercase">
+            <p className="hidden lg:flex">Voice</p>
+            <p className="bg-white text-black p-2 rounded-md lg:bg-none lg:p-0 lg:bg-gray-800 lg:text-white font-bold">
+              {voice}
             </p>
           </div>
           <input

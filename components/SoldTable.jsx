@@ -1,5 +1,4 @@
-import { FiEdit } from "react-icons/fi";
-import Link from "next/link";
+import { PaidPage } from "./PaidPage";
 
 const SoldTable = ({ item }) => {
   const formattedDate = item?.install_date
@@ -29,10 +28,10 @@ const SoldTable = ({ item }) => {
         <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.install_purpose}
         </p>
-        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.30] overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_price}
         </p>
-        <p className="flex-[1.25] overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="flex-[1.14] overflow-hidden text-ellipsis whitespace-nowrap">
           {formattedDate}
         </p>
       </div>
@@ -54,18 +53,8 @@ const SoldTable = ({ item }) => {
         </p>
       </div>
 
-      <div className="flex flex-[1]">
-        {item?.is_complete ? (
-          <>
-            <FiEdit className="text-gray-400 cursor-not-allowed" />
-          </>
-        ) : (
-          <>
-            <Link href={`/retail/${item?._id}/update`}>
-              <FiEdit className="text-black" />
-            </Link>
-          </>
-        )}
+      <div className="flex flex-[1] items-center justify-center">
+        <PaidPage device_id={item?.device_id} />
       </div>
     </div>
   );
