@@ -5,6 +5,7 @@ import Link from "next/link";
 import SoldTable from "./SoldTable";
 import * as XLSX from "xlsx";
 import { startOfDay, endOfDay } from "date-fns";
+import { MdDownload } from "react-icons/md";
 
 const headers = [
   "Device_id",
@@ -25,6 +26,7 @@ function Sold({ devices }) {
     selectedDate: null,
     startDate: "",
     endDate: "",
+    monthYear: "",
   });
 
   const handleSearch = (e) => {
@@ -176,6 +178,35 @@ function Sold({ devices }) {
     XLSX.writeFile(workbook, "sold_devices.xlsx");
   };
 
+  const filterByMonth = () => {
+    const { monthYear } = state;
+    if (monthYear) {
+      const [year, month] = monthYear.split("-");
+      const filteredData = devices.filter((item) => {
+        if (item.install_date) {
+          const installDate = new Date(item.install_date);
+          return (
+            installDate.getFullYear() === parseInt(year) &&
+            installDate.getMonth() + 1 === parseInt(month)
+          );
+        }
+        return false;
+      });
+
+      setState((prev) => ({
+        ...prev,
+        data: filteredData,
+      }));
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setState((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   // const exportToExcel = (startDate, endDate) => {
   //   const selectedFields = [
   //     "device_id",
@@ -222,7 +253,7 @@ function Sold({ devices }) {
 
   return (
     <div className="h-[100%] w-full flex flex-col">
-      <div className="h-[10%] flex w-full justify-between  bg-gray-400 items-center p-4">
+      <div className="h-[10%] flex w-full justify-between  bg-gray-800 items-center p-4">
         <div className="flex gap-4">
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[30px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/"}> HOME</Link>
@@ -247,6 +278,20 @@ function Sold({ devices }) {
           >
             GO
           </button>
+          <input
+            type="month"
+            name="monthYear"
+            value={state.monthYear}
+            onChange={handleInputChange}
+            className="border rounded px-2"
+            placeholder="select month"
+          />
+          <button
+            onClick={filterByMonth}
+            className="text-white p-2 rounded bg-green-500"
+          >
+            GO
+          </button>
         </div>
         <div>
           <p className="text-white uppercase">Sold Device</p>
@@ -262,10 +307,10 @@ function Sold({ devices }) {
             onClick={() => exportToExcel(state.startDate, state.endDate)}
             className="bg-green-600 text-white px-2 py-2 rounded"
           >
-            Download
+            <MdDownload />
           </button>
-          <div className="flex gap-3 text-white uppercase">
-            <p>Total Devices</p>
+          <div className="flex gap-3 text-white uppercase font-bold">
+            <p>Total</p>
             <p>{state.data.length}</p>
           </div>
           <input
