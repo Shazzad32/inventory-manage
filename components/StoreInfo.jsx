@@ -14,9 +14,37 @@ const StoreInfo = ({ devices }) => {
     search: "",
   });
 
-  const sortedData = [...devices]
+  const sortedData = state.data
     .filter((item) => item.send_to === "Store")
     .sort((a, b) => new Date(b.insert_date) - new Date(a.insert_date));
+
+  // const handleSearch = (e) => {
+  //   const search = e.target.value.toLowerCase();
+  //   setState((prev) => ({
+  //     ...prev,
+  //     search: search,
+  //   }));
+  // };
+
+  // useEffect(() => {
+  //   let filterDEvices = [];
+
+  //   if (state.search === "") {
+  //     filterDEvices = [...devices];
+  //   } else {
+  //     filterDEvices = [...devices].filter(
+  //       (x) =>
+  //         x.device_id.toLowerCase().includes(state.search.toLowerCase()) ||
+  //         x.device_type.toLowerCase().includes(state.search.toLowerCase()) ||
+  //         x.device_model.toLowerCase().includes(state.search.toLowerCase())
+  //     );
+  //   }
+
+  //   setState((prev) => ({
+  //     ...prev,
+  //     data: [...filterDEvices],
+  //   }));
+  // }, [state.search]);
 
   const handleSearch = (e) => {
     const search = e.target.value.toLowerCase();
@@ -36,7 +64,8 @@ const StoreInfo = ({ devices }) => {
         (x) =>
           x.device_id.toLowerCase().includes(state.search.toLowerCase()) ||
           x.device_type.toLowerCase().includes(state.search.toLowerCase()) ||
-          x.device_model.toLowerCase().includes(state.search.toLowerCase())
+          x.device_model.toLowerCase().includes(state.search.toLowerCase()) ||
+          x.from.toLowerCase().includes(state.search.toLowerCase())
       );
     }
 
