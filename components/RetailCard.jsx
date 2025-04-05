@@ -143,15 +143,18 @@ const RetailCard = ({ totalInRetail }) => {
             </span>
           </p>
         </div>
-        <div className="h-[55%] w-[90%] bg-white flex items-start justify-center px-4 flex-col rounded-md text-sm gap-1">
+        <div className="h-[55%] w-[90%] bg-white flex items-start justify-center px-4 flex-col rounded-md text-sm gap-1 capitalize">
           <p>
-            Facebook (This Month): <span>{facebookSellMonthly}</span>
+            Facebook (This Month):{" "}
+            <span className="text-red-500">{facebookSellMonthly}</span>
           </p>
           <p>
-            Reference (This Month): <span>{referenceSellMonthly}</span>
+            Reference (This Month):{" "}
+            <span className="text-red-500">{referenceSellMonthly}</span>
           </p>
           <p>
-            Replace (This Month): <span>{replaceSellMonthly}</span>
+            Replace (This Month):{" "}
+            <span className="text-red-500">{replaceSellMonthly}</span>
           </p>
         </div>
       </Link>

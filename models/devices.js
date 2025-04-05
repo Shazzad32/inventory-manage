@@ -22,7 +22,7 @@ const devicesSchema = new Schema({
   is_complete: { type: Boolean, default: false },
 });
 
-devicesSchema.index({ device_id: 1 });
+devicesSchema.index({ device_id: 1, status: -1 });
 
 devicesSchema.pre("save", function (next) {
   if (this.is_complete && !this.install_date) {
