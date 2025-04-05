@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import RangsTable from "./RangsTable";
@@ -13,23 +12,6 @@ const headers = [
   "Insert_Date",
   "Sending_Date",
 ];
-
-// const Item = ({ device, index }) => {
-//   return (
-//     <div
-//       className={`w-full justify-between flex p-4 ${
-//         index % 2 == 0 ? "bg-slate-100" : "bg-slate-500"
-//       }`}
-//     >
-//       <p>{device.device_id}</p>
-//       <p>{device.device_model}</p>
-//       <p>{device.from}</p>
-//       <p>{device.device_type}</p>
-//       <p>{device.from}</p>
-//       <p>sdasdal</p>
-//     </div>
-//   );
-// };
 
 const RangsInfo = ({ devices }) => {
   const [state, setState] = useState({
@@ -114,27 +96,6 @@ const RangsInfo = ({ devices }) => {
           </div>
         </div>
       </div>
-      {/* 
-      <div className="flex flex-col flex-1 bg-slate-300 w-full p-1">
-        <div className="flex justify-between bg-gray-800 items-center p-4">
-          {headers.map((x) => (
-            <p key={x} className="text-white uppercase flex-[8]">
-              {x}
-            </p>
-          ))}
-        </div>
-
-        <div className="w-full flex max-h-[510px] flex-col flex-1 overflow-y-auto">
-          {state.data.map((x, i) => (
-            <div
-              key={i}
-              className={`${i % 2 == 0 ? "bg-slate-100" : "bg-slate-200"}`}
-            >
-              <RangsTable item={x} />
-            </div>
-          ))}
-        </div> */}
-      {/* </div> */}
     </div>
   );
 };

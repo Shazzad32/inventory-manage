@@ -32,24 +32,6 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
     device_price: "",
   });
 
-  // const validateFields = () => {
-  //   let newErrors = { device_price: "" };
-
-  //   if (item.is_complete) {
-  //     const price = parseFloat(item.device_price);
-  //     if (isNaN(price) || price < 1500 || price > 8000) {
-  //       newErrors.device_price = "Device Price must be between 1500 and 8000";
-  //     }
-  //   }
-
-  //   if (!item.device_price) {
-  //     newErrors.device_price = "Price required";
-  //   }
-
-  //   setErrors(newErrors);
-  //   return Object.values(newErrors).every((error) => error === "");
-  // };
-
   const validateFields = () => {
     let newErrors = {};
 
@@ -109,6 +91,61 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
 
     router.push("/retail");
   };
+
+  // const updateDevice = async () => {
+  //   if (!validateFields()) return;
+
+  //   try {
+  //     const res = await fetch(`/api/devices/${item._id}`, {
+  //       method: "PUT",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(item),
+  //     });
+
+  //     const responseData = await res.json();
+  //     console.log("Update Response Data:", responseData); // Debugging
+
+  //     if (res.ok) {
+  //       // Ensure `device_id` and `device_price` exist before sending
+  //       if (responseData.device_id && responseData.device_price) {
+  //         console.log(
+  //           "Sending to service-check:",
+  //           responseData.device_id,
+  //           responseData.device_price
+  //         );
+
+  //         const serviceCheckRes = await fetch(
+  //           "https://servicecheckapp.vercel.app/api/service-check",
+  //           {
+  //             method: "POST",
+  //             headers: { "Content-Type": "application/json" },
+  //             body: JSON.stringify({
+  //               device_id: responseData.device_id,
+  //               device_price: responseData.device_price,
+  //             }),
+  //           }
+  //         );
+
+  //         const serviceCheckData = await serviceCheckRes.json();
+  //         console.log("Service Check Response:", serviceCheckData);
+
+  //         if (!serviceCheckRes.ok) {
+  //           throw new Error("Failed to send data to service-check");
+  //         }
+  //       } else {
+  //         console.warn(
+  //           "Missing device_id or device_price, skipping service-check request"
+  //         );
+  //       }
+
+  //       router.push("/retail"); // Navigate after successful update
+  //     } else {
+  //       throw new Error("Failed to update device");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -170,7 +207,6 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
         )}
         {!isUpdate && (
           <>
-            {/* {" "}
             <TechName
               value={item.issue_by}
               onChange={handleChange}
@@ -179,18 +215,6 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
             <DistrictName
               value={item.district}
               onChange={handleChange}
-              technicians={technicians}
-            /> */}
-            <TechName
-              value={item.issue_by}
-              onChange={handleChange}
-              // error={errors.issue_by}
-              technicians={technicians}
-            />
-            <DistrictName
-              value={item.district}
-              onChange={handleChange}
-              // error={errors.district}
               technicians={technicians}
             />
           </>
@@ -208,7 +232,7 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
                 handleChange({
                   target: {
                     name: "sending_date",
-                    value: newValue ? newValue.toISOString() : "", // Use ISO format
+                    value: newValue ? dayjs(newValue).format("YYYY-MM-DD") : "",
                   },
                 });
               }}
@@ -238,7 +262,8 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
                     value={item.install_purpose || ""}
                     onChange={handleChange}
                   >
-                    <MenuItem value="New_Install">New_Install</MenuItem>
+                    <MenuItem value="Facebook">Facebook</MenuItem>
+                    <MenuItem value="Reference">Reference</MenuItem>
                     <MenuItem value="Replace">Replace</MenuItem>
                   </Select>
                 </FormControl>

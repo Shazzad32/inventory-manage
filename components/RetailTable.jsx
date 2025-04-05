@@ -7,6 +7,7 @@ const RetailTable = ({ item }) => {
         .toLocaleDateString("en-GB")
         .replace(/\//g, "-")
     : new Date().toLocaleDateString("en-GB").replace(/\//g, "-");
+
   const formatteInsertdDate = item?.insert_date
     ? new Date(item.insert_date).toLocaleDateString("en-GB").replace(/\//g, "-")
     : new Date().toLocaleDateString("en-GB").replace(/\//g, "-");

@@ -135,7 +135,7 @@ const RangsForm = ({ defaultItem, isUpdate }) => {
                 handleChange({
                   target: {
                     name: "insert_date",
-                    value: newValue ? newValue.toISOString() : "", // Use ISO format
+                    value: newValue ? newValue.toISOString() : "",
                   },
                 });
               }}
@@ -143,15 +143,16 @@ const RangsForm = ({ defaultItem, isUpdate }) => {
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              className="w-[50%]"
+              className="w-[100%]"
               label="Sending Date"
+              type="date"
               name="sending_date"
               value={item.sending_date ? dayjs(item.sending_date) : null}
               onChange={(newValue) => {
                 handleChange({
                   target: {
                     name: "sending_date",
-                    value: newValue ? newValue.toISOString() : "", // Use ISO format
+                    value: newValue ? newValue.toISOString() : "",
                   },
                 });
               }}
@@ -180,17 +181,10 @@ const RangsForm = ({ defaultItem, isUpdate }) => {
 
           {item.is_send && (
             <div>
-              {/* <TextField
-                type="text"
-                label="Workshop"
-                name="workshop"
-                value={item.workshop || ""}
-                onChange={handleChange}
-              /> */}
               <Autocomplete
                 fullWidth
-                options={workshop} // Assuming `workshop` is an array of workshop names
-                value={item.workshop || ""} // Ensure it shows selected value
+                options={workshop}
+                value={item.workshop || ""}
                 onChange={(e, newValue) =>
                   handleAutocompleteChange("workshop", newValue)
                 }

@@ -8,27 +8,15 @@ import { StoreDropdownMenue } from "./StoreDropdownMenue";
 
 const headers = ["Device_id", "Model", "From", "Type", "Insert Date"];
 
-// const Item = ({ device, index }) => {
-//   return (
-//     <div
-//       className={`w-full justify-between flex p-4 ${
-//         index % 2 == 0 ? "bg-slate-100" : "bg-slate-500"
-//       }`}
-//     >
-//       <p>{device.device_id}</p>
-//       <p>{device.device_model}</p>
-//       <p>{device.from}</p>
-//       <p>{device.device_type}</p>
-//       <p>{device.from}</p>
-//     </div>
-//   );
-// };
-
 const StoreInfo = ({ devices }) => {
   const [state, setState] = useState({
     data: [...devices],
     search: "",
   });
+
+  const sortedData = [...devices]
+    .filter((item) => item.send_to === "Store")
+    .sort((a, b) => new Date(b.insert_date) - new Date(a.insert_date));
 
   const handleSearch = (e) => {
     const search = e.target.value.toLowerCase();
@@ -61,6 +49,7 @@ const StoreInfo = ({ devices }) => {
   const non_voice = state.data.filter(
     (x) => x.send_to === "Store" && x.device_type === "Non_Voice"
   ).length;
+
   const voice = state.data.filter(
     (x) => x.send_to === "Store" && x.device_type === "Voice"
   ).length;
@@ -113,15 +102,15 @@ const StoreInfo = ({ devices }) => {
       <div className="h-[90%] flex items-center justify-center bg-white">
         <div className="h-[99%] w-[99.5%] flex flex-col">
           <div className="hidden h-[8%] lg:flex bg-gray-800 p-2 items-center">
-            {headers.map((x) => (
-              <p key={x} className="text-white uppercase flex-[9]">
+            {headers.map((x, i) => (
+              <p key={i} className="text-white uppercase flex-[9]">
                 {x}
               </p>
             ))}
             <p className="flex-[1] text-white text-center">ACTION</p>
           </div>
           <div className="h-[92%] overflow-y-scroll">
-            {state.data.map((x, i) => (
+            {sortedData.map((x, i) => (
               <div
                 key={i}
                 className={`${i % 2 == 0 ? "bg-slate-100" : "bg-slate-200"}`}

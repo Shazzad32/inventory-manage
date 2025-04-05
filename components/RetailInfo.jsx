@@ -54,6 +54,7 @@ const RetailInfo = ({ devices }) => {
   const non_voice = state.data.filter(
     (x) => x.send_to === "Retail" && x.device_type === "Non_Voice"
   ).length;
+
   const voice = state.data.filter(
     (x) => x.send_to === "Retail" && x.device_type === "Voice"
   ).length;
@@ -71,6 +72,9 @@ const RetailInfo = ({ devices }) => {
           </button>
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/retail/sold"}> SOLD</Link>
+          </button>
+          <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
+            <Link href={"/retail/tech-report"}> Tech</Link>
           </button>
         </div>
         <div>
@@ -126,30 +130,6 @@ const RetailInfo = ({ devices }) => {
           </div>
         </div>
       </div>
-
-      {/* <div className="flex flex-col flex-1 bg-slate-300 w-full p-1">
-        <div className="flex justify-between bg-gray-800 items-center p-4">
-          <div className="flex-[9] flex">
-            {headers.map((x) => (
-              <p key={x} className="text-white uppercase flex-[8]">
-                {x}
-              </p>
-            ))}
-          </div>
-          <div className="flex-[1] text-white">ACTION</div>
-        </div>
-
-        <div className="w-full flex flex-col flex-1 max-h-[510px] overflow-y-auto">
-          {state.data.map((x, i) => (
-            <div
-              key={i}
-              className={`${i % 2 == 0 ? "bg-slate-100" : "bg-slate-200"}`}
-            >
-              <RetailTable item={x} />
-            </div>
-          ))}
-        </div>
-      </div> */}
     </div>
   );
 };

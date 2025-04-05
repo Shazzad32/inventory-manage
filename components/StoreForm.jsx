@@ -33,11 +33,6 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
       district: "",
     };
 
-    // if (!item.device_id) newErrors.district = "Device Id Name is required";
-    // if (!item.device_model) newErrors.district = "Device Model is required";
-    // if (!item.device_type) newErrors.district = "Device Type is required";
-    // if (!item.from) newErrors.district = "From is required";
-
     if (item.send_to === "Retail") {
       if (!item.issue_by) newErrors.issue_by = "Issue By is required";
       if (!item.district) newErrors.district = "District Name is required";
@@ -185,16 +180,6 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
         )}
 
         {isUpdate && item.send_to === "Rangs" && (
-          // <TextField
-          //   type="text"
-          //   name="workshop"
-          //   value={item.workshop || ""}
-          //   label="Workshop"
-          //   onChange={handleChange}
-          //   error={errors.workshop}
-          //   helperText={errors.workshop || ""}
-          // />
-
           <Autocomplete
             fullWidth
             options={workshop}
