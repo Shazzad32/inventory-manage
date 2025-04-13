@@ -11,7 +11,10 @@ const devicesSchema = new Schema({
     enum: ["Retail", "Rangs", "Store"],
     default: "Store",
   },
-  install_purpose: { type: String, enum: ["New_Install", "Replace"] },
+  install_purpose: {
+    type: String,
+    enum: ["Facebook", "Replace", "Reference"],
+  },
   issue_by: { type: String },
   workshop: { type: String },
   district: { type: String },

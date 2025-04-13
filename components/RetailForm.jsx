@@ -102,7 +102,16 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
   //       body: JSON.stringify(item),
   //     });
 
-  //     const responseData = await res.json();
+  //     const rawText = await res.text(); // Read response as plain text first
+  //     let responseData;
+
+  //     try {
+  //       responseData = JSON.parse(rawText); // Try to parse it as JSON
+  //     } catch (err) {
+  //       console.error("Invalid JSON response from /api/devices:", rawText);
+  //       throw new Error("Response from update device API is not JSON");
+  //     }
+
   //     console.log("Update Response Data:", responseData); // Debugging
 
   //     if (res.ok) {
@@ -126,7 +135,16 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
   //           }
   //         );
 
-  //         const serviceCheckData = await serviceCheckRes.json();
+  //         const serviceCheckText = await serviceCheckRes.text();
+  //         let serviceCheckData;
+
+  //         try {
+  //           serviceCheckData = JSON.parse(serviceCheckText);
+  //         } catch (err) {
+  //           console.error("Invalid JSON from service-check:", serviceCheckText);
+  //           throw new Error("Invalid JSON response from service-check");
+  //         }
+
   //         console.log("Service Check Response:", serviceCheckData);
 
   //         if (!serviceCheckRes.ok) {
@@ -140,6 +158,7 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
 
   //       router.push("/retail"); // Navigate after successful update
   //     } else {
+  //       console.error("Device update failed:", responseData);
   //       throw new Error("Failed to update device");
   //     }
   //   } catch (error) {
