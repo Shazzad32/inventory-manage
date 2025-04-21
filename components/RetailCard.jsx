@@ -103,6 +103,46 @@ const RetailCard = ({ totalInRetail }) => {
           </div>
         </div>
       </Link>
+
+      <Link
+        href={"retail/sold"}
+        className="w-[90%] h-[33%] bg-pink-500 rounded-md hidden flex-col lg:flex items-center justify-center gap-3 "
+      >
+        <div className="bg-white px-2 py-1 rounded-md flex items-center mt-2 h-[25%] w-[90%] justify-around">
+          <p>
+            Sold Device
+            <span className="text-[18px] font-bold text-orange-500 ml-1">
+              {totalSoldDevices.length}
+            </span>
+          </p>
+          <p>
+            Amount
+            <span className="text-[18px] font-bold text-orange-500 ml-1">
+              {calculateAmount(totalInRetail.filter((x) => x.is_complete))}
+            </span>
+          </p>
+        </div>
+        <div className="h-[55%] w-[90%] bg-white flex items-start justify-center px-4 flex-col rounded-md text-sm gap-1 capitalize">
+          <p>
+            Facebook (This Month):{" "}
+            <span className="text-orange-500 text-[18px]">
+              {facebookSellMonthly}
+            </span>
+          </p>
+          <p>
+            Reference (This Month):{" "}
+            <span className="text-orange-500 text-[18px]">
+              {referenceSellMonthly}
+            </span>
+          </p>
+          <p>
+            Replace (This Month):{" "}
+            <span className="text-orange-500 text-[18px]">
+              {replaceSellMonthly}
+            </span>
+          </p>
+        </div>
+      </Link>
       <div className="w-[90%] h-[33%] bg-pink-500 rounded-md hidden lg:flex flex-col text-left p-4">
         <div className="flex justify-between">
           <p className="text-left text-white">Daily Report</p>
@@ -125,40 +165,6 @@ const RetailCard = ({ totalInRetail }) => {
           </p>
         </div>
       </div>
-      <Link
-        href={"retail/sold"}
-        className="w-[90%] h-[33%] bg-pink-500 rounded-md hidden flex-col lg:flex items-center justify-center gap-3 "
-      >
-        <div className="bg-white px-2 py-1 rounded-md flex items-center mt-2 h-[25%] w-[90%] justify-around">
-          <p>
-            Sold Device
-            <span className="text-xl font-bold text-orange-500 ml-1">
-              {totalSoldDevices.length}
-            </span>
-          </p>
-          <p>
-            Amount
-            <span className="text-xl font-bold text-orange-500 ml-1">
-              {calculateAmount(totalInRetail.filter((x) => x.is_complete))}
-            </span>
-          </p>
-        </div>
-        <div className="h-[55%] w-[90%] bg-white flex items-start justify-center px-4 flex-col rounded-md text-sm gap-1 capitalize">
-          <p>
-            Facebook (This Month):{" "}
-            <span className="text-red-500">{facebookSellMonthly}</span>
-          </p>
-          <p>
-            Reference (This Month):{" "}
-            <span className="text-red-500">{referenceSellMonthly}</span>
-          </p>
-          <p>
-            Replace (This Month):{" "}
-            <span className="text-red-500">{replaceSellMonthly}</span>
-          </p>
-        </div>
-      </Link>
-
       <RetailMobile
         unSoldDevice={unSoldDevice}
         nonVocieInRetail={nonVocieInRetail}

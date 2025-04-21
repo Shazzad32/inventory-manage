@@ -12,11 +12,11 @@ const StoreCard = ({ totalDevices, voiceDevices, nonVoiceDevices }) => {
       >
         Total Device :<p className="text-2xl">{totalDevices}</p>
       </Link>
-      <div className="hidden w-[98%] h-[33%] bg-rose-500 rounded-md lg:flex items-center justify-center gap-2 text-white">
-        VOice Device :<p className="text-2xl">{voiceDevices}</p>
-      </div>
       <div className="w-[98%] h-[33%] bg-rose-500 rounded-md hidden lg:flex items-center justify-center gap-2 text-white">
         Non VOice Device :<p className="text-2xl">{nonVoiceDevices}</p>
+      </div>
+      <div className="hidden w-[98%] h-[33%] bg-rose-500 rounded-md lg:flex items-center justify-center gap-2 text-white">
+        VOice Device :<p className="text-2xl">{voiceDevices}</p>
       </div>
       <StoreMobile
         totalDevices={totalDevices}
