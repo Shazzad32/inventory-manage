@@ -56,7 +56,7 @@ const RetailCard = ({ totalInRetail }) => {
   });
 
   const facebookSellMonthly = monthlySales.filter(
-    (x) => x.install_purpose === "New_Install"
+    (x) => x.install_purpose === "Facebook"
   ).length;
 
   const referenceSellMonthly = monthlySales.filter(
