@@ -1,6 +1,6 @@
 import React from "react";
 import DeviceRetailForm from "@/components/RetailForm";
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 const UpdateRetail = async ({ params }) => {
   const { id } = await params;
