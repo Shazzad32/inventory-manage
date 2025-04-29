@@ -120,51 +120,40 @@ function Sold({ devices }) {
       "install_date",
     ];
 
-    // Map the filtered data to include only selected fields
     const filteredData = state.data.map((item) =>
       Object.fromEntries(selectedFields.map((key) => [key, item[key]]))
     );
 
-    // Create a new worksheet
     const worksheet = XLSX.utils.json_to_sheet([]);
 
-    // Add Title
     XLSX.utils.sheet_add_aoa(worksheet, [["Device Bill"]], { origin: "A1" });
 
-    // Merge Title Row
     worksheet["!merges"] = [
       { s: { r: 0, c: 0 }, e: { r: 0, c: selectedFields.length - 1 } },
     ];
-
-    // Add Date Range
     XLSX.utils.sheet_add_aoa(
       worksheet,
       [[`Date On: ${startDate || "N/A"} to ${endDate || "N/A"}`]],
       { origin: "A2" }
     );
 
-    // Add Column Headers in Bold
     XLSX.utils.sheet_add_aoa(
       worksheet,
       [selectedFields.map((field) => field.toUpperCase())],
       { origin: "A4" }
     );
 
-    // Add the Data Below Headers
     XLSX.utils.sheet_add_json(worksheet, filteredData, {
       origin: "A5",
-      skipHeader: true, // Headers already added manually
+      skipHeader: true,
     });
 
-    // Create a New Workbook
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "SoldDevices");
 
-    // Apply Formatting
-    const columnWidths = selectedFields.map(() => ({ wch: 20 })); // Set column width
+    const columnWidths = selectedFields.map(() => ({ wch: 20 }));
     worksheet["!cols"] = columnWidths;
 
-    // Apply styling (requires XLSX-Style library for actual styling)
     worksheet["A1"].s = {
       font: { bold: true, sz: 14 },
       alignment: { horizontal: "center" },
@@ -174,7 +163,6 @@ function Sold({ devices }) {
       alignment: { horizontal: "center" },
     };
 
-    // Save File
     XLSX.writeFile(workbook, "sold_devices.xlsx");
   };
 

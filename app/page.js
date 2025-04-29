@@ -2,15 +2,11 @@ import RangsCard from "@/components/RangsCard";
 import RetailCard from "@/components/RetailCard";
 import StoreCard from "@/components/StoreCard";
 import Link from "next/link";
-
 import axios from "axios";
-
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const devices = (await axios.get(`${process.env.URL}/api/devices`)).data;
-
-  console.log(devices);
 
   const totalDevices = devices.length;
   const totalInRetail = devices.filter((x) => x.send_to === "Retail");

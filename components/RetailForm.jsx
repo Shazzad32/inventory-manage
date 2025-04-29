@@ -18,10 +18,6 @@ import TechName from "./TechnicianName";
 import DistrictName from "./DistrictName";
 
 const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
-  const [state, setState] = useState({
-    datas: [],
-  });
-
   const router = useRouter();
 
   const [item, setItem] = useState({
@@ -88,6 +84,8 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
     if (!res.ok) {
       throw new Error("Failed to update device");
     }
+
+    // console.log(transac);
 
     router.push("/retail");
   };
@@ -244,16 +242,19 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
             <DatePicker
               className="w-[100%]"
               label="Sending Date"
-              type="date"
               name="sending_date"
-              value={item.sending_date ? dayjs(item.sending_date) : null}
+              value={
+                item.sending_date && dayjs(item.sending_date).isValid()
+                  ? dayjs(item.sending_date)
+                  : null
+              }
               onChange={(newValue) => {
-                handleChange({
-                  target: {
-                    name: "sending_date",
-                    value: newValue ? dayjs(newValue).format("YYYY-MM-DD") : "",
-                  },
-                });
+                setItem((prev) => ({
+                  ...prev,
+                  sending_date: newValue
+                    ? dayjs(newValue).format("YYYY-MM-DD")
+                    : "",
+                }));
               }}
             />
           </LocalizationProvider>

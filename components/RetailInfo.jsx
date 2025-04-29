@@ -63,7 +63,7 @@ const RetailInfo = ({ devices }) => {
     <div className="h-[100%] w-full flex flex-col">
       <div className="flex h-[10%] w-full justify-between bg-gray-800 items-center p-2">
         <DropdownMenuDemo />
-        <div className="lg:flex gap-4 hidden">
+        <div className="lg:flex gap-2 hidden">
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/"}> HOME</Link>
           </button>
@@ -73,11 +73,14 @@ const RetailInfo = ({ devices }) => {
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/retail/sold"}> SOLD</Link>
           </button>
+          <button className="text-[8px] h-[20px] w-[80px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
+            <Link href={"/retail/not-paid-list"}>N.Paid</Link>
+          </button>
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
             <Link href={"/retail/tech-report"}> Tech</Link>
           </button>
         </div>
-        <div>
+        <div className="flex items-center justify-end">
           <p className="text-white uppercase lg:flex hidden">Total In Retail</p>
         </div>
         <div className="flex gap-6 items-center justify-end">
@@ -110,13 +113,15 @@ const RetailInfo = ({ devices }) => {
       </div>
       <div className="h-[90%] flex items-center justify-center bg-white">
         <div className="h-[99%] w-[99.5%] flex flex-col">
-          <div className="hidden h-[8%] lg:flex bg-gray-800 p-2 items-center">
-            {headers.map((x) => (
-              <p key={x} className="text-white uppercase flex-[9]">
-                {x}
-              </p>
-            ))}
-            <p className="flex-[1] text-white text-center">ACTION</p>
+          <div className="hidden lg:w-[100%] h-[8%] lg:flex bg-gray-800 p-3 items-center">
+            <div className="w-[90%] grid grid-cols-[repeat(8,1fr)] p-2">
+              {headers.map((x) => (
+                <p key={x} className="text-white uppercase">
+                  {x}
+                </p>
+              ))}
+            </div>
+            <p className="w-[10%] text-white text-center">ACTION</p>
           </div>
           <div className="h-[92%] overflow-y-scroll">
             {state.data.map((x, i) => (

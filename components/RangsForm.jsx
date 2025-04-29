@@ -145,16 +145,19 @@ const RangsForm = ({ defaultItem, isUpdate }) => {
             <DatePicker
               className="w-[100%]"
               label="Sending Date"
-              type="date"
               name="sending_date"
-              value={item.sending_date ? dayjs(item.sending_date) : null}
+              value={
+                item.sending_date && dayjs(item.sending_date).isValid()
+                  ? dayjs(item.sending_date)
+                  : null
+              }
               onChange={(newValue) => {
-                handleChange({
-                  target: {
-                    name: "sending_date",
-                    value: newValue ? newValue.toISOString() : "",
-                  },
-                });
+                setItem((prev) => ({
+                  ...prev,
+                  sending_date: newValue
+                    ? dayjs(newValue).format("YYYY-MM-DD")
+                    : "",
+                }));
               }}
             />
           </LocalizationProvider>

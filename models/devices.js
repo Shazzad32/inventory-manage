@@ -8,7 +8,7 @@ const devicesSchema = new Schema({
   from: { type: String },
   send_to: {
     type: String,
-    enum: ["Retail", "Rangs", "Store"],
+    enum: ["Retail", "Rangs", "Store", "Return"],
     default: "Store",
   },
   install_purpose: {
@@ -21,7 +21,7 @@ const devicesSchema = new Schema({
   device_price: { type: Number },
   insert_date: { type: Date, default: Date.now },
   install_date: { type: Date, default: Date.now },
-  sending_date: { type: Date },
+  sending_date: { type: Date, default: Date.now },
   is_complete: { type: Boolean, default: false },
 });
 

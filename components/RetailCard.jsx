@@ -106,9 +106,9 @@ const RetailCard = ({ totalInRetail }) => {
 
       <Link
         href={"retail/sold"}
-        className="w-[90%] h-[33%] bg-pink-500 rounded-md hidden flex-col lg:flex items-center justify-center gap-3 "
+        className="w-[95%] h-[33%] bg-pink-500 rounded-md hidden flex-col lg:flex items-center justify-center gap-1 "
       >
-        <div className="bg-white px-2 py-1 rounded-md flex items-center mt-2 h-[25%] w-[90%] justify-around">
+        <div className="bg-white p-1 rounded-md flex items-center h-[20%] w-[90%] justify-around">
           <p>
             Sold Device
             <span className="text-[18px] font-bold text-orange-500 ml-1">
@@ -117,12 +117,18 @@ const RetailCard = ({ totalInRetail }) => {
           </p>
           <p>
             Amount
-            <span className="text-[18px] font-bold text-orange-500 ml-1">
+            <span className="text-[16px] font-bold text-orange-500 ml-1">
               {calculateAmount(totalInRetail.filter((x) => x.is_complete))}
             </span>
           </p>
         </div>
-        <div className="h-[55%] w-[90%] bg-white flex items-start justify-center px-4 flex-col rounded-md text-sm gap-1 capitalize">
+        <div className="h-[70%] w-[90%] bg-white flex items-start justify-center px-4 flex-col rounded-md text-xs gap-1 capitalize">
+          <p>
+            Total Sell (This Month):{" "}
+            <span className="text-orange-500 text-[18px]">
+              {monthlySales.length}
+            </span>
+          </p>
           <p>
             Facebook (This Month):{" "}
             <span className="text-orange-500 text-[18px]">
