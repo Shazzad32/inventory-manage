@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -40,6 +39,12 @@ export default function TemporaryDrawer() {
         whileHover={{ background: "skyblue", scaleX: 1.1 }}
       >
         <Link href={"/retail"}>retail</Link>
+      </motion.p>
+      <motion.p
+        className="bg-gray-200 rounded-md px-16 py-2"
+        whileHover={{ background: "skyblue", scaleX: 1.1 }}
+      >
+        <Link href={"/return"}>return</Link>
       </motion.p>
       <LogoutButton />
     </Box>

@@ -1,11 +1,13 @@
 import axios from "axios";
-import React from "react";
+import ReturnInfo from "@/components/ReturnInfo";
 
-const ReturnHome = async () => {
-  const returnRes = (await axios.get(`${process.env.URL}/api/devices/retail`))
+export const dynamic = "force-dynamic";
+
+const Return = async () => {
+  const alldevices = (await axios.get(`${process.env.URL}/api/devices/return`))
     .data;
 
-  return <div>This is return page</div>;
+  return <ReturnInfo devices={alldevices} />;
 };
 
-export default ReturnHome;
+export default Return;

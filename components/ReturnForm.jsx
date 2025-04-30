@@ -7,12 +7,25 @@ import { useRouter } from "next/navigation";
 
 const ReturnForm = ({ defaultItem }) => {
   const [item, setItem] = useState({
-    device_id: defaultItem.device_id || "",
-    send_to: defaultItem.send_to || "",
-    problem: defaultItem.problem || "", // You had typo: "problems" but field should be "problem"
+    ...defaultItem,
   });
 
   const router = useRouter();
+
+  const updateDevice = async () => {
+    const res = await fetch(`/api/devices/${item._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to update topic");
+    }
+    router.push("/return");
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,8 +41,7 @@ const ReturnForm = ({ defaultItem }) => {
   };
 
   const handleCancel = () => {
-    console.log("Canceled");
-    router.push("/retail");
+    router.push("/return");
   };
 
   return (
@@ -47,14 +59,6 @@ const ReturnForm = ({ defaultItem }) => {
           disabled
         />
         <TextField
-          className="w-2/4"
-          type="text"
-          name="issue_by"
-          value={item.issue_by}
-          label="Technician"
-        />
-
-        <TextField
           select
           className="w-2/4"
           name="send_to"
@@ -69,20 +73,11 @@ const ReturnForm = ({ defaultItem }) => {
           ))}
         </TextField>
 
-        <TextField
-          className="w-2/4"
-          type="text"
-          name="problem"
-          value={item.problem}
-          label="Problem"
-          onChange={handleChange}
-        />
-
         <div className="w-2/4 flex gap-4 justify-end">
-          <Button type="submit">Submit</Button>
           <Button type="button" onClick={handleCancel}>
             Cancel
           </Button>
+          <Button onClick={updateDevice}>Submit</Button>
         </div>
       </form>
     </div>
