@@ -82,14 +82,31 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
     }
   };
 
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   if (item[name] !== value) {
+  //     setItem((prevState) => ({
+  //       ...prevState,
+  //       [name]: value,
+  //     }));
+  //   }
+  // };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (item[name] !== value) {
-      setItem((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
+
+    setItem((prevState) => {
+      const updatedItem = { ...prevState, [name]: value };
+      if (
+        name === "send_to" &&
+        (value === "Retail" || value === "Rangs") &&
+        !prevState.sending_date
+      ) {
+        updatedItem.sending_date = new Date().toISOString();
+      }
+
+      return updatedItem;
+    });
   };
 
   const handleAutocompleteChange = (name, newValue) => {

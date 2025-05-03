@@ -78,6 +78,7 @@ const ReturnInfo = ({ devices }) => {
         </div>
       </div>
       <div className="h-[90%] flex items-center justify-center bg-white">
+        fa
         <div className="h-[99%] w-[99.5%] flex flex-col">
           <div className="hidden lg:w-[100%] h-[8%] lg:flex bg-gray-800 p-3 items-center">
             <div className="w-[90%] grid grid-cols-[repeat(4,1fr)] p-2">

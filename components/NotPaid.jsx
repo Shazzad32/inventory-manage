@@ -1,13 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const NotPaid = ({ devices, assignIds }) => {
   const [assignId] = useState({ ...assignIds });
   const [unSoldDevice] = useState({ ...devices });
 
-  console.log(assignId);
+  // const [state, setState] = useState({
+  //   data: [...devices],
+  //   search: "",
+  // });
+
+  // const handleSearch = (e) => {
+  //   const search = e.target.value.toLowerCase();
+  //   setState((prev) => ({
+  //     ...prev,
+  //     search: search,
+  //   }));
+  // };
+  // console.log(assignId);
 
   const deviceList = Object.values(unSoldDevice);
   const assignList = Object.values(assignId);
@@ -16,6 +28,25 @@ const NotPaid = ({ devices, assignIds }) => {
     assignList.includes(device.device_id)
   );
 
+  // useEffect(() => {
+  //   let filterDEvices = [];
+
+  //   if (state.search === "") {
+  //     filterDEvices = [...devices];
+  //   } else {
+  //     filterDEvices = [...devices].filter(
+  //       (x) =>
+  //         x.device_id.toLowerCase().includes(state.search.toLowerCase()) ||
+  //         x.issue_by.toLowerCase().includes(state.search.toLowerCase())
+  //     );
+  //   }
+
+  //   setState((prev) => ({
+  //     ...prev,
+  //     data: [...filterDEvices],
+  //   }));
+  // }, [state.search]);
+
   return (
     <div className="h-[100%] w-[100%] flex justify-center items-center">
       <div className="h-[99%] w-[99%] bg-red-200 flex flex-col">
@@ -23,6 +54,13 @@ const NotPaid = ({ devices, assignIds }) => {
           <p>Device Id</p>
           <p>Technician Name</p>
           <p>District</p>
+          {/* <input
+            type="search"
+            placeholder="Search..."
+            className="h-[40px] px-4 rounded-md flex items-center justify-center text-black "
+            value={state.searchItem}
+            onChange={handleSearch}
+          /> */}
           <div className=" flex gap-4">
             <Link
               href={"/retail"}
