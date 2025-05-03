@@ -1,18 +1,24 @@
 import React from "react";
-import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+} from "@mui/material";
 
-const DistrictName = ({ value, onChange, error, technicians }) => {
+import { district } from "../data"; // Assumes district is an array of strings
+
+const DistrictName = ({ value, onChange, error }) => {
+  const sortedDistricts = [...district].sort((a, b) => a.localeCompare(b));
+
   return (
     <FormControl fullWidth error={!!error}>
       <InputLabel>District</InputLabel>
-      <Select
-        value={value || ""}
-        onChange={onChange}
-        name="district"
-      >
-        {technicians.map((tech, i) => (
-          <MenuItem key={i} value={tech.district}>
-            {tech.district}
+      <Select value={value || ""} onChange={onChange} name="district">
+        {sortedDistricts.map((dist, i) => (
+          <MenuItem key={i} value={dist}>
+            {dist}
           </MenuItem>
         ))}
       </Select>

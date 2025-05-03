@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import TechName from "./TechnicianName";
 import DistrictName from "./DistrictName";
-import workshop from "@/data";
+import { workshop } from "@/data";
 
 const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
   const router = useRouter();
