@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import RangsCard from "@/components/RangsCard";
 import RetailCard from "@/components/RetailCard";
 import StoreCard from "@/components/StoreCard";
