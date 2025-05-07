@@ -14,6 +14,9 @@ import React, { useState } from "react";
 import TechName from "./TechnicianName";
 import DistrictName from "./DistrictName";
 import { workshop } from "@/data";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
   const router = useRouter();
@@ -82,31 +85,14 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
     }
   };
 
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   if (item[name] !== value) {
-  //     setItem((prevState) => ({
-  //       ...prevState,
-  //       [name]: value,
-  //     }));
-  //   }
-  // };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
-
-    setItem((prevState) => {
-      const updatedItem = { ...prevState, [name]: value };
-      if (
-        name === "send_to" &&
-        (value === "Retail" || value === "Rangs") &&
-        !prevState.sending_date
-      ) {
-        updatedItem.sending_date = new Date().toISOString();
-      }
-
-      return updatedItem;
-    });
+    if (item[name] !== value) {
+      setItem((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   const handleAutocompleteChange = (name, newValue) => {
@@ -213,6 +199,29 @@ const StoreForm = ({ defaultItem, isUpdate, technicians }) => {
               />
             )}
           />
+        )}
+
+        {isUpdate && (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              className="w-[100%]"
+              label="Sending Date"
+              name="sending_date"
+              value={
+                item.sending_date && dayjs(item.sending_date).isValid()
+                  ? dayjs(item.sending_date)
+                  : null
+              }
+              onChange={(newValue) => {
+                setItem((prev) => ({
+                  ...prev,
+                  sending_date: newValue
+                    ? dayjs(newValue).format("YYYY-MM-DD")
+                    : "",
+                }));
+              }}
+            />
+          </LocalizationProvider>
         )}
       </div>
 
