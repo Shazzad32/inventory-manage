@@ -19,8 +19,8 @@ const TechInfo = () => {
   });
 
   const [loading, setLoading] = useState(true);
-  const [sortOrder, setSortOrder] = useState("desc"); // Default: Descending order
-  const [selectedTech, setSelectedTech] = useState("all"); // Default: Show all technicians
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [selectedTech, setSelectedTech] = useState("all");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,17 +51,21 @@ const TechInfo = () => {
 
   const technicianWorkSummary = data.technicians.map((tech) => {
     const completedWorks = data.devices.filter(
-      (device) => device.issue_by === tech.tech_name && device.is_complete
+      (device) =>
+        device.issue_by === tech.tech_name &&
+        device.send_to === "Retail" &&
+        device.is_complete
     ).length;
 
     const notCompletedWorks = data.devices.filter(
       (device) =>
-        device.issue_by === tech.tech_name && device.is_complete === false
+        device.issue_by === tech.tech_name &&
+        !device.is_complete &&
+        device.send_to === "Retail"
     ).length;
 
     return {
-      tech_name: tech.tech_name,
-      district: tech.district,
+      ...tech,
       completedWorks,
       notCompletedWorks,
     };
@@ -72,7 +76,7 @@ const TechInfo = () => {
   );
 
   const inHandDevice = data.devices.filter(
-    (item) => item.send_to === "Retail" && item.is_complete === "false"
+    (item) => item.send_to === "Retail" && !item.is_complete
   );
 
   const filteredTechnicians =
@@ -94,6 +98,12 @@ const TechInfo = () => {
           <span className="info-box text-white">
             Done:{" "}
             <strong className="text-orange-300 ml-2">{doneWork.length}</strong>
+          </span>
+          <span className="info-box text-white">
+            In Hand:{" "}
+            <strong className="text-orange-300 ml-2">
+              {inHandDevice.length}
+            </strong>
           </span>
           <Link href="/retail" className="info-box text-white">
             Back

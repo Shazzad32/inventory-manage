@@ -3,9 +3,49 @@ import { calculateAmount } from "@/utils/utils";
 import Link from "next/link";
 import { React, useState } from "react";
 import RetailMobile from "./mobile_device/RetailMobile";
+import { PiArrowFatLineRightFill } from "react-icons/pi";
+import { PiArrowFatLineLeftFill } from "react-icons/pi";
 
 const RetailCard = ({ totalInRetail }) => {
   const [selectedDate, setSelectedDate] = useState("");
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+
+  const changeMonth = (num) => {
+    const newDate = new Date(currentMonth);
+    newDate.setMonth(newDate.getMonth() + num);
+    setCurrentMonth(newDate);
+  };
+
+  const month = currentMonth.getMonth() + 1;
+  const year = currentMonth.getFullYear();
+
+  const monthlySales = totalInRetail.filter((item) => {
+    if (item.is_complete && item.install_date) {
+      const installDate = new Date(item.install_date);
+      return (
+        installDate.getMonth() + 1 === month &&
+        installDate.getFullYear() === year
+      );
+    }
+    return false;
+  });
+
+  const monthlyAmount = monthlySales.reduce(
+    (total, item) => total + Number(item.device_price || 0),
+    0
+  );
+
+  const facebookSellMonthly = monthlySales.filter(
+    (x) => x.install_purpose === "Facebook"
+  ).length;
+
+  const referenceSellMonthly = monthlySales.filter(
+    (x) => x.install_purpose === "Reference"
+  ).length;
+
+  const replaceSellMonthly = monthlySales.filter(
+    (x) => x.install_purpose === "Replace"
+  ).length;
 
   const filteredSales = Array.isArray(totalInRetail)
     ? totalInRetail.filter((item) => {
@@ -40,40 +80,6 @@ const RetailCard = ({ totalInRetail }) => {
     (x) => x.is_complete === false && x.device_type === "Voice"
   );
 
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed in JavaScript
-  const currentYear = currentDate.getFullYear();
-
-  const monthlySales = totalInRetail.filter((item) => {
-    if (item.is_complete && item.install_date) {
-      const installDate = new Date(item.install_date);
-      return (
-        installDate.getMonth() + 1 === currentMonth &&
-        installDate.getFullYear() === currentYear
-      );
-    }
-    return false;
-  });
-
-  const facebookSellMonthly = monthlySales.filter(
-    (x) => x.install_purpose === "Facebook"
-  ).length;
-
-  const referenceSellMonthly = monthlySales.filter(
-    (x) => x.install_purpose === "Reference"
-  ).length;
-
-  const replaceSellMonthly = monthlySales.filter(
-    (x) => x.install_purpose === "Replace"
-  ).length;
-
-  const facebookSell = totalInRetail.filter(
-    (x) => x.is_complete && x.install_purpose === "New_Install"
-  );
-  const replaceSell = totalInRetail.filter(
-    (x) => x.is_complete && x.install_purpose === "Replace"
-  );
-
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
   };
@@ -82,7 +88,7 @@ const RetailCard = ({ totalInRetail }) => {
     <div className="h-[85%] lg:h-[95%] w-full flex flex-col gap-4 items-center justify-evenly">
       <Link
         href={"/retail"}
-        className="w-[90%] h-[33%] bg-pink-500 rounded-md lg:flex hidden flex-col text-left p-4 "
+        className="w-[95%] h-[33%] bg-pink-500 rounded-md lg:flex hidden flex-col text-left p-4 "
       >
         <p className="text-center text-white">
           Un Sold Device =<span>{unSoldDevice.length}</span>
@@ -104,10 +110,7 @@ const RetailCard = ({ totalInRetail }) => {
         </div>
       </Link>
 
-      <Link
-        href={"retail/sold"}
-        className="w-[95%] h-[33%] bg-pink-500 rounded-md hidden flex-col lg:flex items-center justify-center gap-1 "
-      >
+      <div className="w-[95%] h-[33%] bg-pink-800 rounded-md hidden flex-col lg:flex items-center justify-center gap-1 ">
         <div className="bg-white p-1 rounded-md flex items-center h-[20%] w-[90%] justify-around">
           <p>
             Sold Device
@@ -122,34 +125,65 @@ const RetailCard = ({ totalInRetail }) => {
             </span>
           </p>
         </div>
-        <div className="h-[70%] w-[90%] bg-white flex items-start justify-center px-4 flex-col rounded-md text-xs gap-1 capitalize">
-          <p>
-            Total Sell (This Month):{" "}
-            <span className="text-orange-500 text-[18px]">
-              {monthlySales.length}
-            </span>
-          </p>
-          <p>
-            Facebook (This Month):{" "}
-            <span className="text-orange-500 text-[18px]">
-              {facebookSellMonthly}
-            </span>
-          </p>
-          <p>
-            Reference (This Month):{" "}
-            <span className="text-orange-500 text-[18px]">
-              {referenceSellMonthly}
-            </span>
-          </p>
-          <p>
-            Replace (This Month):{" "}
-            <span className="text-orange-500 text-[18px]">
-              {replaceSellMonthly}
-            </span>
-          </p>
+        <div className="h-[70%] bg-white w-[90%] rounded-md flex text-[12px] justify-center gap-2 p-1 items-center flex-col">
+          <div className="flex items-center justify-between w-[90%] px-2">
+            <button
+              onClick={() => changeMonth(-1)}
+              className="text-lg font-extrabold text-red-500"
+            >
+              <PiArrowFatLineLeftFill />
+            </button>
+            <p className=" font-extrabold">
+              {currentMonth.toLocaleString("default", {
+                month: "long",
+                year: "numeric",
+              })}
+            </p>
+            <button
+              onClick={() => changeMonth(1)}
+              className="text-lg font-extrabold text-red-500"
+            >
+              <PiArrowFatLineRightFill />
+            </button>
+          </div>
+          <div className="flex w-full text-left justify-center gap-4">
+            <p>
+              Total Sell :
+              <span className="text-orange-500 text-[16px] ml-1">
+                {monthlySales.length}
+              </span>
+            </p>
+            <p>
+              Amount :
+              <span className="text-orange-500 text-[16px] ml-1">
+                {monthlyAmount}
+              </span>
+            </p>
+          </div>
+          <div className="flex w-full justify-center items-center gap-6">
+            <p>
+              Facebook :
+              <span className="text-orange-500 text-[16px] ml-1">
+                {facebookSellMonthly}
+              </span>
+            </p>
+            <p>
+              Reference :
+              <span className="text-orange-500 text-[16px] ml-1">
+                {referenceSellMonthly}
+              </span>
+            </p>
+            <p>
+              Replace :
+              <span className="text-orange-500 text-[16px] ml-1">
+                {replaceSellMonthly}
+              </span>
+            </p>
+          </div>
         </div>
-      </Link>
-      <div className="w-[90%] h-[33%] bg-pink-500 rounded-md hidden lg:flex flex-col text-left p-4">
+      </div>
+
+      <div className="w-[95%] h-[33%] bg-pink-500 rounded-md hidden lg:flex flex-col text-left p-4">
         <div className="flex justify-between">
           <p className="text-left text-white">Daily Report</p>
           <input
@@ -171,6 +205,7 @@ const RetailCard = ({ totalInRetail }) => {
           </p>
         </div>
       </div>
+
       <RetailMobile
         unSoldDevice={unSoldDevice}
         nonVocieInRetail={nonVocieInRetail}
