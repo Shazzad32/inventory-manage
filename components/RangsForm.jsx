@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import dayjs from "dayjs";
-import workshop from "@/data";
+import { workshop } from "@/data";
 
 const RangsForm = ({ defaultItem, isUpdate }) => {
   const router = useRouter();
