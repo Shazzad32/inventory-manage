@@ -274,17 +274,20 @@ const NotPaid = ({ devices, assignIds }) => {
   return (
     <div className="h-[100%] w-full flex justify-center flex-col items-center ">
       <div className="h-[10%] w-full bg-gray-700 text-white flex items-center justify-between px-4">
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center uppercase">
           <Link href={"/retail"} className="font-bold px-2 rounded-md">
             Back
           </Link>
           <span>
-            Total Device:{" "}
-            <strong className="text-orange-700 text-xl font-bold">
+            Total Device:
+            <strong className="text-orange-500 text-xl font-bold">
               {filteredDevices.length}
             </strong>
           </span>
         </div>
+        <h1 className="uppercase tracking-tight">
+          Technician Report on Due List
+        </h1>
 
         <input
           type="search"
@@ -295,7 +298,6 @@ const NotPaid = ({ devices, assignIds }) => {
         />
       </div>
 
-      {/* Table */}
       <div className="h-[90%] w-full bg-white flex justify-center items-center">
         <div className="h-[99%] w-[99%] flex flex-col">
           <div className="w-full bg-slate-800 text-white grid grid-cols-[repeat(3,1fr)] p-2 items-center">

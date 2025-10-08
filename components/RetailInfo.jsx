@@ -74,10 +74,10 @@ const RetailInfo = ({ devices }) => {
             <Link href={"/retail/sold"}> SOLD</Link>
           </button>
           <button className="text-[8px] h-[20px] w-[80px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
-            <Link href={"/retail/not-paid-list"}>Due</Link>
+            <Link href={"/retail/not-paid-list"}>DUE</Link>
           </button>
           <button className="text-[8px] h-[20px] w-[40px] lg:w-[60px] bg-orange-400 lg:bg-transparent px-1 lg:text-[16px] lg:border-2 lg:h-[25px] lg:p-4 rounded-md flex items-center justify-center text-white">
-            <Link href={"/retail/tech-report"}> Tech</Link>
+            <Link href={"/retail/tech-report"}> TECH</Link>
           </button>
         </div>
         <div className="flex items-center justify-end">
