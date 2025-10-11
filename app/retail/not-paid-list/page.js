@@ -7,9 +7,23 @@ const page = async () => {
   const devicesReq = (await axios.get(`${process.env.URL}/api/devices/retail`))
     .data;
 
-  const assignIds = (
+  const devices = devicesReq.filter(
+    (item) => item.send_to === "Retail" && item.is_complete === false
+  );
+
+  const kanaphuliassignIds = (
     await axios.get(
-      "https://mongo6.sultantracker.com/api/devices/assign-devices-ids",
+      "https://retail-api.sultantracker.com/devices/assign-devices-ids",
+      {
+        headers: {
+          Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+        },
+      }
+    )
+  ).data;
+  const tiktikiAssingIDs = (
+    await axios.get(
+      "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
       {
         headers: {
           Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
@@ -18,11 +32,11 @@ const page = async () => {
     )
   ).data;
 
-  const devices = devicesReq.filter(
-    (item) => item.send_to === "Retail" && item.is_complete === false
-  );
+  const totalassignIDs = [
+    ...new Set([...kanaphuliassignIds, ...tiktikiAssingIDs]),
+  ];
 
-  return <NotPaid devices={devices} assignIds={assignIds} />;
+  return <NotPaid devices={devices} assignIds={totalassignIDs} />;
 };
 
 export default page;

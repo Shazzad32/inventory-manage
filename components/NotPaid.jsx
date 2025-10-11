@@ -229,6 +229,7 @@ import NotPaidTable from "./NotPaidTable";
 
 const NotPaid = ({ devices, assignIds }) => {
   const [assignId] = useState({ ...assignIds });
+
   const [unSoldDevice] = useState({ ...devices });
 
   const deviceList = useMemo(() => Object.values(unSoldDevice), [unSoldDevice]);
