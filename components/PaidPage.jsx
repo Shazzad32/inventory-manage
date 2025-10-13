@@ -31,6 +31,7 @@
 //     </Dialog>
 //   );
 // }
+
 "use client";
 import React, { useState } from "react";
 import CustomerRegistrationForm from "@/components/CustomerRegistrationForm";
@@ -40,7 +41,6 @@ export const PaidPage = ({ device_id }) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      {/* Button to open form */}
       <button
         onClick={() => setShowForm(true)}
         className="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition"
@@ -48,11 +48,9 @@ export const PaidPage = ({ device_id }) => {
         Register
       </button>
 
-      {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-2xl shadow-xl max-w-4xl w-[95%] relative">
-            {/* Close button */}
             <button
               onClick={() => setShowForm(false)}
               className="absolute top-3 right-3 text-gray-600 hover:text-red-500 text-xl font-bold"
@@ -60,7 +58,6 @@ export const PaidPage = ({ device_id }) => {
               ✕
             </button>
 
-            {/* Form */}
             <CustomerRegistrationForm deviceId={device_id} />
           </div>
         </div>

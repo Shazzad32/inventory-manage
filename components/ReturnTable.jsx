@@ -4,7 +4,7 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 const ReturnTable = ({ item }) => {
   return (
     <div className="h-auto w-full lg:w-[100%] flex lg:flex-row lg:h-12 items-center">
-      <div className="w-[90%] grid grid-cols-[repeat(4,1fr)] p-2">
+      <div className="w-[90%] grid grid-cols-[repeat(5,1fr)] p-2">
         <p className=" overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_id}
         </p>
@@ -17,9 +17,7 @@ const ReturnTable = ({ item }) => {
         <p className=" overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.issue_by}
         </p>
-        <p className=" overflow-hidden text-ellipsis whitespace-nowrap">
-          {item?.issue_by}
-        </p>
+
         <p className=" overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.district}
         </p>

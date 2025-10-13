@@ -15,7 +15,6 @@ const RetailTable = ({ item }) => {
 
   return (
     <div className="h-auto w-full lg:w-[100%] flex lg:flex-row lg:h-12 items-center">
-      {/* <div className="hidden flex-[9] lg:flex p-2"> */}
       <div className="w-[90%] grid grid-cols-[repeat(8,1fr)] p-2">
         <p className=" overflow-hidden text-ellipsis whitespace-nowrap">
           {item?.device_id}

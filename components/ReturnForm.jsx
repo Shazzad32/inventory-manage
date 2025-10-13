@@ -24,7 +24,7 @@ const ReturnForm = ({ defaultItem }) => {
     if (!res.ok) {
       throw new Error("Failed to update topic");
     }
-    router.push("/return");
+    router.push("/retail");
   };
 
   const handleChange = (e) => {
@@ -41,7 +41,7 @@ const ReturnForm = ({ defaultItem }) => {
   };
 
   const handleCancel = () => {
-    router.push("/return");
+    router.push("/retail");
   };
 
   return (

@@ -281,9 +281,7 @@ const NotPaid = ({ devices, assignIds }) => {
           </Link>
           <span>
             Total Device:
-            <strong className="text-orange-500 text-xl font-bold">
-              {filteredDevices.length}
-            </strong>
+            <strong className="font-bold ml-2">{filteredDevices.length}</strong>
           </span>
         </div>
         <h1 className="uppercase tracking-tight">
