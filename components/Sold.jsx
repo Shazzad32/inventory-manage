@@ -320,9 +320,9 @@ function Sold({ devices }) {
               </p>
             ))}
           </div>
-          <div className="flex-[1] text-white flex items-center justify-center">
+          {/* <div className="flex-[1] text-white flex items-center justify-center">
             ACTION
-          </div>
+          </div> */}
         </div>
 
         <div className="h-[92%] w-full flex flex-col overflow-y-scroll">

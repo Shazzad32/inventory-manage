@@ -299,10 +299,13 @@ const NotPaid = ({ devices, assignIds }) => {
 
       <div className="h-[90%] w-full bg-white flex justify-center items-center">
         <div className="h-[99%] w-[99%] flex flex-col">
-          <div className="w-full bg-slate-800 text-white grid grid-cols-[repeat(3,1fr)] p-2 items-center">
-            <p>Device Id</p>
-            <p>Technician Name</p>
-            <p>District</p>
+          <div className="w-full bg-slate-800 text-white ">
+            <div className="grid grid-cols-[repeat(4,1fr)] p-2 items-center ">
+              <p>Device Id</p>
+              <p>Technician Name</p>
+              <p>District</p>
+              <p>Download Form</p>
+            </div>
           </div>
 
           <div className="w-full overflow-y-auto">
