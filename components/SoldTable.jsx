@@ -319,7 +319,7 @@ const SoldTable = ({ item }) => {
         ["Device SIM Number", data.device_sim_number || "N/A"],
         ["Center Number", data.center_number || "N/A"],
         ["Customer Email", data.uid?.email || "N/A"],
-        ["Purpose", item.device_type || "N/A"],
+        ["Device Type", item.device_type || "N/A"],
         ["Device Price", `${item.device_price} BDT`],
         ["Service Charge", `${data.service_charge || 0} BDT`],
         ["Purpose", item.install_purpose || "N/A"],
