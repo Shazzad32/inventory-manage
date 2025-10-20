@@ -13,6 +13,7 @@ const headers = [
   "District",
   "Insert_Date",
   "Sending_Date",
+  "",
 ];
 
 const RetailInfo = ({ devices }) => {

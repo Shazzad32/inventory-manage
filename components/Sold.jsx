@@ -311,8 +311,8 @@ function Sold({ devices }) {
         </div>
       </div>
 
-      <div className="h-[90%] flex flex-col flex-1 bg-slate-300 w-full p-1">
-        <div className="h-[8%] hidden lg:flex justify-between bg-gray-800 items-center p-3">
+      {/* <div className="h-[90%] flex flex-col flex-1 bg-slate-300 w-full p-1">
+        <div className="h-[8%] w hidden lg:flex justify-between bg-gray-800 items-center p-3">
           <div className="flex-[9] flex">
             {headers.map((x) => (
               <p key={x} className="text-white uppercase flex-[8]">
@@ -320,9 +320,9 @@ function Sold({ devices }) {
               </p>
             ))}
           </div>
-          {/* <div className="flex-[1] text-white flex items-center justify-center">
+          <div className="flex-[1] text-white flex items-center justify-center">
             ACTION
-          </div> */}
+          </div>
         </div>
 
         <div className="h-[92%] w-full flex flex-col overflow-y-scroll">
@@ -334,6 +334,30 @@ function Sold({ devices }) {
               <SoldTable item={x} />
             </div>
           ))}
+        </div>
+      </div> */}
+      <div className="h-[90%] flex items-center justify-center bg-white">
+        <div className="h-[99%] w-[99.5%] flex flex-col">
+          <div className="hidden lg:w-[100%] h-[8%] lg:flex bg-gray-800 p-3 items-center">
+            <div className="w-[90%] grid grid-cols-[repeat(8,1fr)] p-2">
+              {headers.map((x) => (
+                <p key={x} className="text-white uppercase">
+                  {x}
+                </p>
+              ))}
+            </div>
+            <p className="w-[10%] text-white text-center">ACTION</p>
+          </div>
+          <div className="h-[92%] overflow-y-scroll">
+            {state.data.map((x, i) => (
+              <div
+                key={i}
+                className={`${i % 2 == 0 ? "bg-slate-100" : "bg-slate-200"}`}
+              >
+                <SoldTable item={x} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

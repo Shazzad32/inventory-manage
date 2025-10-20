@@ -34,7 +34,7 @@
 
 "use client";
 import React, { useState } from "react";
-import CustomerRegistrationForm from "@/components/CustomerRegistrationForm";
+import CustomerRegistrationForm from "@/components/CustomerFormGenerator";
 
 export const PaidPage = ({ device_id }) => {
   const [showForm, setShowForm] = useState(false);
