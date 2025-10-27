@@ -7,7 +7,6 @@ import axios from "axios";
 
 export default async function Home() {
   const devices = (await axios.get(`${process.env.URL}/api/devices`)).data;
-
   const totalDevices = devices.length;
   const totalInRetail = devices.filter((x) => x.send_to === "Retail");
   const totalInRangs = devices.filter((x) => x.send_to === "Rangs").length;
@@ -27,9 +26,42 @@ export default async function Home() {
     (x) => x.send_to === "Rangs" && x.device_type === "Non_Voice"
   ).length;
 
+  const platformDevice = devices.filter(
+    (x) => x.send_to === "Retail" && x.is_complete === false
+  );
+
+  const kanaphuliassignIds = (
+    await axios.get(
+      "https://retail-api.sultantracker.com/devices/assign-devices-ids",
+      {
+        headers: {
+          Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+        },
+      }
+    )
+  ).data;
+  const tiktikiAssingIDs = (
+    await axios.get(
+      "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
+      {
+        headers: {
+          Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+        },
+      }
+    )
+  ).data;
+
+  const totalassignIDs = [
+    ...new Set([...kanaphuliassignIds, ...tiktikiAssingIDs]),
+  ];
+
+  const commonDevices = platformDevice.filter((device) =>
+    totalassignIDs.includes(device.device_id)
+  );
+
   return (
     <div className="w-full h-full bg-skyblue-500 flex flex-col">
-      <div className="h-[10%] w-full bg-gray-800 text-white flex lg:gap-2 gap-2 md:gap:3 items-center lg:px-2 px-2">
+      <div className="h-[10%] w-full bg-gray-500 text-white flex lg:gap-2 gap-2 md:gap:3 items-center lg:px-2 px-2">
         <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
           <Link href={"/store"}> STORE</Link>
         </button>
@@ -44,7 +76,7 @@ export default async function Home() {
           <p className="hidden lg:flex lg:items-center lg:justify-center">
             Total Device
           </p>
-          <p className="font-bold rounded-md lg:bg-gray-800 text-white border border-white lg:px-2 lg:py-1">
+          <p className="font-bold rounded-md text-white border border-white lg:px-2 lg:py-1">
             {totalDevices}
           </p>
         </div>
@@ -61,7 +93,10 @@ export default async function Home() {
         </div>
         <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold uppercase">
           Retail Information
-          <RetailCard totalInRetail={totalInRetail} />
+          <RetailCard
+            totalInRetail={totalInRetail}
+            commonDevice={commonDevices}
+          />
         </div>
 
         <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center uppercase p-2 font-bold">

@@ -5,18 +5,27 @@ import RangsMobile from "./mobile_device/RangsMobile";
 
 const RangsCard = ({ totalInRangs, voiceInRangs, nonVoiceInRangs }) => {
   return (
-    <div className="h-[85%] lg:h-[95%] w-full flex flex-col gap-4 items-center justify-evenly">
+    <div className="h-[85%] lg:h-[95%] w-full flex flex-col gap-4 text-white">
       <Link
         href={"/rangs"}
-        className="w-[95%] h-[33%] bg-sky-500 rounded-md hidden lg:flex items-center justify-center gap-2 text-white"
+        className="bg-gray-500 h-[33%] w-full  rounded-md  flex items-center justify-center"
       >
-        Total Device :<p className="text-2xl">{totalInRangs}</p>
+        <p>
+          Total
+          <strong className="ml-2 text-6xl">{totalInRangs}</strong>
+        </p>
       </Link>
-      <div className="w-[95%] h-[33%] bg-sky-500 rounded-md hidden lg:flex items-center justify-center gap-2 text-white">
-        Non VOice Device :<p className="text-2xl">{nonVoiceInRangs}</p>
+      <div className="h-[40%] w-full  rounded-md  bg-gray-500 flex gap-4 justify-center items-center">
+        <p>
+          non-voice
+          <strong className="ml-2 text-6xl">{nonVoiceInRangs}</strong>
+        </p>
       </div>
-      <div className="hidden w-[95%] h-[33%] bg-sky-500 rounded-md lg:flex items-center justify-center gap-2 text-white">
-        VOice Device :<p className="text-2xl">{voiceInRangs}</p>
+      <div className="h-[40%] w-full  rounded-md  bg-gray-500 flex gap-4 justify-center items-center">
+        <p>
+          voice
+          <strong className="ml-2 text-6xl">{voiceInRangs}</strong>
+        </p>
       </div>
       <RangsMobile
         totalInRangs={totalInRangs}

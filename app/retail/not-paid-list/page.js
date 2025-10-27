@@ -32,20 +32,6 @@ const page = async () => {
     )
   ).data;
 
-  // const retailIDs = (
-  //   await axios.post(
-  //     "https://retail-api.sultantracker.com/devices/inventory",
-  //     { ids: kanaphuliassignIds }, // send the list here
-  //     {
-  //       headers: {
-  //         Authorization: "Bearer ####rangs.sultantrack.com!!!!$$###",
-  //       },
-  //     }
-  //   )
-  // ).data;
-
-  // console.log(retailIDs);
-
   const totalassignIDs = [
     ...new Set([...kanaphuliassignIds, ...tiktikiAssingIDs]),
   ];

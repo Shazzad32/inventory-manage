@@ -9,7 +9,32 @@ const Retail = async () => {
 
   const devices = alldevices.filter((item) => item.is_complete === false);
 
-  return <RetailInfo devices={devices} />;
+  const kanaphuliassignIds = (
+    await axios.get(
+      "https://retail-api.sultantracker.com/devices/assign-devices-ids",
+      {
+        headers: {
+          Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+        },
+      }
+    )
+  ).data;
+  const tiktikiAssingIDs = (
+    await axios.get(
+      "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
+      {
+        headers: {
+          Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+        },
+      }
+    )
+  ).data;
+
+  const totalassignIDs = [
+    ...new Set([...kanaphuliassignIds, ...tiktikiAssingIDs]),
+  ];
+
+  return <RetailInfo devices={devices} totalassignIDs={totalassignIDs} />;
 };
 
 export default Retail;
