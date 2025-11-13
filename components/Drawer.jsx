@@ -26,6 +26,12 @@ export default function TemporaryDrawer() {
         className="bg-gray-200 rounded-md px-16 py-2"
         whileHover={{ background: "skyblue", scaleX: 1.1 }}
       >
+        <Link href={"/"}>Home</Link>
+      </motion.p>
+      <motion.p
+        className="bg-gray-200 rounded-md px-16 py-2"
+        whileHover={{ background: "skyblue", scaleX: 1.1 }}
+      >
         <Link href={"/store"}>store</Link>
       </motion.p>
       <motion.p

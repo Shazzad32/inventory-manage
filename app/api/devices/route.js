@@ -49,7 +49,7 @@ export const POST = async (req) => {
         JSON.stringify({
           message: `Device with ID ${device_id} already exists. Ignored.`,
         }),
-        { status: 200 }
+        { status: 409 }
       );
     }
 
@@ -71,12 +71,12 @@ export const POST = async (req) => {
 
     await newDevice.save();
 
-    const savedDevice = await Devices.findOne({ device_id });
-    if (!savedDevice) {
-      return new Response(JSON.stringify({ error: "Failed to save device" }), {
-        status: 500,
-      });
-    }
+    // const savedDevice = await Devices.findOne({ device_id });
+    // if (!savedDevice) {
+    //   return new Response(JSON.stringify({ error: "Failed to save device" }), {
+    //     status: 500,
+    //   });
+    // }
 
     return new Response(
       JSON.stringify({ message: "Device added successfully" }),
