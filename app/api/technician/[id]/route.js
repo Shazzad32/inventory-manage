@@ -1,5 +1,6 @@
 import { connectToDb } from "../../../../utils/database";
-import Technician from "/models/technician";
+// import Technician from "/models/technician";
+import Technician from "../../../../models/devices";
 
 export const GET = async (req, { params }) => {
   let { id } = await params;

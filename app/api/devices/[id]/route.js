@@ -1,6 +1,7 @@
 import { connectToDb } from "../../../../utils/database";
 // import { connectToDb } from "/utils/database";
-import Devices from "/models/devices";
+// import Devices from "/models/devices";
+import Devices from "../../../../models/devices";
 import axios from "axios";
 
 export const GET = async (req, { params }) => {
