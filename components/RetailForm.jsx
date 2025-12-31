@@ -85,8 +85,6 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
       throw new Error("Failed to update device");
     }
 
-    // console.log(transac);
-
     router.push("/retail");
   };
 
@@ -198,9 +196,9 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
                 />
               }
             </p>
-            <div className="flex gap-4 w-full">
+            <div className="flex gap-2 w-full">
               {item.is_complete && (
-                <FormControl className="w-[50%]">
+                <FormControl className="w-[33%]">
                   <InputLabel>Install Purpose</InputLabel>
                   <Select
                     type="text"
@@ -214,10 +212,20 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
                   </Select>
                 </FormControl>
               )}
+              {item.is_complete && (
+                <TextField
+                  className="w-[33%]"
+                  type="number"
+                  name="technican_charge"
+                  value={item.technican_charge || ""}
+                  label="Technican_Charge"
+                  onChange={handleChange}
+                />
+              )}
 
               {item.is_complete && (
                 <TextField
-                  className="w-[50%]"
+                  className="w-[33%]"
                   type="number"
                   label="Device Price"
                   name="device_price"

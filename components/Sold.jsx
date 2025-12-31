@@ -16,6 +16,7 @@ const headers = [
   "install_purpose",
   "Price",
   "Install_date",
+  "technican_charge",
 ];
 
 function Sold({ devices }) {
@@ -117,6 +118,7 @@ function Sold({ devices }) {
       "district",
       "install_purpose",
       "device_price",
+      "technican_charge",
       "install_date",
     ];
 
@@ -195,50 +197,6 @@ function Sold({ devices }) {
     }));
   };
 
-  // const exportToExcel = (startDate, endDate) => {
-  //   const selectedFields = [
-  //     "device_id",
-  //     "device_type",
-  //     "issue_by",
-  //     "district",
-  //     "install_purpose",
-  //     "device_price",
-  //     "install_date",
-  //   ];
-
-  //   const filteredData = state.data.map((item) =>
-  //     Object.fromEntries(selectedFields.map((key) => [key, item[key]]))
-  //   );
-
-  //   const worksheet = XLSX.utils.json_to_sheet([]);
-
-  //   // Add title
-  //   XLSX.utils.sheet_add_aoa(worksheet, [["Device Bill"]], { origin: "A1" });
-
-  //   // Merge title
-  //   worksheet["!merges"] = [
-  //     { s: { r: 0, c: 0 }, e: { r: 0, c: selectedFields.length - 1 } },
-  //   ];
-
-  //   // Add date range
-  //   XLSX.utils.sheet_add_aoa(
-  //     worksheet,
-  //     [[`Date On: ${startDate || "N/A"} to ${endDate || "N/A"}`]],
-  //     { origin: "A2" }
-  //   );
-
-  //   // Add actual data
-  //   XLSX.utils.sheet_add_json(worksheet, filteredData, {
-  //     origin: "A4",
-  //     skipHeader: false,
-  //   });
-
-  //   const workbook = XLSX.utils.book_new();
-  //   XLSX.utils.book_append_sheet(workbook, worksheet, "SoldDevices");
-
-  //   XLSX.writeFile(workbook, "sold_devices.xlsx");
-  // };
-
   return (
     <div className="h-[100%] w-full flex flex-col">
       <div className="h-[10%] flex w-full justify-between  bg-gray-800 items-center p-4">
@@ -310,32 +268,6 @@ function Sold({ devices }) {
           />
         </div>
       </div>
-
-      {/* <div className="h-[90%] flex flex-col flex-1 bg-slate-300 w-full p-1">
-        <div className="h-[8%] w hidden lg:flex justify-between bg-gray-800 items-center p-3">
-          <div className="flex-[9] flex">
-            {headers.map((x) => (
-              <p key={x} className="text-white uppercase flex-[8]">
-                {x}
-              </p>
-            ))}
-          </div>
-          <div className="flex-[1] text-white flex items-center justify-center">
-            ACTION
-          </div>
-        </div>
-
-        <div className="h-[92%] w-full flex flex-col overflow-y-scroll">
-          {state.data.map((x, i) => (
-            <div
-              key={i}
-              className={`${i % 2 == 0 ? "bg-slate-100" : "bg-slate-200"}`}
-            >
-              <SoldTable item={x} />
-            </div>
-          ))}
-        </div>
-      </div> */}
       <div className="h-[90%] flex items-center justify-center bg-white">
         <div className="h-[99%] w-[99.5%] flex flex-col">
           <div className="hidden lg:w-[100%] h-[8%] lg:flex bg-gray-800 p-3 items-center">

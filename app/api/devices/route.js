@@ -25,6 +25,7 @@ export const POST = async (req) => {
       device_model,
       device_type,
       device_price,
+      technican_charge,
       workshop,
       district,
       from,
@@ -58,6 +59,7 @@ export const POST = async (req) => {
       device_model,
       device_type,
       device_price,
+      technican_charge,
       workshop,
       district,
       from,
@@ -70,13 +72,6 @@ export const POST = async (req) => {
     });
 
     await newDevice.save();
-
-    // const savedDevice = await Devices.findOne({ device_id });
-    // if (!savedDevice) {
-    //   return new Response(JSON.stringify({ error: "Failed to save device" }), {
-    //     status: 500,
-    //   });
-    // }
 
     return new Response(
       JSON.stringify({ message: "Device added successfully" }),

@@ -19,6 +19,7 @@ const devicesSchema = new Schema({
   workshop: { type: String },
   district: { type: String },
   device_price: { type: Number },
+  technican_charge: { type: Number },
   insert_date: { type: Date, default: Date.now },
   install_date: { type: Date, default: Date.now },
   sending_date: { type: Date, default: Date.now },
