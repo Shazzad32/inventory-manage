@@ -1,4 +1,5 @@
-import { connectToDb } from "/utils/database";
+import { connectToDb } from "../../../../utils/database";
+// import { connectToDb } from "/utils/database";
 import Devices from "/models/devices";
 import axios from "axios";
 
