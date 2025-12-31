@@ -63,9 +63,7 @@ const RetailTable = ({ item }) => {
         <p>
           <strong>Insert Date:</strong> {formatteInsertdDate}
         </p>
-        <p>
-          <strong>Sending Date:</strong> {formattedDate}
-        </p>
+
         <p className="flex float-right mt-[-150px] relative top-0">
           {item?._id && (
             <Link href={`/retail/${item._id}/update`}>
