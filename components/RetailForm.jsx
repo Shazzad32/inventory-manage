@@ -216,23 +216,22 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
                 <TextField
                   className="w-[33%]"
                   type="number"
-                  name="technican_charge"
-                  value={item.technican_charge || ""}
-                  label="Technican_Charge"
-                  onChange={handleChange}
-                />
-              )}
-
-              {item.is_complete && (
-                <TextField
-                  className="w-[33%]"
-                  type="number"
                   label="Device Price"
                   name="device_price"
                   value={item.device_price || ""}
                   onChange={handleChange}
                   error={!!errors.device_price}
                   helperText={errors.device_price}
+                />
+              )}
+              {item.is_complete && (
+                <TextField
+                  className="w-[33%]"
+                  type="number"
+                  name="technican_charge"
+                  value={item.technican_charge || ""}
+                  label="Technican_Charge"
+                  onChange={handleChange}
                 />
               )}
             </div>

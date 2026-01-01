@@ -16,7 +16,6 @@ const headers = [
   "install_purpose",
   "Price",
   "Install_date",
-  "technican_charge",
 ];
 
 function Sold({ devices }) {
