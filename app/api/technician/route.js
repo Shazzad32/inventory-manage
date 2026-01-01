@@ -1,6 +1,3 @@
-// import { connectToDb } from "@/utils/database";
-// import Technician from "@/models/technician";
-
 import { connectToDb } from "../../../utils/database";
 import Technician from "../../../models/technician";
 
