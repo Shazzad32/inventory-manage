@@ -109,6 +109,64 @@ function Sold({ devices }) {
     }));
   };
 
+  // const exportToExcel = (startDate, endDate) => {
+  //   const selectedFields = [
+  //     "device_id",
+  //     "device_type",
+  //     "issue_by",
+  //     "district",
+  //     "install_purpose",
+  //     "device_price",
+  //     "technican_charge",
+  //     "install_date",
+  //   ];
+
+  //   const filteredData = state.data.map((item) =>
+  //     Object.fromEntries(selectedFields.map((key) => [key, item[key]]))
+  //   );
+
+  //   const worksheet = XLSX.utils.json_to_sheet([]);
+
+  //   XLSX.utils.sheet_add_aoa(worksheet, [["Device Bill"]], { origin: "A1" });
+
+  //   worksheet["!merges"] = [
+  //     { s: { r: 0, c: 0 }, e: { r: 0, c: selectedFields.length - 1 } },
+  //   ];
+  //   XLSX.utils.sheet_add_aoa(
+  //     worksheet,
+  //     [[`Date On: ${startDate || "N/A"} to ${endDate || "N/A"}`]],
+  //     { origin: "A2" }
+  //   );
+
+  //   XLSX.utils.sheet_add_aoa(
+  //     worksheet,
+  //     [selectedFields.map((field) => field.toUpperCase())],
+  //     { origin: "A4" }
+  //   );
+
+  //   XLSX.utils.sheet_add_json(worksheet, filteredData, {
+  //     origin: "A5",
+  //     skipHeader: true,
+  //   });
+
+  //   const workbook = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(workbook, worksheet, "SoldDevices");
+
+  //   const columnWidths = selectedFields.map(() => ({ wch: 20 }));
+  //   worksheet["!cols"] = columnWidths;
+
+  //   worksheet["A1"].s = {
+  //     font: { bold: true, sz: 14 },
+  //     alignment: { horizontal: "center" },
+  //   };
+  //   worksheet["A2"].s = {
+  //     font: { italic: true, sz: 12 },
+  //     alignment: { horizontal: "center" },
+  //   };
+
+  //   XLSX.writeFile(workbook, "sold_devices.xlsx");
+  // };
+
   const exportToExcel = (startDate, endDate) => {
     const selectedFields = [
       "device_id",
@@ -127,34 +185,73 @@ function Sold({ devices }) {
 
     const worksheet = XLSX.utils.json_to_sheet([]);
 
+    // Title
     XLSX.utils.sheet_add_aoa(worksheet, [["Device Bill"]], { origin: "A1" });
-
     worksheet["!merges"] = [
       { s: { r: 0, c: 0 }, e: { r: 0, c: selectedFields.length - 1 } },
     ];
+
+    // Date row
     XLSX.utils.sheet_add_aoa(
       worksheet,
       [[`Date On: ${startDate || "N/A"} to ${endDate || "N/A"}`]],
       { origin: "A2" }
     );
 
+    // Header
     XLSX.utils.sheet_add_aoa(
       worksheet,
-      [selectedFields.map((field) => field.toUpperCase())],
+      [selectedFields.map((f) => f.toUpperCase())],
       { origin: "A4" }
     );
 
+    // Data
     XLSX.utils.sheet_add_json(worksheet, filteredData, {
       origin: "A5",
       skipHeader: true,
     });
 
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "SoldDevices");
+    const dataStartRow = 5;
+    const dataEndRow = dataStartRow + filteredData.length - 1;
 
-    const columnWidths = selectedFields.map(() => ({ wch: 20 }));
-    worksheet["!cols"] = columnWidths;
+    // ===== Summary Section =====
+    const summaryStartRow = dataEndRow + 2;
 
+    XLSX.utils.sheet_add_aoa(
+      worksheet,
+      [
+        [
+          "",
+          "",
+          "",
+          "",
+          "Device Price",
+          { f: `SUM(F${dataStartRow}:F${dataEndRow})` },
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "Technician",
+          { f: `SUM(G${dataStartRow}:G${dataEndRow})` },
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "Total",
+          { f: `F${summaryStartRow} - F${summaryStartRow + 1}` },
+        ],
+      ],
+      { origin: `A${summaryStartRow}` }
+    );
+
+    // Column width
+    worksheet["!cols"] = selectedFields.map(() => ({ wch: 20 }));
+
+    // Styling
     worksheet["A1"].s = {
       font: { bold: true, sz: 14 },
       alignment: { horizontal: "center" },
@@ -163,6 +260,9 @@ function Sold({ devices }) {
       font: { italic: true, sz: 12 },
       alignment: { horizontal: "center" },
     };
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "SoldDevices");
 
     XLSX.writeFile(workbook, "sold_devices.xlsx");
   };
