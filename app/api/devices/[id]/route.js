@@ -41,6 +41,7 @@ export const PUT = async (req, { params }) => {
       technican_charge,
       device_model,
       issue_by,
+      problem,
       sending_date,
       install_date,
       device_price,
@@ -64,6 +65,7 @@ export const PUT = async (req, { params }) => {
     device.device_type = device_type;
     device.device_model = device_model;
     device.issue_by = issue_by;
+    device.problem = problem;
     device.sending_date = sending_date;
     device.install_date = install_date;
     device.device_price = device_price;

@@ -1,38 +1,46 @@
 import { connectToDb } from "../../../../../utils/database";
-import Devices from "../../../../../models/devices";
+import DeviceModel from "../../../../../models/devices";
 import { NextResponse } from "next/server";
 
 export const POST = async (req) => {
   try {
     await connectToDb();
-    const devices = await req.json();
 
-    const ids = devices.map((x) => x.device_id);
+    const devicesFromExcel = await req.json();
 
-    const existingdevices = await Device.find({ device_id: { $in: ids } });
+    if (!Array.isArray(devicesFromExcel)) {
+      return NextResponse.json(
+        { message: "Invalid data format" },
+        { status: 400 }
+      );
+    }
 
-    if (existingdevices.length > 0) {
+    const ids = devicesFromExcel.map((x) => x.device_id).filter(Boolean);
+
+    const existingDevices = await DeviceModel.find({
+      device_id: { $in: ids },
+    });
+
+    if (existingDevices.length > 0) {
       return NextResponse.json(
         {
           message: "These Devices Already inserted",
-          data: existingdevices.map((x) => x.device_id),
+          data: existingDevices.map((x) => x.device_id),
         },
         { status: 200 }
       );
     }
 
-    const createdDEvices = await Device.create([...devices]);
-
-    console.log(createdDEvices);
+    const createdDevices = await DeviceModel.create(devicesFromExcel);
 
     return NextResponse.json(
-      { message: "Devices added succussfully", data: createdDEvices },
+      { message: "Devices added successfully", data: createdDevices },
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error adding device:", error.message);
-    return new Response(
-      JSON.stringify({ error: error.message || "Internal server error" }),
+    console.error("Error adding device:", error);
+    return NextResponse.json(
+      { error: error.message || "Internal server error" },
       { status: 500 }
     );
   }

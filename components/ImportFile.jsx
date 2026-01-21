@@ -45,12 +45,6 @@ const ImportFile = () => {
           }
         }
       } catch (error) {
-        // if (error.status === 401) {
-        //   console.log(error.response);
-        //   alert(`DEvice Already Exist ${error.response.data.data.join("\n")}`);
-        // } else {
-
-        // }
         alert("Error processing the file. Please check the format.");
         console.error("Error reading file:", error);
       }

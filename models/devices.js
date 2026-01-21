@@ -17,6 +17,7 @@ const devicesSchema = new Schema({
   },
   issue_by: { type: String },
   workshop: { type: String },
+  problem: { type: String },
   district: { type: String },
   device_price: { type: Number },
   technican_charge: { type: Number },

@@ -11,6 +11,7 @@ const NotPaid = ({ devices, assignIds }) => {
 
   const deviceList = useMemo(() => Object.values(unSoldDevice), [unSoldDevice]);
   const assignList = useMemo(() => Object.values(assignId), [assignId]);
+  const assignDevice = useMemo(() => Object.values(assignId), [assignId]);
 
   const commonDevices = useMemo(() => {
     return deviceList.filter((device) => assignList.includes(device.device_id));
@@ -93,7 +94,7 @@ const NotPaid = ({ devices, assignIds }) => {
                   key={i}
                   className={`${i % 2 === 0 ? "bg-slate-100" : "bg-slate-200"}`}
                 >
-                  <NotPaidTable item={item} />
+                  <NotPaidTable item={item} assignDevice={assignDevice} />
                 </div>
               ))
             ) : (

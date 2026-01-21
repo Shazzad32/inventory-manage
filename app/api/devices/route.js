@@ -35,6 +35,7 @@ export const POST = async (req) => {
       sending_date,
       install_date,
       is_complete,
+      problem,
     } = await req.json();
 
     if (!device_id || !device_model || !device_type || !from) {
@@ -69,6 +70,7 @@ export const POST = async (req) => {
       sending_date,
       install_date,
       is_complete,
+      problem,
     });
 
     await newDevice.save();

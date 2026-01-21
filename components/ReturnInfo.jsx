@@ -4,7 +4,14 @@ import Link from "next/link";
 import ReturnTable from "@/components/ReturnTable";
 import { DropdownMenuDemo } from "./DropdownMenuDemo";
 
-const headers = ["Device_id", "Model", "Type", "Issue_By", "District"];
+const headers = [
+  "Device_id",
+  "Model",
+  "Type",
+  "Problem",
+  "Issue_By",
+  "District",
+];
 
 const ReturnInfo = ({ devices }) => {
   const [state, setState] = useState({
@@ -70,10 +77,9 @@ const ReturnInfo = ({ devices }) => {
         </div>
       </div>
       <div className="h-[90%] flex items-center justify-center bg-white">
-        fa
         <div className="h-[99%] w-[99.5%] flex flex-col">
           <div className="hidden lg:w-[100%] h-[8%] lg:flex bg-gray-800 p-3 items-center">
-            <div className="w-[90%] grid grid-cols-[repeat(5,1fr)] p-2">
+            <div className="w-[90%] grid grid-cols-[repeat(6,1fr)] p-2">
               {headers.map((x) => (
                 <p key={x} className="text-white uppercase">
                   {x}

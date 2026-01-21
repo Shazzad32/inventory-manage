@@ -4,9 +4,10 @@ import RetailCard from "@/components/RetailCard";
 import StoreCard from "@/components/StoreCard";
 import Link from "next/link";
 import axios from "axios";
-
+import { getDevices } from "@/utils/getDevices";
 export default async function Home() {
-  const devices = (await axios.get(`${process.env.URL}/api/devices`)).data;
+  // const devices = (await axios.get(`${process.env.URL}/api/devices`)).data;
+  const devices = await getDevices();
   const totalDevices = devices.length;
   const totalInRetail = devices.filter((x) => x.send_to === "Retail");
   const totalInRangs = devices.filter((x) => x.send_to === "Rangs").length;

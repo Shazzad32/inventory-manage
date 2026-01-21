@@ -59,6 +59,13 @@ const ReturnForm = ({ defaultItem }) => {
           disabled
         />
         <TextField
+          className="w-2/4"
+          type="text"
+          name="problem"
+          value={item.problem}
+          label="Problem"
+        />
+        <TextField
           select
           className="w-2/4"
           name="send_to"

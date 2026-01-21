@@ -1,64 +1,37 @@
-import { BsThreeDotsVertical } from "react-icons/bs";
+"use client";
+
 import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
-
-import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-} from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import ImportFile from "./ImportFile";
+import { Button } from "@mui/material";
 
-export function StoreDropdownMenue() {
+export function StoreDropdownMenue({ onImportClick }) {
   return (
-    <DropdownMenu className="">
-      <DropdownMenuTrigger asChild>
-        <button className="text-white lg:hidden flex">
-          <PiDotsThreeOutlineVerticalBold />
-        </button>
-      </DropdownMenuTrigger>
+    <DropdownMenu>
+      {/* <DropdownMenuTrigger asChild>jj</DropdownMenuTrigger> */}
+
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Total Store</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href={"/"}>Home</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href={"/store/add"}>Add</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <p>Import Excel</p>
-          <ImportFile className="bg-black text-orange-400" />
+
+        <DropdownMenuItem asChild>
+          <Link href="/">Home</Link>
         </DropdownMenuItem>
 
-        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/store/add">Add</Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem onClick={onImportClick}>
+          Import Excel
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
