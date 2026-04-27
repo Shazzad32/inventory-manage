@@ -1,7 +1,7 @@
 import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import CustomerFormGenerator from "./CustomerFormGenerator";
+// import CustomerFormGenerator from "./CustomerFormGenerator";
 
 const RetailTable = ({ item }) => {
   const formattedDate = item?.sending_date
@@ -86,12 +86,12 @@ const RetailTable = ({ item }) => {
             <FiEdit className="text-black" />
           </Link>
         )}
-        <CustomerFormGenerator
+        {/* <CustomerFormGenerator
           deviceId={item.device_id}
           issueBy={item.issue_by}
           district={item.district}
           installDate={item.install_date}
-        />
+        /> */}
       </div>
     </div>
   );

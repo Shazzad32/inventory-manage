@@ -1,4 +1,4 @@
-import CustomerFormGenerator from "./CustomerFormGenerator";
+// import CustomerFormGenerator from "./CustomerFormGenerator";
 import { PaidPage } from "./PaidPage";
 
 const SoldTable = ({ item }) => {
@@ -61,12 +61,12 @@ const SoldTable = ({ item }) => {
       </div>
 
       <div className="w-[10%] h-full flex justify-center items-center gap-8">
-        <CustomerFormGenerator
+        {/* <CustomerFormGenerator
           deviceId={item.device_id}
           issueBy={item.issue_by}
           district={item.district}
           installDate={item.install_date}
-        />
+        /> */}
       </div>
     </div>
   );

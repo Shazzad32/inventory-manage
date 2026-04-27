@@ -1,4 +1,3 @@
-import axios from "axios";
 import RetailInfo from "@/components/RetailInfo";
 import {
   getRetailDevices,
