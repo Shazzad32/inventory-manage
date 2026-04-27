@@ -9,6 +9,30 @@ const RetailPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      try {
+        const [invRes, gpsRes] = await Promise.all([
+          axios.get("https://retail-api.sultantracker.com/devices/inventory", {
+            headers: {
+              Authorization: "Bearer ####rangs.sultantrack.com!!!!$$###",
+            },
+          }),
+          axios.get("https://gps-api.sultantracker.com/devices", {
+            headers: { Authorization: "Bearer ####gpsplatform.token###" },
+          }),
+        ]);
+
+        setInventory(invRes.data);
+        setGpsDevices(gpsRes.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
       // Inventory থেকে device list আনো
       const invRes = await axios.get(
         "https://retail-api.sultantracker.com/devices/inventory",
