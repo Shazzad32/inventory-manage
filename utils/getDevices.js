@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  timeout: 10000,
+  timeout: 30000,
 });
 
 async function safeGet(url, config = {}) {
@@ -29,13 +29,7 @@ export const getStoreDevices = () =>
   safeGet(`${process.env.URL}/api/devices/store`);
 
 export const getKanaphuliAssignIds = () =>
-  safeGet(
-    "https://retail-api.sultantracker.com/devices/assign-devices-ids",
-    AUTH_HEADER
-  );
+  safeGet(`${process.env.RETAIL_ASSIGN_ID}`, AUTH_HEADER);
 
 export const getTiktikiAssignIds = () =>
-  safeGet(
-    "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
-    AUTH_HEADER
-  );
+  safeGet(`${process.env.TIKTIKI_ASSING_ID}`, AUTH_HEADER);

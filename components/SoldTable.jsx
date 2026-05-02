@@ -60,14 +60,7 @@ const SoldTable = ({ item }) => {
         </p>
       </div>
 
-      <div className="w-[10%] h-full flex justify-center items-center gap-8">
-        {/* <CustomerFormGenerator
-          deviceId={item.device_id}
-          issueBy={item.issue_by}
-          district={item.district}
-          installDate={item.install_date}
-        /> */}
-      </div>
+      <div className="w-[10%] h-full flex justify-center items-center gap-8"></div>
     </div>
   );
 };
