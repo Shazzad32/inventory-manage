@@ -28,6 +28,9 @@ export const getRetailDevices = () =>
 export const getStoreDevices = () =>
   safeGet(`${process.env.URL}/api/devices/store`);
 
+export const getRangsDevices = () =>
+  safeGet(`${process.env.URL}/api/devices/rangs`);
+
 export const getKanaphuliAssignIds = () =>
   safeGet(`${process.env.RETAIL_ASSIGN_ID}`, AUTH_HEADER);
 

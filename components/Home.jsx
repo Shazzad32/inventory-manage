@@ -118,7 +118,6 @@ import RangsCard from "@/components/RangsCard";
 import RetailCard from "@/components/RetailCard";
 import StoreCard from "@/components/StoreCard";
 import Link from "next/link";
-import axios from "axios";
 import {
   getDevices,
   getTiktikiAssignIds,
@@ -192,6 +191,7 @@ export default async function Home() {
   // ]);
 
   // ---------- merge ids ----------
+
   const totalassignIDs = Array.from(
     new Set([...kanaphuliassignIds, ...tiktikiAssingIDs])
   );

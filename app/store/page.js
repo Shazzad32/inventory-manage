@@ -1,12 +1,14 @@
 import axios from "axios";
 export const dynamic = "force-dynamic";
 import StoreInfo from "@/components/StoreInfo";
+import { getDevices } from "@/utils/getDevices";
 
 const Store = async () => {
-  const devices = (await axios.get(`${process.env.URL}/api/devices/store`))
-    .data;
+  const devices = await getDevices();
 
-  return <StoreInfo devices={devices} />;
+  const storeDevices = devices.filter((device) => device.send_to === "Store");
+
+  return <StoreInfo devices={storeDevices} />;
 };
 
 export default Store;

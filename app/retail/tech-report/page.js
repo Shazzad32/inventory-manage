@@ -1,15 +1,17 @@
 import TechInfo from "@/components/TechInfo";
-import axios from "axios";
 import React from "react";
 export const dynamic = "force-dynamic";
+import { getRetailDevices } from "@/utils/getDevices";
 
 const TechnicianReport = async () => {
-  const alldevices = (await axios.get(`${process.env.URL}/api/devices/retail`))
-    .data;
+  // const alldevices = (await axios.get(`${process.env.URL}/api/devices/retail`))
+  //   .data;
+  const devices = await getRetailDevices();
 
-  const devices = alldevices.filter((item) => item.is_complete);
+  const soldDevices = devices.filter((item) => item.is_complete);
+  // const devices = alldevices.filter((item) => item.is_complete);
 
-  return <TechInfo devices={devices} />;
+  return <TechInfo devices={soldDevices} />;
 };
 
 export default TechnicianReport;
