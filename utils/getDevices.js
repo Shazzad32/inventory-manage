@@ -9,10 +9,31 @@ async function safeGet(url, config = {}) {
     const res = await api.get(url, config);
     return res.data;
   } catch (error) {
-    console.error("API Error:", url, error.message);
+    console.error("FULL ERROR:", {
+      url,
+      message: error.message,
+      code: error.code,
+      status: error.response?.status,
+    });
     return [];
   }
 }
+
+// const AUTH_HEADER = {
+//   headers: {
+//     Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+//   },
+// };
+
+// async function safeGet(url, config = {}) {
+//   try {
+//     const res = await api.get(url, config);
+//     return res.data;
+//   } catch (error) {
+//     console.error("API Error:", url, error.message);
+//     return [];
+//   }
+// }
 
 const AUTH_HEADER = {
   headers: {
@@ -35,4 +56,16 @@ export const getKanaphuliAssignIds = () =>
   safeGet(`${process.env.RETAIL_ASSIGN_ID}`, AUTH_HEADER);
 
 export const getTiktikiAssignIds = () =>
-  safeGet(`${process.env.TIKTIKI_ASSING_ID}`, AUTH_HEADER);
+  safeGet(`${process.env.TIKTIKI_ASSIGN_ID}`, AUTH_HEADER);
+
+//   export const getKanaphuliAssignIds = () =>
+//   safeGet(
+//     "https://retail-api.sultantracker.com/devices/assign-devices-ids",
+//     AUTH_HEADER
+//   );
+
+// export const getTiktikiAssignIds = () =>
+//   safeGet(
+//     "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
+//     AUTH_HEADER
+//   );
