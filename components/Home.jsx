@@ -119,12 +119,18 @@ import RetailCard from "@/components/RetailCard";
 import StoreCard from "@/components/StoreCard";
 import Link from "next/link";
 import axios from "axios";
-import { getDevices } from "@/utils/getDevices";
+import {
+  getDevices,
+  getTiktikiAssignIds,
+  getKanaphuliAssignIds,
+} from "@/utils/getDevices";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const devices = await getDevices();
+  const tiktikiAssingIDs = await getTiktikiAssignIds();
+  const kanaphuliassignIds = await getKanaphuliAssignIds();
 
   const totalDevices = devices.length;
 
@@ -167,24 +173,23 @@ export default async function Home() {
     (d) => d.send_to === "Retail" && !d.is_complete
   );
 
-  // ---------- external APIs (parallel) ----------
-  const [kanaphuliassignIds, tiktikiAssingIDs] = await Promise.all([
-    axios
-      .get("https://retail-api.sultantracker.com/devices/assign-devices-ids", {
-        headers: {
-          Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
-        },
-      })
-      .then((res) => res.data),
+  // const [kanaphuliassignIds, tiktikiAssingIDs] = await Promise.all([
+  //   axios
+  //     .get("https://retail-api.sultantracker.com/devices/assign-devices-ids", {
+  //       headers: {
+  //         Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+  //       },
+  //     })
+  //     .then((res) => res.data),
 
-    axios
-      .get("https://tiktiki-api.sultantracker.com/devices/assign-devices-ids", {
-        headers: {
-          Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
-        },
-      })
-      .then((res) => res.data),
-  ]);
+  //   axios
+  //     .get("https://tiktiki-api.sultantracker.com/devices/assign-devices-ids", {
+  //       headers: {
+  //         Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+  //       },
+  //     })
+  //     .then((res) => res.data),
+  // ]);
 
   // ---------- merge ids ----------
   const totalassignIDs = Array.from(
