@@ -15,7 +15,7 @@ const page = async () => {
     cache: "no-store",
   });
 
-  const tiktikiRes = await fetch(process.env.TIKTIKI_ASSING_ID, {
+  const tiktikiRes = await fetch(process.env.TIKTIKI_ASSIGN_ID, {
     headers: {
       Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
     },

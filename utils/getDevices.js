@@ -21,7 +21,7 @@ async function safeGet(url, config = {}) {
 
 // const AUTH_HEADER = {
 //   headers: {
-//     Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+//     Authorization: `BEARER ${process.env.AUTH_TOKEN}`,
 //   },
 // };
 
@@ -52,20 +52,20 @@ export const getStoreDevices = () =>
 export const getRangsDevices = () =>
   safeGet(`${process.env.URL}/api/devices/rangs`);
 
-// export const getKanaphuliAssignIds = () =>
-//   safeGet(`${process.env.RETAIL_ASSIGN_ID}`, AUTH_HEADER);
-
-// export const getTiktikiAssignIds = () =>
-//   safeGet(`${process.env.TIKTIKI_ASSIGN_ID}`, AUTH_HEADER);
-
 export const getKanaphuliAssignIds = () =>
-  safeGet(
-    "https://retail-api.sultantracker.com/devices/assign-devices-ids",
-    AUTH_HEADER
-  );
+  safeGet(`${process.env.RETAIL_ASSIGN_ID}`, AUTH_HEADER);
 
 export const getTiktikiAssignIds = () =>
-  safeGet(
-    "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
-    AUTH_HEADER
-  );
+  safeGet(`${process.env.TIKTIKI_ASSIGN_ID}`, AUTH_HEADER);
+
+// export const getKanaphuliAssignIds = () =>
+//   safeGet(
+//     "https://retail-api.sultantracker.com/devices/assign-devices-ids",
+//     AUTH_HEADER
+//   );
+
+// export const getTiktikiAssignIds = () =>
+//   safeGet(
+//     "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
+//     AUTH_HEADER
+//   );
