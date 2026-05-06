@@ -126,6 +126,8 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
+  console.log("URL:", process.env.NEXT_PUBLIC_URL);
+  console.log("ASSIGN:", process.env.NEXT_PUBLIC_RETAIL_ASSIGN_ID);
   const devices = await getDevices();
   const tiktikiAssingIDs = await getTiktikiAssignIds();
   const kanaphuliassignIds = await getKanaphuliAssignIds();

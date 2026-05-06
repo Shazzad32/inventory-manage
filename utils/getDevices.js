@@ -70,3 +70,14 @@ export const getTiktikiAssignIds = () =>
 //     "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
 //     AUTH_HEADER
 //   );
+
+// # RETAIL_ASSIGN_ID='https://retail-api.sultantracker.com/devices/assign-devices-ids'
+// # TIKTIKI_ASSIGN_ID='https://tiktiki-api.sultantracker.com/devices/assign-devices-ids'
+// # # RETAIL_ASSIGN_ID='https://retail-api.sultantracker.com/devices/assign-devices-ids'
+// # # TIKTIKI_ASSIGN_ID='https://tiktiki-api.sultantracker.com/devices/assign-devices-ids'
+// # URL_TWO = "https://mongo6.sultantracker.com/api/devices/assign-devices-ids"
+// # AUTH_TOKEN='BEARER ####cp-!!!!$$sultantracker.com###'
+// # TRANSACTION_URL = "https://mongo2.sultantracker.com//civil/api/projects/6954de2078252e1ac7c78ea8/transactions/"
+// # PROJECT_ID = "6954de2078252e1ac7c78ea8"
+// # DEVICE_SALE_DEPOSIT_ID = "695531cd78252e4bbcc78fdc"
+// # RETAIL_DEVICES_SALES_ID = "695531ba78252e105cc78fda"

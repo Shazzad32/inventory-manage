@@ -4,7 +4,9 @@ import DeviceRangsForm from "@/components/RangsForm";
 const UpdateRangs = async ({ params }) => {
   const { id } = await params;
 
-  const response = await fetch(`${process.env.URL}/api/rangs/${id}`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/rangs/${id}`
+  );
   const data = await response.json();
 
   console.log(data);

@@ -15,8 +15,12 @@ const UpdateStore = async ({ params }) => {
   // const technicians = await techniciansRes.json();
 
   const [data, technicians] = await Promise.all([
-    fetch(`${process.env.URL}/api/devices/${id}`).then((res) => res.json()),
-    fetch(`${process.env.URL}/api/technician`).then((res) => res.json()),
+    fetch(`${process.env.NEXT_PUBLIC_URL}/api/devices/${id}`).then((res) =>
+      res.json()
+    ),
+    fetch(`${process.env.NEXT_PUBLIC_URL}/api/technician`).then((res) =>
+      res.json()
+    ),
   ]);
 
   console.log(technicians);
