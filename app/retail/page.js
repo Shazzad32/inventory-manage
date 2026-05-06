@@ -9,7 +9,6 @@ export const dynamic = "force-dynamic";
 
 const Retail = async () => {
   const alldevices = await getRetailDevices();
-
   const devices = alldevices.filter((item) => item.is_complete === false);
 
   // const kanaphuliassignIds = (

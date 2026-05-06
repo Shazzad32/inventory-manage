@@ -8,14 +8,14 @@ const page = async () => {
 
   const devices = res.filter((item) => item.is_complete === false);
 
-  const kanaphuliRes = await fetch(process.env.RETAIL_ASSIGN_ID, {
+  const kanaphuliRes = await fetch(process.env.NEXT_PUBLIC_RETAIL_ASSIGN_ID, {
     headers: {
       Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
     },
     cache: "no-store",
   });
 
-  const tiktikiRes = await fetch(process.env.TIKTIKI_ASSIGN_ID, {
+  const tiktikiRes = await fetch(process.env.NEXT_PUBLIC_TIKTIKI_ASSIGN_ID, {
     headers: {
       Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
     },

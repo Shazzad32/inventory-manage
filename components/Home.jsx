@@ -113,7 +113,6 @@
 // }
 
 // uporer code puratai thik ache
-
 import RangsCard from "@/components/RangsCard";
 import RetailCard from "@/components/RetailCard";
 import StoreCard from "@/components/StoreCard";
@@ -130,7 +129,6 @@ export default async function Home() {
   const devices = await getDevices();
   const tiktikiAssingIDs = await getTiktikiAssignIds();
   const kanaphuliassignIds = await getKanaphuliAssignIds();
-
   const totalDevices = devices.length;
 
   const filterBy = (key, value) => devices.filter((d) => d[key] === value);
@@ -199,6 +197,7 @@ export default async function Home() {
   const commonDevices = platformDevice.filter((d) =>
     totalassignIDs.includes(d.device_id)
   );
+
   return (
     <div className="w-full h-full bg-skyblue-500 flex flex-col">
       <div className="h-[10%] w-full bg-gray-500 text-white flex lg:gap-2 gap-2 md:gap:3 items-center lg:px-2 px-2">

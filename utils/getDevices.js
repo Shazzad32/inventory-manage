@@ -41,22 +41,23 @@ const AUTH_HEADER = {
   },
 };
 
-export const getDevices = () => safeGet(`${process.env.URL}/api/devices`);
+export const getDevices = () =>
+  safeGet(`${process.env.NEXT_PUBLIC_URL}/api/devices`);
 
 export const getRetailDevices = () =>
-  safeGet(`${process.env.URL}/api/devices/retail`);
+  safeGet(`${process.env.NEXT_PUBLIC_URL}/api/devices/retail`);
 
 export const getStoreDevices = () =>
-  safeGet(`${process.env.URL}/api/devices/store`);
+  safeGet(`${process.env.NEXT_PUBLIC_URL}/api/devices/store`);
 
 export const getRangsDevices = () =>
-  safeGet(`${process.env.URL}/api/devices/rangs`);
+  safeGet(`${process.env.NEXT_PUBLIC_URL}/api/devices/rangs`);
 
 export const getKanaphuliAssignIds = () =>
-  safeGet(`${process.env.RETAIL_ASSIGN_ID}`, AUTH_HEADER);
+  safeGet(`${process.env.NEXT_PUBLIC_RETAIL_ASSIGN_ID}`, AUTH_HEADER);
 
 export const getTiktikiAssignIds = () =>
-  safeGet(`${process.env.TIKTIKI_ASSIGN_ID}`, AUTH_HEADER);
+  safeGet(`${process.env.NEXT_PUBLIC_TIKTIKI_ASSIGN_ID}`, AUTH_HEADER);
 
 // export const getKanaphuliAssignIds = () =>
 //   safeGet(
