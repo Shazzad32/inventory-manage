@@ -1,5 +1,3 @@
-import axios from "axios";
-export const dynamic = "force-dynamic";
 import StoreInfo from "@/components/StoreInfo";
 import { getDevices } from "@/utils/getDevices";
 

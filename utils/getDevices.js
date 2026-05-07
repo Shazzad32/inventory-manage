@@ -19,45 +19,37 @@ async function safeGet(url, config = {}) {
   }
 }
 
-// const AUTH_HEADER = {
-//   headers: {
-//     Authorization: `BEARER ${process.env.AUTH_TOKEN}`,
-//   },
-// };
-
-// async function safeGet(url, config = {}) {
-//   try {
-//     const res = await api.get(url, config);
-//     return res.data;
-//   } catch (error) {
-//     console.error("API Error:", url, error.message);
-//     return [];
-//   }
-// }
-
 const AUTH_HEADER = {
   headers: {
     Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
   },
 };
 
-export const getDevices = () =>
-  safeGet(`${process.env.NEXT_PUBLIC_URL}/api/devices`);
+export const getDevices = () => safeGet(`${process.env.URL}/api/devices`);
+
+export const getSingleDevice = (id) =>
+  safeGet(`${process.env.URL}/api/devices/${id}`);
+
+export const getTechnicians = () =>
+  safeGet(`${process.env.URL}/api/technician`);
 
 export const getRetailDevices = () =>
-  safeGet(`${process.env.NEXT_PUBLIC_URL}/api/devices/retail`);
+  safeGet(`${process.env.URL}/api/devices/retail`);
 
 export const getStoreDevices = () =>
-  safeGet(`${process.env.NEXT_PUBLIC_URL}/api/devices/store`);
+  safeGet(`${process.env.URL}/api/devices/store`);
 
 export const getRangsDevices = () =>
-  safeGet(`${process.env.NEXT_PUBLIC_URL}/api/devices/rangs`);
+  safeGet(`${process.env.URL}/api/devices/rangs`);
+
+export const getReturnDevices = () =>
+  safeGet(`${process.env.URL}/api/devices/return`);
 
 export const getKanaphuliAssignIds = () =>
-  safeGet(`${process.env.NEXT_PUBLIC_RETAIL_ASSIGN_ID}`, AUTH_HEADER);
+  safeGet(`${process.env.RETAIL_ASSIGN_ID}`, AUTH_HEADER);
 
 export const getTiktikiAssignIds = () =>
-  safeGet(`${process.env.NEXT_PUBLIC_TIKTIKI_ASSIGN_ID}`, AUTH_HEADER);
+  safeGet(`${process.env.TIKTIKI_ASSIGN_ID}`, AUTH_HEADER);
 
 // export const getKanaphuliAssignIds = () =>
 //   safeGet(

@@ -1,10 +1,16 @@
 import React from "react";
 import StoreForm from "@/components/StoreForm";
+import { getSingleDevice, getTechnicians } from "@/utils/getDevices";
 
 const UpdateStore = async ({ params }) => {
   const { id } = await params;
 
-  console.log(id);
+  const [data, technicians] = await Promise.all([
+    getSingleDevice(id),
+    getTechnicians(),
+  ]);
+
+  // console.log(id);
   // const response = await fetch(`${process.env.URL}/api/devices/${id}`);
   // const data = await response.json();
 
@@ -14,21 +20,14 @@ const UpdateStore = async ({ params }) => {
 
   // const technicians = await techniciansRes.json();
 
-  const [data, technicians] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_URL}/api/devices/${id}`).then((res) =>
-      res.json()
-    ),
-    fetch(`${process.env.NEXT_PUBLIC_URL}/api/technician`).then((res) =>
-      res.json()
-    ),
-  ]);
-
-  console.log(technicians);
-
-  // const data = await response.json();
-
-  // console.log(data);
-  // const technicians = await techniciansRes.json();
+  // const [data, technicians] = await Promise.all([
+  //   fetch(`${process.env.NEXT_PUBLIC_URL}/api/devices/${id}`).then((res) =>
+  //     res.json()
+  //   ),
+  //   fetch(`${process.env.NEXT_PUBLIC_URL}/api/technician`).then((res) =>
+  //     res.json()
+  //   ),
+  // ]);
 
   return (
     <div className="w-full flex flex-col items-center justify-center sm:w-full ">

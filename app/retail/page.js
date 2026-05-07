@@ -5,10 +5,13 @@ import {
   getTiktikiAssignIds,
 } from "@/utils/getDevices";
 
-export const dynamic = "force-dynamic";
-
 const Retail = async () => {
-  const alldevices = await getRetailDevices();
+  const [alldevices, kanaphuliassignIds, tiktikiAssingIDs] = await Promise.all([
+    getRetailDevices(),
+    getKanaphuliAssignIds(),
+    getTiktikiAssignIds(),
+  ]);
+
   const devices = alldevices.filter((item) => item.is_complete === false);
 
   // const kanaphuliassignIds = (
@@ -31,9 +34,6 @@ const Retail = async () => {
   //     }
   //   )
   // ).data;
-
-  const kanaphuliassignIds = await getKanaphuliAssignIds();
-  const tiktikiAssingIDs = await getTiktikiAssignIds();
 
   const totalassignIDs = [
     ...new Set([...kanaphuliassignIds, ...tiktikiAssingIDs]),

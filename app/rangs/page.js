@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import RangsInfo from "@/components/RangsInfo";
 import { getRangsDevices } from "@/utils/getDevices";
 

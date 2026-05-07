@@ -1,13 +1,9 @@
-import axios from "axios";
 import ReturnInfo from "@/components/ReturnInfo";
-
-export const dynamic = "force-dynamic";
+import { getReturnDevices } from "@/utils/getDevices";
 
 const Return = async () => {
-  const alldevices = (await axios.get(`${process.env.URL}/api/devices/return`))
-    .data;
-
-  return <ReturnInfo devices={alldevices} />;
+  const returnDevice = await getReturnDevices();
+  return <ReturnInfo devices={returnDevice} />;
 };
 
 export default Return;
