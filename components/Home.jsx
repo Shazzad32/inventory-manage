@@ -114,6 +114,143 @@
 
 // uporer code puratai thik ache
 
+// import RangsCard from "@/components/RangsCard";
+// import RetailCard from "@/components/RetailCard";
+// import StoreCard from "@/components/StoreCard";
+// import Link from "next/link";
+// import {
+//   getDevices,
+//   getTiktikiAssignIds,
+//   getKanaphuliAssignIds,
+// } from "@/utils/getDevices";
+
+// export const dynamic = "force-dynamic";
+
+// export default async function Home() {
+//   const devices = await getDevices();
+//   const tiktikiAssingIDs = await getTiktikiAssignIds();
+//   const kanaphuliassignIds = await getKanaphuliAssignIds();
+//   const totalDevices = devices.length;
+
+//   const filterBy = (key, value) => devices.filter((d) => d[key] === value);
+
+//   const filterByTwo = (key1, val1, key2, val2) =>
+//     devices.filter((d) => d[key1] === val1 && d[key2] === val2);
+
+//   const totalInRetail = filterBy("send_to", "Retail");
+//   const totalInRangs = filterBy("send_to", "Rangs").length;
+//   const totalInStock = filterBy("send_to", "Store").length;
+
+//   const voiceDeviceInStock = filterByTwo(
+//     "send_to",
+//     "Store",
+//     "device_type",
+//     "Voice"
+//   ).length;
+//   const nonVoiceDeviceInStock = filterByTwo(
+//     "send_to",
+//     "Store",
+//     "device_type",
+//     "Non_Voice"
+//   ).length;
+
+//   const voiceDeviceInRangs = filterByTwo(
+//     "send_to",
+//     "Rangs",
+//     "device_type",
+//     "Voice"
+//   ).length;
+//   const nonVoiceDeviceInRangs = filterByTwo(
+//     "send_to",
+//     "Rangs",
+//     "device_type",
+//     "Non_Voice"
+//   ).length;
+
+//   const platformDevice = devices.filter(
+//     (d) => d.send_to === "Retail" && !d.is_complete
+//   );
+
+//   // const [kanaphuliassignIds, tiktikiAssingIDs] = await Promise.all([
+//   //   axios
+//   //     .get("https://retail-api.sultantracker.com/devices/assign-devices-ids", {
+//   //       headers: {
+//   //         Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+//   //       },
+//   //     })
+//   //     .then((res) => res.data),
+
+//   //   axios
+//   //     .get("https://tiktiki-api.sultantracker.com/devices/assign-devices-ids", {
+//   //       headers: {
+//   //         Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
+//   //       },
+//   //     })
+//   //     .then((res) => res.data),
+//   // ]);
+
+//   // ---------- merge ids ----------
+
+//   const totalassignIDs = Array.from(
+//     new Set([...kanaphuliassignIds, ...tiktikiAssingIDs])
+//   );
+
+//   const commonDevices = platformDevice.filter((d) =>
+//     totalassignIDs.includes(d.device_id)
+//   );
+
+//   return (
+//     <div className="w-full h-full bg-skyblue-500 flex flex-col">
+//       <div className="h-[10%] w-full bg-gray-500 text-white flex lg:gap-2 gap-2 md:gap:3 items-center lg:px-2 px-2">
+//         <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
+//           <Link href={"/store"}> STORE</Link>
+//         </button>
+//         <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
+//           <Link href={"/rangs"}> RANGS</Link>
+//         </button>
+//         <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
+//           <Link href={"/retail"}>RETAIL</Link>
+//         </button>
+
+//         <div className="flex gap-3 text-white uppercase float-end">
+//           <p className="hidden lg:flex lg:items-center lg:justify-center">
+//             Total Device
+//           </p>
+//           <p className="font-bold rounded-md text-white border border-white lg:px-2 lg:py-1">
+//             {totalDevices}
+//           </p>
+//         </div>
+//       </div>
+
+//       <div className="lg:h-[99%] h-[95%] w-full bg-gray-400 flex flex-col gap-4 md:flex-row lg:flex items-center justify-center">
+//         <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold uppercase">
+//           Total In Store
+//           <StoreCard
+//             totalDevices={totalInStock}
+//             voiceDevices={voiceDeviceInStock}
+//             nonVoiceDevices={nonVoiceDeviceInStock}
+//           />
+//         </div>
+//         <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold uppercase">
+//           Retail Information
+//           <RetailCard
+//             totalInRetail={totalInRetail}
+//             commonDevice={commonDevices}
+//           />
+//         </div>
+
+//         <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center uppercase p-2 font-bold">
+//           Rangs Information
+//           <RangsCard
+//             totalInRangs={totalInRangs}
+//             voiceInRangs={voiceDeviceInRangs}
+//             nonVoiceInRangs={nonVoiceDeviceInRangs}
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 import RangsCard from "@/components/RangsCard";
 import RetailCard from "@/components/RetailCard";
 import StoreCard from "@/components/StoreCard";
@@ -127,103 +264,87 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const devices = await getDevices();
-  const tiktikiAssingIDs = await getTiktikiAssignIds();
-  const kanaphuliassignIds = await getKanaphuliAssignIds();
+  // ⚡ Parallel API calls (IMPORTANT)
+  const [devices, tiktikiAssingIDs, kanaphuliassignIds] = await Promise.all([
+    getDevices(),
+    getTiktikiAssignIds(),
+    getKanaphuliAssignIds(),
+  ]);
+
   const totalDevices = devices.length;
 
-  const filterBy = (key, value) => devices.filter((d) => d[key] === value);
+  // ⚡ single-pass calculation (FAST)
+  let totalInRetail = [];
+  let totalInRangs = 0;
+  let totalInStock = 0;
 
-  const filterByTwo = (key1, val1, key2, val2) =>
-    devices.filter((d) => d[key1] === val1 && d[key2] === val2);
+  let voiceDeviceInStock = 0;
+  let nonVoiceDeviceInStock = 0;
 
-  const totalInRetail = filterBy("send_to", "Retail");
-  const totalInRangs = filterBy("send_to", "Rangs").length;
-  const totalInStock = filterBy("send_to", "Store").length;
+  let voiceDeviceInRangs = 0;
+  let nonVoiceDeviceInRangs = 0;
 
-  const voiceDeviceInStock = filterByTwo(
-    "send_to",
-    "Store",
-    "device_type",
-    "Voice"
-  ).length;
-  const nonVoiceDeviceInStock = filterByTwo(
-    "send_to",
-    "Store",
-    "device_type",
-    "Non_Voice"
-  ).length;
+  let platformDevice = [];
 
-  const voiceDeviceInRangs = filterByTwo(
-    "send_to",
-    "Rangs",
-    "device_type",
-    "Voice"
-  ).length;
-  const nonVoiceDeviceInRangs = filterByTwo(
-    "send_to",
-    "Rangs",
-    "device_type",
-    "Non_Voice"
-  ).length;
+  for (const d of devices) {
+    if (d.send_to === "Retail") {
+      totalInRetail.push(d);
 
-  const platformDevice = devices.filter(
-    (d) => d.send_to === "Retail" && !d.is_complete
-  );
+      if (!d.is_complete) {
+        platformDevice.push(d);
+      }
+    }
 
-  // const [kanaphuliassignIds, tiktikiAssingIDs] = await Promise.all([
-  //   axios
-  //     .get("https://retail-api.sultantracker.com/devices/assign-devices-ids", {
-  //       headers: {
-  //         Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
-  //       },
-  //     })
-  //     .then((res) => res.data),
+    if (d.send_to === "Rangs") {
+      totalInRangs++;
 
-  //   axios
-  //     .get("https://tiktiki-api.sultantracker.com/devices/assign-devices-ids", {
-  //       headers: {
-  //         Authorization: "BEARER ####cp-!!!!$$sultantracker.com###",
-  //       },
-  //     })
-  //     .then((res) => res.data),
-  // ]);
+      if (d.device_type === "Voice") voiceDeviceInRangs++;
+      if (d.device_type === "Non_Voice") nonVoiceDeviceInRangs++;
+    }
 
-  // ---------- merge ids ----------
+    if (d.send_to === "Store") {
+      totalInStock++;
 
-  const totalassignIDs = Array.from(
-    new Set([...kanaphuliassignIds, ...tiktikiAssingIDs])
-  );
+      if (d.device_type === "Voice") voiceDeviceInStock++;
+      if (d.device_type === "Non_Voice") nonVoiceDeviceInStock++;
+    }
+  }
+
+  // ⚡ merge + dedupe IDs
+  const totalassignIDs = new Set([...kanaphuliassignIds, ...tiktikiAssingIDs]);
 
   const commonDevices = platformDevice.filter((d) =>
-    totalassignIDs.includes(d.device_id)
+    totalassignIDs.has(d.device_id)
   );
 
   return (
     <div className="w-full h-full bg-skyblue-500 flex flex-col">
-      <div className="h-[10%] w-full bg-gray-500 text-white flex lg:gap-2 gap-2 md:gap:3 items-center lg:px-2 px-2">
-        <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
-          <Link href={"/store"}> STORE</Link>
-        </button>
-        <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
-          <Link href={"/rangs"}> RANGS</Link>
-        </button>
-        <button className="px-2 py-1 rounded-md flex items-center justify-center  text-white border border-white text-sm">
-          <Link href={"/retail"}>RETAIL</Link>
+      {/* HEADER */}
+      <div className="h-[10%] w-full bg-gray-500 text-white flex gap-2 items-center px-2">
+        <button className="px-2 py-1 rounded-md border border-white text-sm">
+          <Link href="/store">STORE</Link>
         </button>
 
-        <div className="flex gap-3 text-white uppercase float-end">
-          <p className="hidden lg:flex lg:items-center lg:justify-center">
-            Total Device
-          </p>
-          <p className="font-bold rounded-md text-white border border-white lg:px-2 lg:py-1">
+        <button className="px-2 py-1 rounded-md border border-white text-sm">
+          <Link href="/rangs">RANGS</Link>
+        </button>
+
+        <button className="px-2 py-1 rounded-md border border-white text-sm">
+          <Link href="/retail">RETAIL</Link>
+        </button>
+
+        <div className="flex gap-3 text-white uppercase ml-auto">
+          <p className="hidden lg:flex items-center">Total Device</p>
+          <p className="font-bold rounded-md border border-white px-2 py-1">
             {totalDevices}
           </p>
         </div>
       </div>
 
+      {/* BODY */}
       <div className="lg:h-[99%] h-[95%] w-full bg-gray-400 flex flex-col gap-4 md:flex-row lg:flex items-center justify-center">
-        <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold uppercase">
+        {/* STORE */}
+        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%] bg-white rounded-md p-2 font-bold uppercase text-center">
           Total In Store
           <StoreCard
             totalDevices={totalInStock}
@@ -231,7 +352,9 @@ export default async function Home() {
             nonVoiceDevices={nonVoiceDeviceInStock}
           />
         </div>
-        <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center p-2 font-bold uppercase">
+
+        {/* RETAIL */}
+        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%] bg-white rounded-md p-2 font-bold uppercase text-center">
           Retail Information
           <RetailCard
             totalInRetail={totalInRetail}
@@ -239,7 +362,8 @@ export default async function Home() {
           />
         </div>
 
-        <div className="w-[95%] h-[30%] lg:w-[32%] rounded-md lg:h-[95%] bg-white text-center uppercase p-2 font-bold">
+        {/* RANGS */}
+        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%] bg-white rounded-md p-2 font-bold uppercase text-center">
           Rangs Information
           <RangsCard
             totalInRangs={totalInRangs}
