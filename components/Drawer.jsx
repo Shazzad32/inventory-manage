@@ -12,8 +12,8 @@ import LogoutButton from "./LogoutButton";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Store", href: "/store" },
-  { name: "Rangs", href: "/rangs" },
   { name: "Retail", href: "/retail" },
+  { name: "Rangs", href: "/rangs" },
   { name: "Return", href: "/return" },
 ];
 
