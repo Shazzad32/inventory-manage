@@ -1,4 +1,8 @@
 "use client";
+
+import Link from "next/link";
+import { FiEdit } from "react-icons/fi";
+
 const NotPaidTable = ({ item, assignDevice }) => {
   const formate_sending_date = item?.sending_date
     ? new Date(item.sending_date)
@@ -16,7 +20,7 @@ const NotPaidTable = ({ item, assignDevice }) => {
       <p>{formate_sending_date}</p>
       {/* <p className="flex float-right mt-[-150px] relative top-0">
         {item?._id && (
-          <Link href={`/retail/${item._id}/update`}>
+          <Link href={`/not-paid-list/${item._id}/update`}>
             <FiEdit className="text-black" />
           </Link>
         )}

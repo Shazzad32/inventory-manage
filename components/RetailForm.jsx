@@ -17,7 +17,12 @@ import dayjs from "dayjs";
 import TechName from "./TechnicianName";
 import DistrictName from "./DistrictName";
 
-const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
+const RetailForm = ({
+  defaultItem,
+  isUpdate,
+  technicians,
+  // redirectPath = "/retail",
+}) => {
   const router = useRouter();
 
   const [item, setItem] = useState({
@@ -57,6 +62,7 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
     if (res.ok) {
       router.refresh();
       router.push("/retail");
+      // router.push(redirectPath);
     } else {
       const responseData = await res.json();
       if (
@@ -86,6 +92,7 @@ const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
     }
 
     router.push("/retail");
+    // router.push(redirectPath);
   };
 
   const handleChange = (event) => {
