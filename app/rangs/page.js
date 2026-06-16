@@ -1,14 +1,12 @@
 export const dynamic = "force-dynamic";
 import RangsInfo from "@/components/RangsInfo";
-import { getRangsDevices } from "@/utils/getDevices";
+import { getDevices } from "@/utils/getDevices";
 
 const Retail = async () => {
-  // const devices = (await axios.get(`${process.env.URL}/api/devices/rangs`))
-  //   .data;
+  const devices = await getDevices();
+  const rangsDevices = devices.filter((device) => device.send_to === "Rangs");
 
-  const devices = await getRangsDevices();
-
-  return <RangsInfo devices={devices} />;
+  return <RangsInfo devices={rangsDevices} />;
 };
 
 export default Retail;

@@ -85,7 +85,7 @@ const RetailCard = ({ totalInRetail, commonDevice }) => {
     <div className="h-[85%] lg:h-[95%] w-full flex flex-col gap-4 items-center justify-center ">
       <Link
         href={"/retail"}
-        className="w-[95%] h-[70%] bg-gray-500 rounded-md lg:flex flex-col hidden justify-center items-center text-left gap-2 p-4 "
+        className="w-[95%] h-[70%] bg-gray-500 text-white rounded-md lg:flex flex-col hidden justify-center items-center text-left gap-2 p-4 "
       >
         <div className="h-[40%] text-white w-full flex flex-col justify-center items-center rounded-md">
           <p>
@@ -114,7 +114,7 @@ const RetailCard = ({ totalInRetail, commonDevice }) => {
             In Hand <strong className="text-white text-6xl">{inHand}</strong>
           </p>
           <p>
-            Due{" "}
+            Due
             <strong className="text-white text-6xl">
               {commonDevice.length}
             </strong>
@@ -122,7 +122,7 @@ const RetailCard = ({ totalInRetail, commonDevice }) => {
         </div>
       </Link>
 
-      <div className="w-[95%] h-[33%] bg-gray-500 rounded-md hidden flex-col lg:flex items-center justify-center gap-1">
+      <div className="w-[95%] h-[33%] bg-gradient-to-br bg-gray-500 rounded-md hidden flex-col lg:flex items-center justify-center gap-1">
         <div className="p-1 text-white rounded-md flex items-center h-[20%] w-[95%] justify-around">
           <p>
             Sold Device
@@ -183,29 +183,6 @@ const RetailCard = ({ totalInRetail, commonDevice }) => {
           </div>
         </div>
       </div>
-
-      {/* <div className="w-[95%] h-[33%] bg-gray-500 rounded-md hidden lg:flex flex-col text-left p-4">
-        <div className="flex justify-between">
-          <p className="text-left text-white">Daily Report</p>
-          <input
-            type="date"
-            name="selectedDate"
-            value={selectedDate}
-            onChange={handleDateChange}
-            className="bg-white p-1 rounded-md"
-          />
-        </div>
-        <div className="flex gap-4">
-          <p className="text-sm bg-white w-[50%] px-2 py-2 mt-2 rounded-md">
-            Today Sell:
-            <span className="text-red-700 ml-2">{totalCompleteDevices}</span>
-          </p>
-          <p className="text-sm bg-white w-[50%] px-2 py-2 mt-2 rounded-md">
-            Amount:
-            <span className="text-red-600 ml-2">{totalDevicePrice}</span>
-          </p>
-        </div>
-      </div> */}
 
       <RetailMobile
         unSoldDevice={unSoldDevice}

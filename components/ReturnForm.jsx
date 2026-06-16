@@ -62,8 +62,9 @@ const ReturnForm = ({ defaultItem }) => {
           className="w-2/4"
           type="text"
           name="problem"
-          value={item.problem}
+          value={item.problem || ""}
           label="Problem"
+          onChange={handleChange}
         />
         <TextField
           select

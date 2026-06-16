@@ -33,17 +33,8 @@ export const getSingleDevice = (id) =>
 export const getTechnicians = () =>
   safeGet(`${process.env.URL}/api/technician`);
 
-export const getRetailDevices = () =>
-  safeGet(`${process.env.URL}/api/devices/retail`);
-
-export const getStoreDevices = () =>
-  safeGet(`${process.env.URL}/api/devices/store`);
-
-export const getRangsDevices = () =>
-  safeGet(`${process.env.URL}/api/devices/rangs`);
-
-export const getReturnDevices = () =>
-  safeGet(`${process.env.URL}/api/devices/return`);
+// export const getRetailDevices = () =>
+//   safeGet(`${process.env.URL}/api/devices/retail`);
 
 export const getKanaphuliAssignIds = () =>
   safeGet(`${process.env.RETAIL_ASSIGN_ID}`, AUTH_HEADER);
@@ -62,14 +53,3 @@ export const getTiktikiAssignIds = () =>
 //     "https://tiktiki-api.sultantracker.com/devices/assign-devices-ids",
 //     AUTH_HEADER
 //   );
-
-// # RETAIL_ASSIGN_ID='https://retail-api.sultantracker.com/devices/assign-devices-ids'
-// # TIKTIKI_ASSIGN_ID='https://tiktiki-api.sultantracker.com/devices/assign-devices-ids'
-// # # RETAIL_ASSIGN_ID='https://retail-api.sultantracker.com/devices/assign-devices-ids'
-// # # TIKTIKI_ASSIGN_ID='https://tiktiki-api.sultantracker.com/devices/assign-devices-ids'
-// # URL_TWO = "https://mongo6.sultantracker.com/api/devices/assign-devices-ids"
-// # AUTH_TOKEN='BEARER ####cp-!!!!$$sultantracker.com###'
-// # TRANSACTION_URL = "https://mongo2.sultantracker.com//civil/api/projects/6954de2078252e1ac7c78ea8/transactions/"
-// # PROJECT_ID = "6954de2078252e1ac7c78ea8"
-// # DEVICE_SALE_DEPOSIT_ID = "695531cd78252e4bbcc78fdc"
-// # RETAIL_DEVICES_SALES_ID = "695531ba78252e105cc78fda"

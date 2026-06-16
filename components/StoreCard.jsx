@@ -34,3 +34,55 @@ const StoreCard = ({ totalDevices, voiceDevices, nonVoiceDevices }) => {
 };
 
 export default StoreCard;
+// "use client";
+
+// import Link from "next/link";
+// import React from "react";
+// import StoreMobile from "./mobile_device/StoreMobile";
+
+// const Box = ({ title, value, href }) => {
+//   const content = (
+//     <div className="w-full min-h-[170px] rounded-3xl bg-gradient-to-br from-[#fff7ed] via-[#fef3c7] to-[#ecfeff] shadow-md hover:shadow-xl duration-300 flex flex-col items-center justify-center border border-amber-100/60 relative overflow-hidden">
+//       {/* soft premium glow */}
+//       <div className="absolute -top-10 -right-10 w-44 h-44 bg-amber-200/40 rounded-full blur-3xl"></div>
+//       <div className="absolute -bottom-10 -left-10 w-44 h-44 bg-cyan-200/40 rounded-full blur-3xl"></div>
+
+//       {/* subtle top highlight */}
+//       <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-300/40 to-transparent"></div>
+
+//       <p className="text-sm lg:text-base font-semibold uppercase tracking-[3px] text-slate-500 z-10">
+//         {title}
+//       </p>
+
+//       <h1 className="text-5xl lg:text-6xl font-extrabold mt-3 text-slate-800 z-10">
+//         {value}
+//       </h1>
+//     </div>
+//   );
+
+//   if (href) {
+//     return <Link href={href}>{content}</Link>;
+//   }
+
+//   return content;
+// };
+
+// const StoreCard = ({ totalDevices, voiceDevices, nonVoiceDevices }) => {
+//   return (
+//     <>
+//       <div className="hidden lg:flex flex-col gap-5 w-full">
+//         <Box title="Total" value={totalDevices} href="/store" />
+//         <Box title="Non Voice" value={nonVoiceDevices} />
+//         <Box title="Voice" value={voiceDevices} />
+//       </div>
+
+//       <StoreMobile
+//         totalDevices={totalDevices}
+//         voiceDevices={voiceDevices}
+//         nonVoiceDevices={nonVoiceDevices}
+//       />
+//     </>
+//   );
+// };
+
+// export default StoreCard;

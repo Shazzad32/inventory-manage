@@ -8,9 +8,9 @@ const headers = [
   "Device_id",
   "Model",
   "Type",
-  "Problem",
   "Issue_By",
   "District",
+  "Problem",
 ];
 
 const ReturnInfo = ({ devices }) => {

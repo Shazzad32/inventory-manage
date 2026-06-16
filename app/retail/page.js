@@ -1,19 +1,22 @@
 export const dynamic = "force-dynamic";
 import RetailInfo from "@/components/RetailInfo";
+
 import {
-  getRetailDevices,
+  getDevices,
   getKanaphuliAssignIds,
   getTiktikiAssignIds,
 } from "@/utils/getDevices";
 
 const Retail = async () => {
-  const [alldevices, kanaphuliassignIds, tiktikiAssingIDs] = await Promise.all([
-    getRetailDevices(),
+  const [alldevices, kanaphuliassignIds, tiktikiAssignIDs] = await Promise.all([
+    getDevices(),
     getKanaphuliAssignIds(),
     getTiktikiAssignIds(),
   ]);
 
-  const devices = alldevices.filter((item) => item.is_complete === false);
+  const devices = alldevices.filter(
+    (item) => (item.send_to === "Retail") & (item.is_complete === false)
+  );
 
   // const kanaphuliassignIds = (
   //   await axios.get(
@@ -37,7 +40,7 @@ const Retail = async () => {
   // ).data;
 
   const totalassignIDs = [
-    ...new Set([...kanaphuliassignIds, ...tiktikiAssingIDs]),
+    ...new Set([...kanaphuliassignIds, ...tiktikiAssignIDs]),
   ];
 
   return <RetailInfo devices={devices} totalassignIDs={totalassignIDs} />;

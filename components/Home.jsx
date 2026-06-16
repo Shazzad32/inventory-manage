@@ -342,9 +342,9 @@ export default async function Home() {
       </div>
 
       {/* BODY */}
-      <div className="lg:h-[99%] h-[95%] w-full bg-gray-400 flex flex-col gap-4 md:flex-row lg:flex items-center justify-center">
+      <div className="lg:h-[99%] h-[95%] w-full bg-gray-200 flex flex-col gap-4 md:flex-row lg:flex items-center justify-center">
         {/* STORE */}
-        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%] bg-white rounded-md p-2 font-bold uppercase text-center">
+        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%] rounded-md p-2 font-bold uppercase text-center">
           Total In Store
           <StoreCard
             totalDevices={totalInStock}
@@ -354,7 +354,7 @@ export default async function Home() {
         </div>
 
         {/* RETAIL */}
-        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%] bg-white rounded-md p-2 font-bold uppercase text-center">
+        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%]  rounded-md p-2 font-bold uppercase text-center">
           Retail Information
           <RetailCard
             totalInRetail={totalInRetail}
@@ -363,7 +363,7 @@ export default async function Home() {
         </div>
 
         {/* RANGS */}
-        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%] bg-white rounded-md p-2 font-bold uppercase text-center">
+        <div className="w-[95%] lg:w-[32%] h-[30%] lg:h-[95%]  rounded-md p-2 font-bold uppercase text-center">
           Rangs Information
           <RangsCard
             totalInRangs={totalInRangs}
@@ -375,3 +375,171 @@ export default async function Home() {
     </div>
   );
 }
+
+// import RangsCard from "@/components/RangsCard";
+// import RetailCard from "@/components/RetailCard";
+// import StoreCard from "@/components/StoreCard";
+// import Link from "next/link";
+// import {
+//   getDevices,
+//   getTiktikiAssignIds,
+//   getKanaphuliAssignIds,
+// } from "@/utils/getDevices";
+
+// export const dynamic = "force-dynamic";
+
+// export default async function Home() {
+//   const [devices, tiktikiAssingIDs, kanaphuliassignIds] = await Promise.all([
+//     getDevices(),
+//     getTiktikiAssignIds(),
+//     getKanaphuliAssignIds(),
+//   ]);
+
+//   const totalDevices = devices.length;
+
+//   let totalInRetail = [];
+//   let totalInRangs = 0;
+//   let totalInStock = 0;
+
+//   let voiceDeviceInStock = 0;
+//   let nonVoiceDeviceInStock = 0;
+
+//   let voiceDeviceInRangs = 0;
+//   let nonVoiceDeviceInRangs = 0;
+
+//   let platformDevice = [];
+
+//   for (const d of devices) {
+//     if (d.send_to === "Retail") {
+//       totalInRetail.push(d);
+
+//       if (!d.is_complete) {
+//         platformDevice.push(d);
+//       }
+//     }
+
+//     if (d.send_to === "Rangs") {
+//       totalInRangs++;
+
+//       if (d.device_type === "Voice") voiceDeviceInRangs++;
+//       if (d.device_type === "Non_Voice") nonVoiceDeviceInRangs++;
+//     }
+
+//     if (d.send_to === "Store") {
+//       totalInStock++;
+
+//       if (d.device_type === "Voice") voiceDeviceInStock++;
+//       if (d.device_type === "Non_Voice") nonVoiceDeviceInStock++;
+//     }
+//   }
+
+//   const totalassignIDs = new Set([...kanaphuliassignIds, ...tiktikiAssingIDs]);
+
+//   const commonDevices = platformDevice.filter((d) =>
+//     totalassignIDs.has(d.device_id)
+//   );
+
+//   return (
+//     <div className="min-h-screen w-full bg-[#eef2f7]">
+//       {/* TOP HEADER */}
+//       <div className="w-full bg-gradient-to-r from-[#071c3f] via-[#0b2d63] to-[#071c3f] shadow-lg">
+//         <div className="h-[80px] flex items-center justify-between px-4 lg:px-8">
+//           <h1 className="text-white text-xl lg:text-3xl font-bold tracking-wide uppercase">
+//             Inventory Management
+//           </h1>
+
+//           <div className="flex items-center gap-3">
+//             <div className="hidden md:flex items-center gap-2 text-white">
+//               <span className="text-sm uppercase tracking-wider">
+//                 Total Device
+//               </span>
+
+//               <div className="bg-white/10 border border-white/20 px-4 py-2 rounded-xl font-bold text-lg backdrop-blur-md">
+//                 {totalDevices}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* NAVIGATION */}
+//         <div className="flex flex-wrap items-center gap-3 px-4 lg:px-8 pb-5">
+//           <Link
+//             href="/store"
+//             className="px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold shadow-md hover:scale-105 duration-300"
+//           >
+//             STORE
+//           </Link>
+
+//           <Link
+//             href="/rangs"
+//             className="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-semibold shadow-md hover:scale-105 duration-300"
+//           >
+//             RANGS
+//           </Link>
+
+//           <Link
+//             href="/retail"
+//             className="px-5 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-500 text-white font-semibold shadow-md hover:scale-105 duration-300"
+//           >
+//             RETAIL
+//           </Link>
+//         </div>
+//       </div>
+
+//       {/* MAIN CONTENT */}
+//       <div className="w-full p-4 lg:p-6">
+//         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+//           {/* STORE */}
+//           <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+//             <div className="p-5 border-b bg-gradient-to-r from-blue-50 to-white">
+//               <h2 className="text-center text-2xl font-bold text-blue-700 uppercase tracking-wide">
+//                 Total In Store
+//               </h2>
+//             </div>
+
+//             <div className="p-4">
+//               <StoreCard
+//                 totalDevices={totalInStock}
+//                 voiceDevices={voiceDeviceInStock}
+//                 nonVoiceDevices={nonVoiceDeviceInStock}
+//               />
+//             </div>
+//           </div>
+
+//           {/* RETAIL */}
+//           <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+//             <div className="p-5 border-b bg-gradient-to-r from-violet-50 to-white">
+//               <h2 className="text-center text-2xl font-bold text-violet-700 uppercase tracking-wide">
+//                 Retail Information
+//               </h2>
+//             </div>
+
+//             <div className="p-4">
+//               <RetailCard
+//                 totalInRetail={totalInRetail}
+//                 commonDevice={commonDevices}
+//               />
+//             </div>
+//           </div>
+
+//           {/* RANGS */}
+//           <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+//             <div className="p-5 border-b bg-gradient-to-r from-emerald-50 to-white">
+//               <h2 className="text-center text-2xl font-bold text-emerald-700 uppercase tracking-wide">
+//                 Rangs Information
+//               </h2>
+//             </div>
+
+//             <div className="p-4">
+//               <RangsCard
+//                 totalInRangs={totalInRangs}
+//                 voiceInRangs={voiceDeviceInRangs}
+//                 nonVoiceInRangs={nonVoiceDeviceInRangs}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
