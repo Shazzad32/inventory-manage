@@ -19,8 +19,12 @@ export const GET = async (req) => {
 
 export const POST = async (req) => {
   try {
-    console.log(await req.json());
+    const body = await req.json();
+
+    console.log(body);
+
     await connectToDb();
+
     const {
       device_id,
       device_model,
@@ -37,22 +41,33 @@ export const POST = async (req) => {
       install_date,
       is_complete,
       problem,
-    } = await req.json();
+    } = body;
 
     if (!device_id || !device_model || !device_type || !from) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
-        { status: 400 }
+        {
+          status: 400,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
     }
 
     const existingDevice = await Devices.findOne({ device_id });
+
     if (existingDevice) {
       return new Response(
         JSON.stringify({
           message: `Device with ID ${device_id} already exists. Ignored.`,
         }),
-        { status: 409 }
+        {
+          status: 409,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
     }
 
@@ -77,14 +92,29 @@ export const POST = async (req) => {
     await newDevice.save();
 
     return new Response(
-      JSON.stringify({ message: "Device added successfully" }),
-      { status: 201 }
+      JSON.stringify({
+        message: "Device added successfully",
+      }),
+      {
+        status: 201,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
   } catch (error) {
-    console.error("Error adding device:", error.message);
+    console.error("Error adding device:", error);
+
     return new Response(
-      JSON.stringify({ error: error.message || "Internal server error" }),
-      { status: 500 }
+      JSON.stringify({
+        error: error.message || "Internal server error",
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
   }
 };
