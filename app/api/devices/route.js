@@ -38,6 +38,8 @@ export const POST = async (req) => {
       problem,
     } = await req.json();
 
+    console.log(await req.json());
+
     if (!device_id || !device_model || !device_type || !from) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
