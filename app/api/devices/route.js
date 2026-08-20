@@ -19,6 +19,7 @@ export const GET = async (req) => {
 
 export const POST = async (req) => {
   try {
+    console.log(await req.json());
     await connectToDb();
     const {
       device_id,
@@ -37,8 +38,6 @@ export const POST = async (req) => {
       is_complete,
       problem,
     } = await req.json();
-
-    console.log(await req.json());
 
     if (!device_id || !device_model || !device_type || !from) {
       return new Response(
