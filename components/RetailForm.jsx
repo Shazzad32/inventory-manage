@@ -17,12 +17,7 @@ import dayjs from "dayjs";
 import TechName from "./TechnicianName";
 import DistrictName from "./DistrictName";
 
-const RetailForm = ({
-  defaultItem,
-  isUpdate,
-  technicians,
-  // redirectPath = "/retail",
-}) => {
+const RetailForm = ({ defaultItem, isUpdate, technicians }) => {
   const router = useRouter();
 
   const [item, setItem] = useState({
@@ -62,7 +57,6 @@ const RetailForm = ({
     if (res.ok) {
       router.refresh();
       router.push("/retail");
-      // router.push(redirectPath);
     } else {
       const responseData = await res.json();
       if (

@@ -3,6 +3,12 @@ import Devices from "../../../../models/devices";
 
 import axios from "axios";
 
+const AUTH_HEADER = {
+  headers: {
+    Authorization: `BEARER ${process.env.TRANSACTION_API_TOKEN}`,
+  },
+};
+
 export const GET = async (req, { params }) => {
   const { id } = await params;
 
@@ -76,7 +82,6 @@ export const PUT = async (req, { params }) => {
     device.install_purpose = install_purpose;
 
     await device.save();
-
     if (is_complete) {
       const transac = {
         project: process.env.PROJECT_ID,
@@ -87,8 +92,11 @@ export const PUT = async (req, { params }) => {
         purpose: device_id,
         amount: device_price,
       };
-
-      const response = await axios.post(process.env.TRANSACTION_URL, transac);
+      const response = await axios.post(
+        process.env.TRANSACTION_URL,
+        transac,
+        AUTH_HEADER
+      );
 
       if (response.status === 201) {
         return new Response("Device updated successfully with Transaction", {
