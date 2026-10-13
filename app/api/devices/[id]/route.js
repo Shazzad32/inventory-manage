@@ -5,7 +5,7 @@ import axios from "axios";
 
 const AUTH_HEADER = {
   headers: {
-    Authorization: `BEARER ${process.env.TRANSACTION_API_TOKEN}`,
+    Authorization: `Bearer ${process.env.TRANSACTION_API_TOKEN}`,
   },
 };
 

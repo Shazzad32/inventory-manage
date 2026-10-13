@@ -13,6 +13,7 @@ export const GET = async (req) => {
 
     return new Response(JSON.stringify(devices), { status: 200 });
   } catch (error) {
+    console.log(error);
     return new Response(error.message, { status: 500 });
   }
 };
