@@ -59,14 +59,6 @@ const ReturnForm = ({ defaultItem }) => {
           disabled
         />
         <TextField
-          className="w-2/4"
-          type="text"
-          name="problem"
-          value={item.problem || ""}
-          label="Problem"
-          onChange={handleChange}
-        />
-        <TextField
           select
           className="w-2/4"
           name="send_to"
@@ -80,6 +72,16 @@ const ReturnForm = ({ defaultItem }) => {
             </MenuItem>
           ))}
         </TextField>
+        {item.send_to === "Return" && (
+          <TextField
+            className="w-2/4"
+            type="text"
+            name="problem"
+            value={item.problem || ""}
+            label="Problem"
+            onChange={handleChange}
+          />
+        )}
 
         <div className="w-2/4 flex gap-4 justify-end">
           <Button type="button" onClick={handleCancel}>

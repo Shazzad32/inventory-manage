@@ -14,11 +14,7 @@ const UpdateNotPaid = async ({ params }) => {
         Not Paid Update Form
       </p>
 
-      <RetailForm
-        defaultItem={data}
-        isUpdate={true}
-        // redirectPath="/not-paid-list"
-      />
+      <RetailForm defaultItem={data} isUpdate={true} />
     </div>
   );
 };
